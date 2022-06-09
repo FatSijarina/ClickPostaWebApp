@@ -37,7 +37,7 @@ export default function DepoRead() {
 
     const [qyteti, setQyteti] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:5094/api/Qyteti').then(response => {
+        axios.get('http://localhost:5094/api/Qyteti/Get Qytetet').then(response => {
             setQyteti(response.data);
         })
     }, [refreshKey])
