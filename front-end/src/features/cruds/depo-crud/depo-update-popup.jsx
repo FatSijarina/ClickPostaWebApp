@@ -1,31 +1,28 @@
 import React from 'react'
 import '../popup.scss';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { toast } from "react-toastify";
 
 export default function DepoUpdatePopup(props) {
 
-    const id = props.depoId;
+    const depoId = props.depoId;
     const [name, setName] = useState('');
-    const [addressNumber, setAddressNumber] = useState('');
+    const [addressNumber, setAddressNumber] = useState('0');
     const [streetName, setStreetName] = useState('');
-    const [zipCode, setZipCode] = useState('');
+    const [zipCode, setZipCode] = useState('0');
 
-    const [isPending, setIsPending] = useState(false);
     const [refreshKey, setRefreshKey] = useState('0');
-    const navigate = useNavigate();
+    const [isPending, setIsPending] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const depo = { id, name, addressNumber, streetName, zipCode };
-        setIsPending(true);
+        const depo = { depoId, name, addressNumber, streetName, zipCode};
         axios.put('http://localhost:5094/api/Depot/UpdateDepo', depo)
             .then(() => {
-                setIsPending(false);
-                props.setRefreshKey(refreshKey => refreshKey + 1);
+                toast.success("Depo updated successfully!!", {theme: "colored"});
                 props.setTrigger(false);
+                props.setRefreshKey(refreshKey => refreshKey + 1);
             })
     }
 

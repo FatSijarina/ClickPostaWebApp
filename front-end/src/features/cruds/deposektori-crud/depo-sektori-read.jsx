@@ -4,11 +4,13 @@ import axios from 'axios';
 import DepoUpdatePopup from './depo-update-popup';
 import { toast } from "react-toastify";
 
-export default function DepoRead() {
+export default function DepoSektoriRead() {
 
-    const [depot, setDepot] = useState([]);
+    const [depoId, setDepoId] = useState([]);
+    const [sektoriId, setSektoriId] = useState([]);
     const [buttonPopup, setButtonPopup] = useState(false);
-    const [depoID, setDepoId] = useState();
+    const [depoID, setDepoId] = useState(0);
+    const [sektoriID, setSektoriId] = useState(0);
     const [refreshKey, setRefreshKey] = useState(0);
 
     function handleClick(depoId) {

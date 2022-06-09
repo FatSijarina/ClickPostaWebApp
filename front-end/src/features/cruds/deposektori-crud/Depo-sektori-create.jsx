@@ -3,12 +3,10 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export default function DepoCreate() {
+export default function DepoSektoriCreate() {
 
-    const [name, setName] = useState('');
-    const [addressNumber, setAddressNumber] = useState('');
-    const [streetName, setStreetName] = useState('');
-    const [zipCode, setZipCode] = useState('');
+    const [depoId, setDepoId] = useState('0');
+    const [sektoriId, setSektoriId] = useState('0');
     const [refreshKey, setRefreshKey] = useState('0');
 
     const [isPending, setIsPending] = useState(false);
@@ -16,13 +14,13 @@ export default function DepoCreate() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const depo = { name, addressNumber, streetName, zipCode };
+        const depoSektori = { depoId, sektoriId };
 
         setIsPending(true);
 
-        axios.post('http://localhost:5094/api/Depot/AddDepo', depo)
+        axios.post('http://localhost:5094/api/DepoSektori/AddDepoSektori', depoSektori)
             .then(() => {
-                toast.success("Depo added successfully!!", { theme: "colored" });
+                toast.success("DepoSektori added successfully!!", { theme: "colored" });
             }).then(() => {
                 setRefreshKey(refreshKey => refreshKey + 1)
             })
@@ -34,36 +32,20 @@ export default function DepoCreate() {
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <input
-                            type="text"
-                            name="name"
-                            placeholder="Emri i depos"
+                            type="number"
+                            name="depoId"
+                            placeholder="DepoId"
                             required
-                            defaultValue={name}
-                            onChange={(e) => setName(e.target.value)}
+                            defaultValue={depoId}
+                            onChange={(e) => setDepoId(e.target.value)}
                         />
                         <input
                             type="number"
-                            name="number"
-                            placeholder="Numri i adreses"
+                            name="sektoriId"
+                            placeholder="SektoriId"
                             required
-                            defaultValue={addressNumber}
-                            onChange={(e) => setAddressNumber(e.target.value)}
-                        />
-                        <input
-                            type="text"
-                            name="address"
-                            placeholder="Emri i rruges"
-                            required
-                            defaultValue={streetName}
-                            onChange={(e) => setStreetName(e.target.value)}
-                        />
-                        <input
-                            type="number"
-                            name="zipCode"
-                            placeholder="Zip Code"
-                            required
-                            defaultValue={zipCode}
-                            onChange={(e) => setZipCode(e.target.value)}
+                            defaultValue={sektoriId}
+                            onChange={(e) => setSektoriId(e.target.value)}
                         />
 
                         {!isPending && <button type="submit" className="register-register-btn" value="Submit">

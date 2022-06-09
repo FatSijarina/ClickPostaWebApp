@@ -1,35 +1,34 @@
 import React from 'react'
 import '../popup.scss';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { toast } from "react-toastify";
 
 export default function DepoUpdatePopup(props) {
 
-    const id = props.veturaId;
+    const veturaId = props.veturaId;
     const [brendi, setBrendi] = useState('');
     const [modeli, setModeli] = useState('');
     const [targa, setTarga] = useState('');
     const [tipi, setTipi] = useState('');
-    const [vellimi, setVellimi] = useState('');
-    const [depoId, setDepoId] = useState('');
+    const [vellimi, setVellimi] = useState('0');
+    const [depoId, setDepoId] = useState('0');
 
     const [isPending, setIsPending] = useState(false);
     const [refreshKey, setRefreshKey] = useState('0');
-    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const vetura = { id, brendi, modeli, targa, tipi, vellimi, depoId};
+        const vetura = { veturaId, brendi, modeli, targa, tipi, vellimi, depoId};
 
         setIsPending(true);
-        axios.put('http://localhost:5094/api/Depot/UpdateDepo', vetura)
+        axios.put('http://localhost:5094/api/Veturat/UpdateVetura', vetura)
             .then(() => {
-                setIsPending(false);
-                props.setRefreshKey(refreshKey => refreshKey + 1);
+                toast.success("Vetura updated successfully!!", { theme: "colored" });
                 props.setTrigger(false);
+                props.setRefreshKey(refreshKey => refreshKey + 1);
+                setIsPending(false);
             })
     }
 

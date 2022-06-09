@@ -4,14 +4,14 @@ import { toast } from "react-toastify";
 
 export default function SektoriUpdatePopup(props) {
 
-    const id = props.porosiaId;
+    const sektoriId = props.sektoriId;
     const [emertimi, setEmertimi] = useState('');
 
     const [isPending, setIsPending] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const sektor = { id, emertimi };
+        const sektor = { sektoriId, emertimi };
 
     setIsPending(true);
 

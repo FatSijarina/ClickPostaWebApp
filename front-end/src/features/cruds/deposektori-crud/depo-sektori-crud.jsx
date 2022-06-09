@@ -3,13 +3,13 @@ import '../crud-styles.scss';
 import DepoIcon from '../../../img/dashboard-assets/depo-icon.svg';
 import DepoRead from '../depo-crud/depo-read';
 import { Link, Route, Routes } from 'react-router-dom';
-import DepoCreate from './depo-create';
+import DepoSektoriCreate from './depo-create';
 
-export default function DepoCrud() {
+export default function DepoSektoriCrud() {
     return (
         <>
             <div className="crud-icons">
-                <Link to="./DepoCreate">
+                <Link to="./DepoSektoriCreate">
                     <div className="crud-icons-combine">
                         <img src={DepoIcon} alt="create users icon" />
                         <p>Create</p>
@@ -24,8 +24,8 @@ export default function DepoCrud() {
             </div>
 
             <Routes>
-                <Route path='/DepoCreate' element={<DepoCreate />} />
-                <Route path='/' element={<DepoRead />} />
+                <Route path='/DepoSektoriCreate' element={<DepoSektoriCreate />} />
+                <Route path='/' element={<DepoSektoriRead />} />
             </Routes>
         </>
     )
