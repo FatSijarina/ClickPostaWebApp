@@ -52,7 +52,7 @@ namespace ClickPostaAPI.Controllers
                 dbDepo.AddressNumber = request.AddressNumber;
             if (!request.StreetName.Equals(""))
                 dbDepo.StreetName = request.StreetName;
-            if (!request.ZipCode.Equals(""))
+            if (request.ZipCode != 0)
                 dbDepo.ZipCode = request.ZipCode;
 
             await _context.SaveChangesAsync();

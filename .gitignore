@@ -56,3 +56,6 @@ packages/react-devtools-extensions/.tempUserDataDir
 packages/react-devtools-inline/dist
 packages/react-devtools-shell/dist
 packages/react-devtools-timeline/dist
+*.v2
+*.v1
+.vs/ClickPostaWebApp/v17/.suo
