@@ -25,12 +25,12 @@ namespace ClickPostaAPI.Controllers
             return Ok(await _context.Qyteti.ToListAsync());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Qyteti>> Get(int id)
+        [HttpGet("{ZipCode}")]
+        public async Task<ActionResult<Qyteti>> Get(int qytetiZipCode)
         {
-            var qyteti = await _context.Qyteti.FindAsync(id);
+            var qyteti = await _context.Qyteti.FindAsync(qytetiZipCode);
             if (qyteti == null)
-                return BadRequest("Qyteti me id: " + id + " nuk u gjet!");
+                return BadRequest("Qyteti me zip code: " + qytetiZipCode + " nuk u gjet!");
             return Ok(qyteti);
         }
 

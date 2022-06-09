@@ -11,10 +11,13 @@ import VehicleIcon from '../../img/dashboard-assets/vehicle-icon.svg';
 import CityIcon from '../../img/dashboard-assets/city-icon.svg';
 import SektoriCrud from '../cruds/sektori-crud/sektori-crud';
 import VeturaCrud from '../cruds/vetura-crud/vetura-crud';
+import PushimiIcon from '../../img/dashboard-assets/rest.png';
+import PushimiCrud from '../cruds/pushimi-crud/Pushimi-crud';
+import QytetiCrud from '../cruds/qyteti-crud/QytetiCrud';
+
 
 export default function Dashboard() {
     return(
-
         <div className="base-container">
 
             <h1>Dashboard</h1>
@@ -36,6 +39,14 @@ export default function Dashboard() {
                     <img src={VehicleIcon} alt="ClientUserIcon" className='client-user-icon' />
                     <p>Veturat</p>
                 </Link>
+                <Link to="./PushimiCrud" > 
+                    <img src={PushimiIcon} alt="ClientUserIcon" className='client-user-icon' />
+                    <p>Pushimet</p>
+                </Link>
+                <Link to="./QytetiCrud" > 
+                    <img src={CityIcon} alt="ClientUserIcon" className='client-user-icon' />
+                    <p>Qytetet</p>
+                </Link>
             </div>    
                
             <Routes>
@@ -43,6 +54,8 @@ export default function Dashboard() {
                 <Route path='/SektoriCrud/*' element={<SektoriCrud />} />
                 <Route path='/DepoCrud/*' element={<DepoCrud />} />
                 <Route path='/VeturaCrud/*' element={<VeturaCrud />} />
+                <Route path='/PushimiCrud/*' element={<PushimiCrud/>}/>
+                <Route path='/QytetiCrud/*' element={<QytetiCrud/>}/>
             </Routes>
 
 

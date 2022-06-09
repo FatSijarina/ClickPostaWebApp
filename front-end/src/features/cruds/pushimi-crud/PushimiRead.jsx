@@ -1,21 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../pushimi-crud.scss';
+import '../crud-styles.scss';
 import PushimiUpdate from './PushimiUpdate';
+import { toast } from "react-toastify";
 
 export default function PushimiRead(){
 
     const [pushimet,setPushimet] = useState([]);
-    const [popUp, setPopup] = useState(false);
+    const [buttonPopup, setButtonPopup] = useState(false);
     const [pushimiId, setPushimiId] = useState();
     const [useriId, setUseriId] = useState();
     const [refreshKey, setRefreshKey] = useState(0);
     
-    function handleClick(pushimiId){
-        axios.delete(  'http://localhost:3000/api/Pushimi/Fshij Pushimin?id=' + pushimiId)
-        .then(setRefreshKey(refreshKey => refreshKey+1))
-    }
+    function handleClick(pushimiId) {
+        const confirmBox = window.confirm(
+            "Are you sure you want to delete pushimi with id " + pushimiId + '?'
+        )
+        if (confirmBox === true) {
+            axios.delete('http://localhost:5094/api/Pushimi/Fshij Pushimin?id=' + pushimiId)
+                .then(() => {
+                    toast.info("Pushimi deleted successfully!!", { theme: "colored" });
+                })
+                .then(() => {
+                    setRefreshKey(refreshKey => refreshKey + 1)
+                })
+        }
+        else {
+            toast.error("Process of deleting a pushim canceled !!")
+        }
+  }
 
+  
     useEffect(() => {
         axios.get('http://localhost:5094/api/Pushimi/Get Pushimet')
         .then(response => {
@@ -25,9 +40,9 @@ export default function PushimiRead(){
 
     return (
         <>
-        <h1>Read Holidays</h1>
+        <h1>Read Pushimet</h1>
         <div className="container">
-            <div className="table">
+            <div className="styled-table">
                 <table>
                     <thead>
                         <tr>
@@ -49,7 +64,7 @@ export default function PushimiRead(){
                                 <th>{pushimi.dataFilimit}</th>
                                 <th>{pushimi.dataMbarimit}</th>
                                 <th> 
-                                    <button onClick={() => {setPopup(true); setPushimiId(pushimi.pushimiId); setUseriId(pushimi.userId) }}>Update</button>
+                                    <button onClick={() => {setButtonPopup(true); setPushimiId(pushimi.pushimiId); setUseriId(pushimi.userId) }}>Update</button>
                                 </th>
                                 <th>
                                     <button type="submit" onClick ={() => handleClick(pushimi.pushimiId)}>Delete</button>
@@ -62,7 +77,7 @@ export default function PushimiRead(){
             </div>
         </div>
 
-        <PushimiUpdate trigger= {popUp} setTrigger={setPopup} pushimiId={pushimiId} useriId = {useriId} setRefreshKey = {setRefreshKey}></PushimiUpdate>
+        <PushimiUpdate trigger= {buttonPopup} setTrigger={setButtonPopup} pushimiId={pushimiId} useriId = {useriId} setRefreshKey = {setRefreshKey}/>
 
         </>
     )
