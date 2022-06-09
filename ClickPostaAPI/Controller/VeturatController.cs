@@ -22,15 +22,6 @@ namespace ClickPostaAPI.Controllers
             return Ok(await _context.Vetura.ToListAsync());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Vetura>> Get(int id)
-        {
-            var vetura = await _context.Vetura.FindAsync(id);
-            if (vetura == null)
-                return BadRequest("Vetura not found");
-            return Ok(vetura);
-        }
-
         [HttpPost("AddVetura")]
         public async Task<ActionResult<List<Vetura>>> AddVetura(Vetura vetura)
         {

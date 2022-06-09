@@ -1,7 +1,7 @@
 import React from 'react'
 import '../popup.scss';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from "react-toastify";
 
 export default function DepoUpdatePopup(props) {
@@ -25,6 +25,14 @@ export default function DepoUpdatePopup(props) {
                 props.setRefreshKey(refreshKey => refreshKey + 1);
             })
     }
+
+
+    const [qytetet, setQytetet] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:5094/api/Qyteti/Get Qytetet').then(response => {
+            setQytetet(response.data);
+        })
+    }, [refreshKey])
 
   return (props.trigger) ? (
     <div className='popup'>
@@ -57,13 +65,20 @@ export default function DepoUpdatePopup(props) {
                                 defaultValue={streetName}
                                 onChange={(e) => setStreetName(e.target.value)}
                             />
-                            <input 
-                                type="text" 
-                                name="zipCode" 
-                                placeholder="Zip Code"
-                                defaultValue={zipCode}
-                                onChange={(e) => setZipCode(e.target.value)}
-                            />
+                             <div className="box">
+                                  <select
+                                      required
+                                      onChange={(e) => setZipCode(e.target.value)}
+                                      defaultValue='Zgjedh Qytetin'
+                                  >
+                                      <option value="Zgjedh Qytetin" disabled={true}>Zgjedh Qytetin</option>
+                                      {qytetet.map((qyteti) => (
+                                          <option required key={qyteti.qytetiZipCode} value={qyteti.qytetiZipCode}>
+                                              {qyteti.emriQytetit}
+                                          </option>
+                                      ))};
+                                  </select>
+                              </div>
                             { !isPending && <button type="submit" className="register-register-btn" value="Submit">
                                 Perditeso
                             </button>}

@@ -5,13 +5,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 
-export default function DepoUpdatePopup(props) {
+export default function DepoSektoriUpdatePopup(props) {
 
-    const id = props.depoId;
-    const [name, setName] = useState('');
-    const [addressNumber, setAddressNumber] = useState('');
-    const [streetName, setStreetName] = useState('');
-    const [zipCode, setZipCode] = useState('');
+    const id = props.id;
+    const [depoId, setDepoId] = useState('0');
+    const [sektoriId, setSektoriId] = useState('0');
 
     const [isPending, setIsPending] = useState(false);
     const [refreshKey, setRefreshKey] = useState('0');
@@ -19,15 +17,30 @@ export default function DepoUpdatePopup(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const depo = { id, name, addressNumber, streetName, zipCode };
+        const depoSektori = { id, depoId, sektoriId };
         setIsPending(true);
-        axios.put('http://localhost:5094/api/Depot/UpdateDepo', depo)
+        axios.put('http://localhost:5094/api/DepoSektori/UpdateDepoSektori', depoSektori)
             .then(() => {
+                toast.success("DepoSektori updated successfully!!", { theme: "colored" });
                 setIsPending(false);
                 props.setRefreshKey(refreshKey => refreshKey + 1);
                 props.setTrigger(false);
             })
     }
+
+    const [depot, setDepot] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:5094/api/Depot/ShowDepot').then(response => {
+            setDepot(response.data);
+        })
+    }, [refreshKey])
+
+    const [sektoret, setSektoret] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:5094/api/Sektoret/ShowSektori').then(response => {
+            setSektoret(response.data);
+        })
+    }, [refreshKey])
 
     return (props.trigger) ? (
         <div className='popup'>
@@ -35,38 +48,38 @@ export default function DepoUpdatePopup(props) {
                 <button className="close-btn" onClick={() => props.setTrigger(false)}>Close</button>
                 {props.children}
                 <div className="content">
-                    <h1>Update Depo</h1>
+                    <h1>Update DepoSektori</h1>
                     <div className="form">
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Emri"
-                                    defaultValue={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                                <input
-                                    type="text"
-                                    name="number"
-                                    placeholder="Numri i adreses"
-                                    defaultValue={addressNumber}
-                                    onChange={(e) => setAddressNumber(e.target.value)}
-                                />
-                                <input
-                                    type="text"
-                                    name="address"
-                                    placeholder="Rruga"
-                                    defaultValue={streetName}
-                                    onChange={(e) => setStreetName(e.target.value)}
-                                />
-                                <input
-                                    type="text"
-                                    name="zipCode"
-                                    placeholder="Zip Code"
-                                    defaultValue={zipCode}
-                                    onChange={(e) => setZipCode(e.target.value)}
-                                />
+                                <div className="box">
+                                    <select
+                                        required
+                                        onChange={(e) => setDepoId(e.target.value)}
+                                        defaultValue='Zgjedh Depon'
+                                    >
+                                        <option value="Zgjedh Depon" disabled={true}>Zgjedh Depon</option>
+                                        {depot.map((depo) => (
+                                            <option required key={depo.depoId} value={depo.depoId}>
+                                                {depo.name}
+                                            </option>
+                                        ))};
+                                    </select>
+                                </div>
+                                <div className="box">
+                                    <select
+                                        required
+                                        onChange={(e) => setSektoriId(e.target.value)}
+                                        defaultValue='Zgjedh Sektorin'
+                                    >
+                                        <option value="Zgjedh Sektorin" disabled={true}>Zgjedh Sektorin</option>
+                                        {sektoret.map((sektori) => (
+                                            <option required key={sektori.sektoriId} value={sektori.sektoriId}>
+                                                {sektori.emertimi}
+                                            </option>
+                                        ))};
+                                    </select>
+                                </div>
                                 {!isPending && <button type="submit" className="register-register-btn" value="Submit">
                                     Perditeso
                                 </button>}

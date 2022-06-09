@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -26,27 +26,53 @@ export default function DepoSektoriCreate() {
             })
     }
 
+    const [depot, setDepot] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:5094/api/Depot/ShowDepot').then(response => {
+            setDepot(response.data);
+        })
+    }, [refreshKey])
+
+    const [sektoret, setSektoret] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:5094/api/Sektoret/ShowSektori').then(response => {
+            setSektoret(response.data);
+        })
+    }, [refreshKey])
+
     return (
         <div className="content">
             <div className="form">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <input
-                            type="number"
-                            name="depoId"
-                            placeholder="DepoId"
-                            required
-                            defaultValue={depoId}
-                            onChange={(e) => setDepoId(e.target.value)}
-                        />
-                        <input
-                            type="number"
-                            name="sektoriId"
-                            placeholder="SektoriId"
-                            required
-                            defaultValue={sektoriId}
-                            onChange={(e) => setSektoriId(e.target.value)}
-                        />
+                        <div className="box">
+                            <select
+                                required
+                                onChange={(e) => setDepoId(e.target.value)}
+                                defaultValue='Zgjedh Depon'
+                            >
+                                <option value="Zgjedh Depon" disabled={true}>Zgjedh Depon</option>
+                                {depot.map((depo) => (
+                                    <option required key={depo.depoId} value={depo.depoId}>
+                                        {depo.name}
+                                    </option>
+                                ))};
+                            </select>
+                        </div>
+                        <div className="box">
+                            <select
+                                required
+                                onChange={(e) => setSektoriId(e.target.value)}
+                                defaultValue='Zgjedh Sektorin'
+                            >
+                                <option value="Zgjedh Sektorin" disabled={true}>Zgjedh Sektorin</option>
+                                {sektoret.map((sektori) => (
+                                    <option required key={sektori.sektoriId} value={sektori.sektoriId}>
+                                        {sektori.emertimi}
+                                    </option>
+                                ))};
+                            </select>
+                        </div>
 
                         {!isPending && <button type="submit" className="register-register-btn" value="Submit">
                             Shto

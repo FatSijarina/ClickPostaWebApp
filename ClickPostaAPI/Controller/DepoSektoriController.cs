@@ -1,4 +1,5 @@
 ﻿using ClickPostaAPI.Data;
+using ClickPostaAPI.Helpers;
 using ClickPostaAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,21 +23,13 @@ namespace ClickPostaAPI.Controllers
             return Ok(await _context.DepoSektori.ToListAsync());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<DepoSektori>> Get(int id)
-        {
-            var depoSektori = await _context.DepoSektori.FindAsync(id);
-            if (depoSektori == null)
-                return BadRequest("Sektori not found in Depo");
-            return Ok(depoSektori);
-        }
-
         [HttpPost("AddDepoSektori")]
         public async Task<ActionResult<List<DepoSektori>>> AddDepoSektori(DepoSektori depoSektori)
         {
-            depoSektori.Depo = await _context.Depo.FindAsync(depoSektori.DepoId);
-            depoSektori.Sektori = await _context.Sektori.FindAsync(depoSektori.SektoriId);
-            _context.DepoSektori.Add(depoSektori);
+            ShtoDepoSektori dS = new ShtoDepoSektori(_context, depoSektori.DepoId, depoSektori.SektoriId);
+            /*depoSektori.Depo = await _context.Depo.FindAsync(depoSektori.DepoId);
+            depoSektori.Sektori = await _context.Sektori.FindAsync(depoSektori.SektoriId);*/
+            _context.DepoSektori.Add(dS.addDepoSektori());
             await _context.SaveChangesAsync();
 
             return Ok(await _context.DepoSektori.ToListAsync());

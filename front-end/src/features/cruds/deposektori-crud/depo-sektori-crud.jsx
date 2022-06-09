@@ -1,9 +1,9 @@
 import React from 'react';
 import '../crud-styles.scss';
 import DepoIcon from '../../../img/dashboard-assets/depo-icon.svg';
-import DepoRead from '../depo-crud/depo-read';
+import DepoSektoriRead from '../deposektori-crud/depo-sektori-read';
 import { Link, Route, Routes } from 'react-router-dom';
-import DepoSektoriCreate from './depo-create';
+import DepoSektoriCreate from './depo-sektori-create';
 
 export default function DepoSektoriCrud() {
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -27,6 +27,13 @@ export default function DepoCreate() {
                 setRefreshKey(refreshKey => refreshKey + 1)
             })
     }
+
+    const [qytetet, setQytetet] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:5094/api/Qyteti/Get Qytetet').then(response => {
+            setQytetet(response.data);
+        })
+    }, [refreshKey])
 
     return (
         <div className="content">
@@ -57,14 +64,20 @@ export default function DepoCreate() {
                             defaultValue={streetName}
                             onChange={(e) => setStreetName(e.target.value)}
                         />
-                        <input 
-                            type="number" 
-                            name="zipCode" 
-                            placeholder="Zip Code"
-                            required
-                            defaultValue={zipCode}
-                            onChange={(e) => setZipCode(e.target.value)}
-                        />
+                        <div className="box">
+                            <select
+                                required
+                                onChange={(e) => setZipCode(e.target.value)}
+                                defaultValue='Zgjedh Qytetin'
+                            >
+                                <option value="Zgjedh Qytetin" disabled={true}>Zgjedh Qytetin</option>
+                                {qytetet.map((qyteti) => (
+                                    <option required key={qyteti.qytetiZipCode} value={qyteti.qytetiZipCode}>
+                                        {qyteti.emriQytetit}
+                                    </option>
+                                ))};
+                            </select>
+                        </div>
 
                         { !isPending && <button type="submit" className="register-register-btn" value="Submit">
                             Shto

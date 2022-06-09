@@ -1,90 +1,94 @@
 import React, { useState, useEffect } from 'react';
 import '../crud-styles.scss';
 import axios from 'axios';
-import DepoUpdatePopup from './depo-update-popup';
+import DepoSektoriUpdatePopup from './depo-sektori-update-popup';
 import { toast } from "react-toastify";
 
 export default function DepoSektoriRead() {
 
-    const [depoId, setDepoId] = useState([]);
-    const [sektoriId, setSektoriId] = useState([]);
+    const [depoSektori, setDepoSektori] = useState([]);
     const [buttonPopup, setButtonPopup] = useState(false);
-    const [depoID, setDepoId] = useState(0);
-    const [sektoriID, setSektoriId] = useState(0);
-    const [refreshKey, setRefreshKey] = useState(0);
+    const [depoSektoriID, setDepoSektoriId] = useState();
+    const [refreshKey, setRefreshKey] = useState('0');
 
-    function handleClick(depoId) {
+    function handleClick(depoSektoriId) {
         const confirmBox = window.confirm(
-            "Are you sure you want to delete depo with id " + depoId + '?'
+            "Are you sure you want to delete depo with id " + depoSektoriId + '?'
         )
         if (confirmBox === true) {
-            axios.delete('http://localhost:5094/api/Depot/DeleteDepo?id=' + depoId)
+            axios.delete('http://localhost:5094/api/Depot/DeleteDepo?id=' + depoSektoriId)
                 .then(() => {
-                    toast.info("Depo deleted successfully!!", { theme: "colored" });
+                    toast.info("DepoSektori deleted successfully!!", { theme: "colored" });
                 })
                 .then(() => {
                     setRefreshKey(refreshKey => refreshKey + 1)
                 })
         }
         else {
-            toast.error("Process of deleting a depo canceled !!")
+            toast.error("Process of deleting a DepoSektori canceled !!")
         }
     }
 
+    useEffect(() => {
+        axios.get('http://localhost:5094/api/DepoSektori/ShowDepoSektori').then(response => {
+            setDepoSektori(response.data);
+        })
+    }, [refreshKey])
+
+    const [depot, setDepot] = useState([]);
     useEffect(() => {
         axios.get('http://localhost:5094/api/Depot/ShowDepot').then(response => {
             setDepot(response.data);
         })
     }, [refreshKey])
 
-    const [qyteti, setQyteti] = useState([]);
+    const [sektoret, setSektoret] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:5094/api/Qyteti').then(response => {
-            setQyteti(response.data);
+        axios.get('http://localhost:5094/api/Sektoret/ShowSektori').then(response => {
+            setSektoret(response.data);
         })
     }, [refreshKey])
 
     return (
         <>
-            <h1>Depo Read</h1>
+            <h1>DepoSektori Read</h1>
 
             <div className="styled-table">
-                <table>
+                <table className="styled-table-table">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Name</th>
-                            <th>Address Number</th>
-                            <th>Street Name</th>
-                            <th>Qyteti</th>
+                            <th>Depo</th>
+                            <th>Sektori</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {depot.map(depo => (
-                            <tr key={depo.depoId}>
-                                <th>{depo.depoId}</th>
-                                <th>{depo.name}</th>
-                                <th>{depo.addressNumber}</th>
-                                <th>{depo.streetName}</th>
+                        {depoSektori.map(dS => (
+                            <tr key={dS.id}>
+                                <th>{dS.id}</th>
                                 <th>
-                                    {qyteti.map((qytet) => (
-                                        (depo.zipCode == qytet.qytetiZipCode) ? qytet.emriQytetit : ""
+                                    {depot.map((depo) => (
+                                        (depo.depoId == dS.depoId) ? depo.name : ""
                                     ))}
                                 </th>
-                                <th> <button onClick={() => { setButtonPopup(true); setDepoId(depo.depoId) }}>Update</button></th>
                                 <th>
-                                    <button type="submit" onClick={() => handleClick(depo.depoId)}>Delete</button>
+                                    {sektoret.map((sektori) => (
+                                        (sektori.sektoriId == dS.sektoriId) ? sektori.emertimi : ""
+                                    ))}
+                                </th>
+                                <th> <button onClick={() => { setButtonPopup(true); setDepoSektoriId(dS.id) }}>Update</button></th>
+                                <th>
+                                    <button type="submit" onClick={() => handleClick(dS.id)}>Delete</button>
                                 </th>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
-
-            <DepoUpdatePopup trigger={buttonPopup} setTrigger={setButtonPopup} depoId={depoID} setRefreshKey={setRefreshKey} />
+            <DepoSektoriUpdatePopup trigger={buttonPopup} setTrigger={setButtonPopup} id={depoSektoriID} setRefreshKey={setRefreshKey} />
         </>
     )
 }

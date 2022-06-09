@@ -1,7 +1,7 @@
 import React from 'react'
 import '../popup.scss';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from "react-toastify";
 
 export default function DepoUpdatePopup(props) {
@@ -31,6 +31,13 @@ export default function DepoUpdatePopup(props) {
                 setIsPending(false);
             })
     }
+
+    const [depot, setDepot] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:5094/api/Depot/ShowDepot').then(response => {
+            setDepot(response.data);
+        })
+    }, [refreshKey])
 
     return (props.trigger) ? (
         <div className='popup'>
@@ -77,13 +84,20 @@ export default function DepoUpdatePopup(props) {
                                     defaultValue={vellimi}
                                     onChange={(e) => setVellimi(e.target.value)}
                                 />
-                                <input
-                                    type="text"
-                                    name="depoId"
-                                    placeholder="Id e depos"
-                                    defaultValue={depoId}
-                                    onChange={(e) => setDepoId(e.target.value)}
-                                />
+                                <div className="box">
+                                    <select
+                                        required
+                                        onChange={(e) => setDepoId(e.target.value)}
+                                        defaultValue='Zgjedh Depon'
+                                    >
+                                        <option value="Zgjedh Depon" disabled={true}>Zgjedh Depon</option>
+                                        {depot.map((depo) => (
+                                            <option required key={depo.depoId} value={depo.depoId}>
+                                                {depo.name}
+                                            </option>
+                                        ))};
+                                    </select>
+                                </div>
                                 {!isPending && <button type="submit" className="register-register-btn" value="Submit">
                                     Perditeso
                                 </button>}
