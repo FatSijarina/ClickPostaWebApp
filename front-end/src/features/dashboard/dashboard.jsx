@@ -10,6 +10,7 @@ import PorositeIcon from '../../img/dashboard-assets/orders-icon.svg';
 import VehicleIcon from '../../img/dashboard-assets/vehicle-icon.svg';
 import CityIcon from '../../img/dashboard-assets/city-icon.svg';
 import SektoriCrud from '../cruds/sektori-crud/sektori-crud';
+import DepoSektoriCrud from '../cruds/deposektori-crud/depo-sektori-crud';
 import VeturaCrud from '../cruds/vetura-crud/vetura-crud';
 
 export default function Dashboard() {
@@ -32,6 +33,10 @@ export default function Dashboard() {
                     <img src={DepoIcon} alt="ClientUserIcon" className='client-user-icon' />
                     <p>DepoCrud</p>
                 </Link>
+                <Link to="./DepoSektoriCrud" >
+                    <img src={DepoIcon} alt="ClientUserIcon" className='client-user-icon' />
+                    <p>DepoSektoriCrud</p>
+                </Link>
                 <Link to="./VeturaCrud" > 
                     <img src={VehicleIcon} alt="ClientUserIcon" className='client-user-icon' />
                     <p>Veturat</p>
@@ -42,6 +47,7 @@ export default function Dashboard() {
                 <Route path='/ClientCrud/*' element={<ClientCrud />} />
                 <Route path='/SektoriCrud/*' element={<SektoriCrud />} />
                 <Route path='/DepoCrud/*' element={<DepoCrud />} />
+                <Route path='/DepoSektoriCrud/*' element={<DepoSektoriCrud />} />
                 <Route path='/VeturaCrud/*' element={<VeturaCrud />} />
             </Routes>
 

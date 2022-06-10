@@ -14,8 +14,8 @@ namespace ClickPostaAPI.Models
         public int DepoId { get; set; }
         public int SektoriId { get; set; }
 
-        public virtual Depo Depo { get; set; } = null!;
-        public virtual Sektori Sektori { get; set; } = null!;
+        public virtual Depo? Depo { get; set; } = null!;
+        public virtual Sektori? Sektori { get; set; } = null!;
         public virtual ICollection<Porosia> Porosia { get; set; }
     }
 }

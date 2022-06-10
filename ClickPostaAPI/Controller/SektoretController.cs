@@ -21,15 +21,6 @@ namespace ClickPostaAPI.Controllers
             return Ok(await _context.Sektori.ToListAsync());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Sektori>> Get(int id)
-        {
-            var sektori = await _context.Sektori.FindAsync(id);
-            if (sektori == null)
-                return BadRequest("Sktori not found");
-            return Ok(sektori);
-        }
-
         [HttpPost("AddSektori")]
         public async Task<ActionResult<List<Sektori>>> AddSektori(Sektori sektori)
         {

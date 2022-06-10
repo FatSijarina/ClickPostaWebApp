@@ -21,15 +21,6 @@ namespace ClickPostaAPI.Controllers
             return Ok(await _context.Depo.ToListAsync());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Depo>> Get(int id)
-        {
-            var depo = await _context.Depo.FindAsync(id);
-            if (depo == null)
-                return BadRequest("Depo not found");
-            return Ok(depo);
-        }
-
         [HttpPost("AddDepo")]
         public async Task<ActionResult<List<Depo>>> AddDepo(Depo depo)
         {

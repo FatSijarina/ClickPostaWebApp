@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -30,6 +30,13 @@ export default function VeturaCreate() {
                 setRefreshKey(refreshKey => refreshKey + 1)
             })
     }
+
+    const [depot, setDepot] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:5094/api/Depot/ShowDepot').then(response => {
+            setDepot(response.data);
+        })
+    }, [refreshKey])
 
     return (
         <>
@@ -76,14 +83,20 @@ export default function VeturaCreate() {
                             defaultValue={vellimi}
                             onChange={(e) => setVellimi(e.target.value)}
                         />
-                        <input
-                            type="text"
-                            name="depoId"
-                            placeholder="ID e depos"
-                            required
-                            defaultValue={depoId}
-                            onChange={(e) => setDepoId(e.target.value)}
-                        />
+                        <div className="box">
+                            <select
+                                required
+                                onChange={(e) => setDepoId(e.target.value)}
+                                defaultValue='Zgjedh Depon'
+                            >
+                                <option value="Zgjedh Depon" disabled={true}>Zgjedh Depon</option>
+                                {depot.map((depo) => (
+                                    <option required key={depo.depoId} value={depo.depoId}>
+                                        {depo.name}
+                                    </option>
+                                ))};
+                            </select>
+                        </div>
                     </div>
                     {!isPending && <button type="submit" className="register-register-btn" value="Submit">
                         Shto
