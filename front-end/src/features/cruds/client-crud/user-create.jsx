@@ -39,7 +39,6 @@ export default function ClientCreate() {
 
         setIsPending(true);
         
-        
         axios.post('http://localhost:5094/api/User/AddUsers', klienti)
         .then(() => {
             toast.success("Perdoruesi u shtua me sukses!")

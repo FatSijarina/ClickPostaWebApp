@@ -66,7 +66,7 @@ namespace ClickPostaAPI.Controllers
                 dbUser.Password = BCrypt.Net.BCrypt.HashPassword(useri.Password);
             if (!useri.NrTelefonit.Trim().Equals(""))
                 dbUser.NrTelefonit = useri.NrTelefonit;
-            if ((useri.HomeNumber <= 0))
+            if (!(useri.HomeNumber <= 0))
                 dbUser.HomeNumber = useri.HomeNumber;
             if (!useri.StreetName.Trim().Equals(""))
                 dbUser.StreetName = useri.StreetName;

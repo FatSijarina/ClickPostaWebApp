@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../crud-styles.scss';
 import axios from 'axios';
 import ClientUpdatePopup from './user-update-popup';
+import { toast } from "react-toastify";
 
 export default function ClientRead() {
 
@@ -9,13 +10,21 @@ export default function ClientRead() {
   const [qyteti, setQyteti] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [klientID, setKlientId] = useState();
-  const [refreshKey, setRefreshKey] = useState(0);
+  const [refreshKey, setRefreshKey] = useState(1);
 
   function handleClick(klientiId) {
-    console.log(klientiId);
-    axios.delete('http://localhost:5094/api/User/DeleteUser/' + klientiId)
-        .then(setRefreshKey(refreshKey => refreshKey + 1))
-}
+    const confirmBox = window.confirm(
+      "Are you sure you want to delete depo with id " + klientiId + '?'
+    )
+    if (confirmBox === true) {
+      axios.delete('http://localhost:5094/api/User/DeleteUser?id=' + klientiId)
+      .then( toast.info("Depo deleted successfully!!", { theme: "colored" })
+      )}
+    else {
+        toast.error("Process of deleting a user canceled !!")
+    }
+    setRefreshKey(refreshKey + 1 )
+  }
 
   useEffect(() => {
     axios.get('http://localhost:5094/api/User/GetKlientet').then(response => {
@@ -62,9 +71,9 @@ export default function ClientRead() {
                       (klienti.zipCode == qytet.qytetiZipCode) ? qytet.emriQytetit : ""
                   ))}
                 </th>
-                <th> <button onClick={() => {setButtonPopup(true); setKlientId(klienti.id)} }>Update</button></th>
+                <th> <button onClick={() => {setButtonPopup(true); setKlientId(klienti.userId)} }>Update</button></th>
                 <th><button type="submit"
-                                    onClick={() => handleClick(klienti.id)}
+                                    onClick={() => handleClick(klienti.userId)}
                                     >Delete</button></th>
               </tr>
             ))}

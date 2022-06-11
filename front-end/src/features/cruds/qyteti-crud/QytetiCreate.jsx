@@ -21,8 +21,7 @@ export default function QytetiCreate() {
         axios.post('http://localhost:5094/api/Qyteti/Add Qyteti' , depo)
             .then(() => {
                 toast.success("City added successfully!!", { theme: "colored" });
-            }).then(() => {
-                setRefreshKey(refreshKey => refreshKey + 1)
+                setIsPending(false);
             })
     }
 
