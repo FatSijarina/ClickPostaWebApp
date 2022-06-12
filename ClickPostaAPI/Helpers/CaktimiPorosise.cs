@@ -34,7 +34,7 @@ namespace ClickPostaAPI.Helpers
         public async Task<int> FiltroTransportuesit(int? PorosiaZipCode)
         {
             //merr transportuesit nga qyteti me zipcode te derguar
-            List<Useri> MarresitNgaQyteti = await _context.Useri.Where(u => u.RoleId == 3/*3 eshte roliID i transportuesit ne databaze*/
+            List<Useri> MarresitNgaQyteti = await _context.Useri.Where(u => u.RoleId == 3 /*3 eshte roliID i transportuesit ne databaze*/
                                                     && u.ZipCode == PorosiaZipCode)
                                             .ToListAsync();
 
@@ -47,8 +47,8 @@ namespace ClickPostaAPI.Helpers
                 var rezervimi = await _context.RezervoVeturen.
                     FromSqlInterpolated($@"SELECT * FROM RezervoVeturen p 
                                         WHERE p.UserID = {u.UserId} 
-                                        and SUBSTRING(datarezervimit, 0, charindex('.',datarezervimit,0)) = {dateTime.Day}
-                                        and SUBSTRING(datarezervimit, 3, charindex('.', datarezervimit) - 1) = {dateTime.Month};")
+                                        and Day(datarezervimit) = {dateTime.Day}
+                                        and Month(datarezervimit) = {dateTime.Month}")
                     .FirstOrDefaultAsync();
 
                 //nese nuk gjejme rezervim nga ky transportues

@@ -3,6 +3,7 @@ import './dashboard-styles.scss';
 import { Route, Routes } from 'react-router-dom'
 import DepoCrud from '../cruds/depo-crud/depo-crud';
 import ClientCrud from '../cruds/client-crud/user-crud';
+import OrdersCrud from '../cruds/orders-crud/orders-crud'
 import { Link } from 'react-router-dom';
 import ClientIcon from '../../img/client-crud-assets/user-crud-read.svg'
 import DepoIcon from '../../img/dashboard-assets/depo-icon.svg';
@@ -27,6 +28,10 @@ export default function Dashboard() {
                 <Link to="./ClientCrud">
                     <img src={ClientIcon} alt="client-user-icon" className='client-user-icon' />
                     <p>Perdoruesit</p>
+                </Link>
+                <Link to="./OrdersCrud">
+                    <img src={PorositeIcon} alt="orders-icon" className='client-user-icon' />
+                    <p>Porosite</p>
                 </Link>
                 <Link to="./SektoriCrud" > 
                     <img src={PorositeIcon} alt="ClientUserIcon" className='client-user-icon' />
@@ -56,6 +61,7 @@ export default function Dashboard() {
                
             <Routes>
                 <Route path='/ClientCrud/*' element={<ClientCrud />} />
+                <Route path='OrdersCrud/*' element={<OrdersCrud />} />
                 <Route path='/SektoriCrud/*' element={<SektoriCrud />} />
                 <Route path='/DepoCrud/*' element={<DepoCrud />} />
                 <Route path='/DepoSektoriCrud/*' element={<DepoSektoriCrud />} />

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
@@ -8,45 +8,50 @@ import { useNavigate } from "react-router-dom";
 
 export default function OrdersCreate() {
 
-    const [klientiId, setKlientiId] = useState();
-    const [senderEmri, setSenderEmri] = useState('');
-    const [senderMbiemri, setSenderMbiemri] = useState('');
+    const [userId, setUserId] = useState();
     const [emertimi, setEmertimi] = useState('');
     const [detajet, setDetajet] = useState('');
-    const [pesha, setPesha] = useState(0);
-    const [vellimi, setVellimi] = useState(0);
-    const [ndjeshmeria, setNdjeshmeria] = useState('');
+    const [vellimi, setVellimi] = useState('');
+    const [materiali, setMateriali] = useState('');
+    const [senderEmri, setSenderEmri] = useState('');
+    const [senderMbiemri, setSenderMbiemri] = useState('');
     const [senderNrTelefonit, setSenderNrTelefonit] = useState('');
+    const [senderHomeNumber, setSenderHomeNumber] = useState('Nr i vendbanimit te derguesit');
     const [senderStreetName, setSenderStreetName] = useState('');
-    const [senderCity, setSenderCity] = useState('Qyteti');
     const [senderZipCode, setSenderZipCode] = useState('');
     const [receiverEmri, setReceiverEmri] = useState('');
     const [receiverMbiemri, setReceiverMbiemri] = useState('');
     const [receiverNrTelefonit, setReceiverNrTelefonit] = useState('');
+    const [receiverHomeNumber, setReceiverHomeNumber] = useState('');
     const [receiverStreetName, setReceiverStreetName] = useState('');
-    const [receiverCity, setReceiverCity] = useState('Qyteti');
     const [receiverZipCode, setReceiverZipCode] = useState('');
 
-
+    const [qyteti, setQyteti] = useState([]);
     const [isPending, setIsPending] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const klienti = { klientiId, senderEmri, senderMbiemri, emertimi, detajet, pesha, vellimi, ndjeshmeria,
-                            senderNrTelefonit, senderStreetName, senderCity, senderZipCode,
-                            receiverEmri, receiverMbiemri, receiverNrTelefonit, receiverStreetName, receiverCity, receiverZipCode};
+        const porosia = { userId, senderEmri, senderMbiemri, emertimi, detajet, vellimi, materiali,
+                            senderNrTelefonit, senderStreetName, senderHomeNumber, senderZipCode,
+                            receiverEmri, receiverMbiemri, receiverNrTelefonit, receiverHomeNumber, receiverStreetName, receiverZipCode};
 
         setIsPending(true);
-        
-        axios.post('http://localhost:5100/PorositeController/ShtoPorosi', klienti)
+        console.log((porosia));
+        axios.post('http://localhost:5094/Porosia/ShtoPorosi', porosia)
         .then(() => {
-            console.log((klienti));
+            
             setIsPending(false);
         })       
         
-        navigate('/Login');
+        //navigate('/Login');
     }
+
+    useEffect(() => {
+        axios.get('http://localhost:5094/api/Qyteti/Get Qytetet').then(response => {
+          setQyteti(response.data);
+        })
+      }, [])
 
     return (
 
@@ -59,25 +64,10 @@ export default function OrdersCreate() {
                             name="clientId" 
                             placeholder="Id e Klientit" 
                             required
-                            defaultValue={klientiId}
-                            onChange={(e) => setKlientiId(e.target.value)}
+                            defaultValue={userId}
+                            onChange={(e) => setUserId(e.target.value)}
                         />
-                        <input 
-                            type="text" 
-                            name="name" 
-                            placeholder="Emri i Derguesit" 
-                            required 
-                            defaultValue={senderEmri}
-                            onChange={(e) => setSenderEmri(e.target.value)}
-                        />
-                        <input 
-                            type="text" 
-                            name="surname" 
-                            placeholder="Mbiemri i Derguesit" 
-                            required
-                            defaultValue={senderMbiemri}
-                            onChange={(e) => setSenderMbiemri(e.target.value)}
-                        />
+
                         <input 
                             type="text" 
                             name="emertimi" 
@@ -96,14 +86,6 @@ export default function OrdersCreate() {
                         />
                         <input 
                             type="text" 
-                            name="pesha" 
-                            placeholder="Pesha"
-                            required
-                            defaultValue={pesha}
-                            onChange={(e) => setPesha(e.target.value)}
-                        />
-                        <input 
-                            type="text" 
                             name="vellimi" 
                             placeholder="Vellimi"
                             required
@@ -112,11 +94,37 @@ export default function OrdersCreate() {
                         />
                         <input 
                             type="text" 
-                            name="ndjeshmeria" 
-                            placeholder="Ndjeshmeria"
+                            name="pesha" 
+                            placeholder="Materiali"
                             required
-                            defaultValue={ndjeshmeria}
-                            onChange={(e) => setNdjeshmeria(e.target.value)}
+                            defaultValue={materiali}
+                            onChange={(e) => setMateriali(e.target.value)}
+                        />
+
+                        <input 
+                            type="text" 
+                            name="name" 
+                            placeholder="Emri i Derguesit" 
+                            required 
+                            defaultValue={senderEmri}
+                            onChange={(e) => setSenderEmri(e.target.value)}
+                        />
+                        <input 
+                            type="text" 
+                            name="surname" 
+                            placeholder="Mbiemri i Derguesit" 
+                            required
+                            defaultValue={senderMbiemri}
+                            onChange={(e) => setSenderMbiemri(e.target.value)}
+                        />
+                        
+                        <input 
+                            type="number" 
+                            name="number" 
+                            placeholder="Nr i vendbanimit te derguesit"
+                            required
+                            defaultValue={senderHomeNumber}
+                            onChange={(e) => setSenderHomeNumber(e.target.value)}
                         />
 
                         <input 
@@ -127,6 +135,7 @@ export default function OrdersCreate() {
                             defaultValue={senderNrTelefonit}
                             onChange={(e) => setSenderNrTelefonit(e.target.value)}
                         />
+                        
                         <input 
                             type="text" 
                             name="address" 
@@ -136,31 +145,28 @@ export default function OrdersCreate() {
                             onChange={(e) => setSenderStreetName(e.target.value)}
                         />
                         <input 
-                            type="text" 
-                            name="zipCode" 
-                            placeholder="ZipCode i Derguesit"
+                            type="number" 
+                            name="number" 
+                            placeholder="Nr i vendbanimit te marresit"
                             required
-                            defaultValue={senderZipCode}
-                            onChange={(e) => setSenderZipCode(e.target.value)}
+                            defaultValue={receiverHomeNumber}
+                            onChange={(e) => setReceiverHomeNumber(e.target.value)}
                         />
                         <div className="box">
                             <select 
                                 required
-                                defaultValue={senderCity}
-                                onChange={(e) => setSenderCity(e.target.value)}
-                            >                                    
-                                <option value="Qyteti" disabled>Qyteti</option>
-                                <option>Gjilan</option>
-                                <option>Prishtine</option>
-                                <option>Prizren</option>
-                                <option>Mitrovice</option>
-                                <option>Gjakove</option>
-                                <option>Peje</option>
-                                <option>Ferizaj</option>                                   
+                                onChange={(e) => setSenderZipCode(e.target.value)} 
+                                defaultValue='Zgjedh Qytetin'
+                            >      
+                            <option value="Zgjedh Qytetin" disabled={true}>Zgjedh Qytetin</option>  
+                            {qyteti.map(qyteti => (
+                                <option required key={qyteti.qytetiZipCode} value={qyteti.qytetiZipCode}>
+                                    {qyteti.emriQytetit}
+                                </option>
+                            ))};                               
                             </select>
                         </div>
                     </div>
-
                     <div className="form-group">
                         <input 
                             type="text" 
@@ -194,30 +200,21 @@ export default function OrdersCreate() {
                             defaultValue={receiverStreetName}
                             onChange={(e) => setReceiverStreetName(e.target.value)}
                         />
-                        <input 
-                            type="text" 
-                            name="zipCode" 
-                            placeholder="Zip Kodi i Marresit"
-                            required
-                            defaultValue={receiverZipCode}
-                            onChange={(e) => setReceiverZipCode(e.target.value)}
-                        />
-                        <div className="box" id="receiver-city-box">
+                        <div className="box">
                             <select 
                                 required
-                                defaultValue={receiverCity}
-                                onChange={(e) => setReceiverCity(e.target.value)}
-                            >                                    
-                                <option value="Qyteti" disabled>Qyteti</option>
-                                <option>Gjilan</option>
-                                <option>Prishtine</option>
-                                <option>Prizren</option>
-                                <option>Mitrovice</option>
-                                <option>Gjakove</option>
-                                <option>Peje</option>
-                                <option>Ferizaj</option>                                   
+                                onChange={(e) => setReceiverZipCode(e.target.value)} 
+                                defaultValue='Zgjedh Qytetin'
+                            >      
+                            <option value="Zgjedh Qytetin" disabled={true}>Zgjedh Qytetin</option>  
+                            {qyteti.map(qyteti => (
+                                <option required key={qyteti.qytetiZipCode} value={qyteti.qytetiZipCode}>
+                                    {qyteti.emriQytetit}
+                                </option>
+                            ))};                               
                             </select>
                         </div>
+                        
                     </div>
                     { !isPending && <button type="submit" className="register-register-btn" value="Submit">
                             Shto

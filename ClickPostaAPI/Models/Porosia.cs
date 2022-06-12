@@ -36,6 +36,6 @@ namespace ClickPostaAPI.Models
         public virtual Qyteti? ReceiverZipCodeNavigation { get; set; }
         public virtual Qyteti? SenderZipCodeNavigation { get; set; }
         public virtual StatusiPorosise? StatusiPorosise { get; set; }
-        public virtual Useri User { get; set; } = null!;
+        public virtual Useri? User { get; set; } = null!;
     }
 }

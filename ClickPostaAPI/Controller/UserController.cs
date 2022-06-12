@@ -37,9 +37,8 @@ namespace ClickPostaAPI.Controllers
         [HttpPost("AddUsers")]
         public async Task<ActionResult<List<Useri>>> AddUsers(Useri useri)
         {
-            Useri user = await _context.Useri.FirstOrDefaultAsync(u => u.UserId == useri.UserId);
-            if (user != null)
-                return BadRequest("Ky User ekziston!");
+            if (useri == null)
+                return BadRequest("Useri nuk mund te jete i zbrazet!");
 
             useri.Password = BCrypt.Net.BCrypt.HashPassword(useri.Password);
             _context.Useri.Add(useri);
