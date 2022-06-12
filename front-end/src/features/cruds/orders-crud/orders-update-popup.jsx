@@ -4,41 +4,45 @@ import axios from 'axios';
 export default function OrdersUpdatePopup(props) {
 
     const id = props.porosiaId;
-    const klientiId = props.klientiId;
-    const [senderEmri, setSenderEmri] = useState('');
-    const [senderMbiemri, setSenderMbiemri] = useState('');
+    const userId = props.userId;
     const [emertimi, setEmertimi] = useState('');
     const [detajet, setDetajet] = useState('');
-    const [pesha, setPesha] = useState(0);
     const [vellimi, setVellimi] = useState(0);
-    const [ndjeshmeria, setNdjeshmeria] = useState('');
+    const [materiali, setMateriali] = useState('');
+    const [senderEmri, setSenderEmri] = useState('');
+    const [senderMbiemri, setSenderMbiemri] = useState('');
     const [senderNrTelefonit, setSenderNrTelefonit] = useState('');
+    const [senderHomeNumber, setSenderHomeNumber] = useState(0);
     const [senderStreetName, setSenderStreetName] = useState('');
-    const [senderCity, setSenderCity] = useState('Qyteti');
-    const [senderZipCode, setSenderZipCode] = useState('');
-    const [senderAddressDetails, setSenderAddressDetails] = useState ('');
+    const [senderZipCode, setSenderZipCode] = useState(0);
+    const [senderAddressDetails] = useState('');
     const [receiverEmri, setReceiverEmri] = useState('');
     const [receiverMbiemri, setReceiverMbiemri] = useState('');
     const [receiverNrTelefonit, setReceiverNrTelefonit] = useState('');
+    const [receiverHomeNumber, setReceiverHomeNumber] = useState(0);
     const [receiverStreetName, setReceiverStreetName] = useState('');
-    const [receiverCity, setReceiverCity] = useState('Qyteti');
-    const [receiverZipCode, setReceiverZipCode] = useState('');
-    const [receiverAddressDetails, setReceiverAddressDetails] = useState ('');
+    const [receiverZipCode, setReceiverZipCode] = useState(0);
+    const [receiverAddressDetails] = useState('');
+    const [marresiId, setMarresiId] = useState(0);
+    const [depoSektoriId, setDepoSektoriId] = useState(0);
+    const [derguesiId, setDerguesiId] = useState(0);
+    const [statusiPorosiseId, setStatusiPorosiseId] = useState(0); 
 
     const [isPending, setIsPending] = useState(false);
 
+
     const handleSubmit = (e) => {
     e.preventDefault();
-    const porosia = { id, klientiId, senderEmri, senderMbiemri, emertimi, detajet, pesha, vellimi, ndjeshmeria,
-                        senderNrTelefonit, senderStreetName, senderCity, senderZipCode,senderAddressDetails,
-                        receiverEmri, receiverMbiemri, receiverNrTelefonit, receiverStreetName, receiverCity, receiverZipCode,receiverAddressDetails};
+    const porosia = { id, userId, emertimi, detajet, vellimi, materiali,
+        senderEmri, senderMbiemri, senderNrTelefonit, senderHomeNumber, senderStreetName,  senderZipCode, senderAddressDetails,
+        receiverEmri, receiverMbiemri, receiverNrTelefonit, receiverHomeNumber, receiverStreetName, receiverZipCode, receiverAddressDetails,
+        marresiId, depoSektoriId, derguesiId, statusiPorosiseId};
 
     setIsPending(true);
     console.log(porosia);
 
-    axios.put('http://localhost:5100/PorositeController/UpdatePorosine', porosia)
+    axios.put('http://localhost:5094/Porosia/UpdatePorosi', porosia)
     .then(() => {
-        
         setIsPending(false);
         props.setRefreshKey(refreshKey => refreshKey + 1);
         props.setTrigger(false);
@@ -57,20 +61,6 @@ export default function OrdersUpdatePopup(props) {
                 <div className="form-group">
                     <input 
                         type="text" 
-                        name="name" 
-                        placeholder="Emri i Derguesit"  
-                        defaultValue={senderEmri}
-                        onChange={(e) => setSenderEmri(e.target.value)}
-                    />
-                    <input 
-                        type="text" 
-                        name="surname" 
-                        placeholder="Mbiemri i Derguesit" 
-                        defaultValue={senderMbiemri}
-                        onChange={(e) => setSenderMbiemri(e.target.value)}
-                    />
-                    <input 
-                        type="text" 
                         name="emertimi" 
                         placeholder="Emertimi"
                         defaultValue={emertimi}
@@ -85,13 +75,6 @@ export default function OrdersUpdatePopup(props) {
                     />
                     <input 
                         type="text" 
-                        name="pesha" 
-                        placeholder="Pesha"
-                        defaultValue={pesha}
-                        onChange={(e) => setPesha(e.target.value)}
-                    />
-                    <input 
-                        type="text" 
                         name="vellimi" 
                         placeholder="Vellimi"
                         defaultValue={vellimi}
@@ -99,10 +82,33 @@ export default function OrdersUpdatePopup(props) {
                     />
                     <input 
                         type="text" 
-                        name="ndjeshmeria" 
-                        placeholder="Ndjeshmeria"
-                        defaultValue={ndjeshmeria}
-                        onChange={(e) => setNdjeshmeria(e.target.value)}
+                        name="pesha" 
+                        placeholder="Materiali"
+                        defaultValue={materiali}
+                        onChange={(e) => setMateriali(e.target.value)}
+                    />
+
+                    <input 
+                        type="text" 
+                        name="name" 
+                        placeholder="Emri i Derguesit" 
+                        defaultValue={senderEmri}
+                        onChange={(e) => setSenderEmri(e.target.value)}
+                    />
+                    <input 
+                        type="text" 
+                        name="surname" 
+                        placeholder="Mbiemri i Derguesit" 
+                        defaultValue={senderMbiemri}
+                        onChange={(e) => setSenderMbiemri(e.target.value)}
+                    />
+                    
+                    <input 
+                        type="number" 
+                        name="number" 
+                        placeholder="Nr i vendbanimit te derguesit"
+                        defaultValue={senderHomeNumber}
+                        onChange={(e) => setSenderHomeNumber(e.target.value)}
                     />
 
                     <input 
@@ -112,6 +118,7 @@ export default function OrdersUpdatePopup(props) {
                         defaultValue={senderNrTelefonit}
                         onChange={(e) => setSenderNrTelefonit(e.target.value)}
                     />
+                    
                     <input 
                         type="text" 
                         name="address" 
@@ -119,82 +126,93 @@ export default function OrdersUpdatePopup(props) {
                         defaultValue={senderStreetName}
                         onChange={(e) => setSenderStreetName(e.target.value)}
                     />
-                    <input 
-                        type="text" 
-                        name="zipCode" 
-                        placeholder="ZipCode i Derguesit"
-                        defaultValue={senderZipCode}
-                        onChange={(e) => setSenderZipCode(e.target.value)}
-                    />
                     <div className="box">
                         <select 
-
-                            defaultValue={senderCity}
-                            onChange={(e) => setSenderCity(e.target.value)}
-                        >                                    
-                            <option value="Qyteti" disabled>Qyteti</option>
-                            <option>Gjilan</option>
-                            <option>Prishtine</option>
-                            <option>Prizren</option>
-                            <option>Mitrovice</option>
-                            <option>Gjakove</option>
-                            <option>Peje</option>
-                            <option>Ferizaj</option>                                   
+                            onChange={(e) => setSenderZipCode(e.target.value)} 
+                            defaultValue='Zgjedh Qytetin'
+                        >      
+                        <option value="Zgjedh Qytetin" disabled={true}>Zgjedh Qytetin</option>  
+                        {props.qyteti.map(qyteti => (
+                            <option  key={qyteti.qytetiZipCode} value={qyteti.qytetiZipCode}>
+                                {qyteti.emriQytetit}
+                            </option>
+                        ))};                               
                         </select>
                     </div>
                 </div>
 
                 <div className="form-group">
-                    <input 
-                        type="text" 
-                        name="name"
-                        placeholder="Emri i Marresit"
-                        defaultValue={receiverEmri}
-                        onChange={(e) => setReceiverEmri(e.target.value)}
-                    />
-                    <input 
-                        type="text" 
-                        name="surname" 
-                        placeholder="Mbiemri i Marresit"
-                        defaultValue={receiverMbiemri}
-                        onChange={(e) => setReceiverMbiemri(e.target.value)}
-                    />
-                    <input 
-                        type="text" 
-                        name="number" 
-                        placeholder="Numri i Marresit"
-                        defaultValue={receiverNrTelefonit}
-                        onChange={(e) => setReceiverNrTelefonit(e.target.value)}
-                    />
-                    <input 
-                        type="text" 
-                        name="address" 
-                        placeholder="Adresa e Marresit"
-                        defaultValue={receiverStreetName}
-                        onChange={(e) => setReceiverStreetName(e.target.value)}
-                    />
-                    <input 
-                        type="text" 
-                        name="zipCode" 
-                        placeholder="Zip Kodi i Marresit"
-                        defaultValue={receiverZipCode}
-                        onChange={(e) => setReceiverZipCode(e.target.value)}
-                    />
-                    <div className="box" id="receiver-city-box">
-                        <select 
-
-                            defaultValue={receiverCity}
-                            onChange={(e) => setReceiverCity(e.target.value)}
-                        >                                    
-                            <option value="Qyteti" disabled>Qyteti</option>
-                            <option>Gjilan</option>
-                            <option>Prishtine</option>
-                            <option>Prizren</option>
-                            <option>Mitrovice</option>
-                            <option>Gjakove</option>
-                            <option>Peje</option>
-                            <option>Ferizaj</option>                                   
-                        </select>
+                <input 
+                            type="text" 
+                            name="name" 
+                            placeholder="Emri i Marresit" 
+                            defaultValue={receiverEmri}
+                            onChange={(e) => setReceiverEmri(e.target.value)}
+                        />
+                        <input 
+                            type="text" 
+                            name="surname" 
+                            placeholder="Mbiemri i Marresit"
+                            defaultValue={receiverMbiemri}
+                            onChange={(e) => setReceiverMbiemri(e.target.value)}
+                        />
+                        <input 
+                            type="text" 
+                            name="number" 
+                            placeholder="Numri i Marresit"
+                            defaultValue={receiverNrTelefonit}
+                            onChange={(e) => setReceiverNrTelefonit(e.target.value)}
+                        />
+                        <input 
+                            type="number" 
+                            name="number" 
+                            placeholder="Nr i vendbanimit te marresit"
+                            defaultValue={receiverHomeNumber}
+                            onChange={(e) => setReceiverHomeNumber(e.target.value)}
+                        />
+                        <input 
+                            type="text" 
+                            name="address" 
+                            placeholder="Adresa e Marresit"
+                            defaultValue={receiverStreetName}
+                            onChange={(e) => setReceiverStreetName(e.target.value)}
+                        />
+                        <div className="box">
+                            <select 
+                                onChange={(e) => setReceiverZipCode(e.target.value)} 
+                                defaultValue='Zgjedh Qytetin'
+                            >      
+                            <option value="Zgjedh Qytetin" disabled={true}>Zgjedh Qytetin</option>  
+                            {props.qyteti.map(qyteti => (
+                                <option  key={qyteti.qytetiZipCode} value={qyteti.qytetiZipCode}>
+                                    {qyteti.emriQytetit}
+                                </option>
+                            ))};                               
+                            </select>   
+                            <input 
+                            type="number" 
+                            name="number" 
+                            placeholder="MarresiId"
+                            onChange={(e) => setMarresiId(e.target.value)}
+                        />   
+                        <input 
+                            type="number" 
+                            name="number" 
+                            placeholder="DepoSektoriId"
+                            onChange={(e) => setDepoSektoriId(e.target.value)}
+                        /> 
+                        <input 
+                            type="number" 
+                            name="number" 
+                            placeholder="DerguesiId"
+                            onChange={(e) => setDerguesiId(e.target.value)}
+                        /> 
+                        <input 
+                            type="number" 
+                            name="number" 
+                            placeholder="StatusiPorosiseId"
+                            onChange={(e) => setStatusiPorosiseId(e.target.value)}
+                        />    
                     </div>
                 </div>
                 { !isPending && <button type="submit" className="register-register-btn" value="Submit">

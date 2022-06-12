@@ -9,7 +9,7 @@ export default function OrdersRead() {
     const [qyteti, setQyteti] = useState([]);
     const [buttonPopup, setButtonPopup] = useState(false);
     const [porosiaId, setPorosiaId] = useState();
-    const [klientiId, setKlientiId] = useState();
+    const [userId, setUserId] = useState();
     const [refreshKey, setRefreshKey] = useState(0)
 
     function handleClick(porosiaId) {
@@ -85,7 +85,7 @@ export default function OrdersRead() {
                                     <th>#{porosia.depoSektoriId}</th>
                                     <th>#{porosia.derguesiId}</th>
                                     <th>{porosia.statusiPorosiseId}</th>
-                                    <th><button onClick={() => { setButtonPopup(true); setPorosiaId(porosia.id); setKlientiId(porosia.klientiId) }}>Update</button></th>
+                                    <th><button onClick={() => { setButtonPopup(true); setPorosiaId(porosia.id); setUserId(porosia.userId) }}>Update</button></th>
                                     <th><button type="submit"
                                         onClick={() => handleClick(porosia.id)}> Delete</button></th>
                                 </tr>
@@ -95,7 +95,7 @@ export default function OrdersRead() {
                 </div>
             </div>
 
-            <OrdersUpdatePopup trigger={buttonPopup} setTrigger={setButtonPopup} porosiaId={porosiaId} klientiId={klientiId} setRefreshKey = { setRefreshKey } >
+            <OrdersUpdatePopup trigger={buttonPopup} setTrigger={setButtonPopup} porosiaId={porosiaId} userId={userId} setRefreshKey = { setRefreshKey } qyteti = {qyteti}>
 
             </OrdersUpdatePopup>
 

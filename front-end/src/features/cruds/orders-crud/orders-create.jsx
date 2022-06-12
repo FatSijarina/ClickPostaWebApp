@@ -144,14 +144,6 @@ export default function OrdersCreate() {
                             defaultValue={senderStreetName}
                             onChange={(e) => setSenderStreetName(e.target.value)}
                         />
-                        <input 
-                            type="number" 
-                            name="number" 
-                            placeholder="Nr i vendbanimit te marresit"
-                            required
-                            defaultValue={receiverHomeNumber}
-                            onChange={(e) => setReceiverHomeNumber(e.target.value)}
-                        />
                         <div className="box">
                             <select 
                                 required
@@ -191,6 +183,14 @@ export default function OrdersCreate() {
                             required
                             defaultValue={receiverNrTelefonit}
                             onChange={(e) => setReceiverNrTelefonit(e.target.value)}
+                        />
+                        <input 
+                            type="number" 
+                            name="number" 
+                            placeholder="Nr i vendbanimit te marresit"
+                            required
+                            defaultValue={receiverHomeNumber}
+                            onChange={(e) => setReceiverHomeNumber(e.target.value)}
                         />
                         <input 
                             type="text" 

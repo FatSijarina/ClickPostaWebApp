@@ -23,7 +23,7 @@ export default function ClientUpdatePopup(props) {
     const [password, setPassword] = useState('');
 
     const [isPending, setIsPending] = useState(false);
-    const [qyteti, setQyteti] = useState([]);
+    const [qyteti, setQyteti] = props.qyteti;
     const rolet = [
         {id: 1, roli: 'Klient'},
         {id: 2, roli: 'Admin'},
@@ -104,7 +104,7 @@ export default function ClientUpdatePopup(props) {
                                     defaultValue='Zgjedh Qytetin'
                                 >      
                                 <option value="Zgjedh Qytetin" disabled={true}>Zgjedh Qytetin</option>  
-                                {qyteti.map(qyteti => (
+                                {props.qyteti.map(qyteti => (
                                     <option key={qyteti.qytetiZipCode} value={qyteti.qytetiZipCode}>
                                         {qyteti.emriQytetit}
                                     </option>
