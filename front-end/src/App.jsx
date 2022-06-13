@@ -10,6 +10,7 @@ import Register from "./features/register/register"
 import Login from "./features/login/login"
 import HomePage from './features/homepage/home-page';
 import Dashboard from './features/dashboard/dashboard';
+import ClientInterface from './features/client-interface/client-interface';
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path='/Register' element={<Register />} />
                 <Route path='/Login' element={<Login />} />
                 <Route path='/Dashboard/*' element={<Dashboard />} />
+                <Route path='/Home/*' element={<ClientInterface />} />
             </Routes>
             <ToastContainer position='bottom-right' />
             <Footer />

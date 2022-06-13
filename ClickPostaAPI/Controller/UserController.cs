@@ -22,6 +22,14 @@ namespace ClickPostaAPI.Controllers
         {
             return Ok(await _context.Useri.Where(u => u.RoleId == 1).ToListAsync());
         }
+        [HttpGet("GetKlientin")]
+        public async Task<ActionResult<Useri>> Get(int id)
+        {
+            var Klienti = await _context.Useri.FindAsync(id);
+            if (Klienti == null)
+                return BadRequest("Klienti nuk u gjet!");
+            return Ok(Klienti);
+        }
         [HttpGet("GetAdmins")]
         public async Task<ActionResult<List<Useri>>> GetAdmins()
         {
