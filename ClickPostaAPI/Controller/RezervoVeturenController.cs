@@ -1,4 +1,5 @@
 ﻿using ClickPostaAPI.Data;
+using ClickPostaAPI.Helpers;
 using ClickPostaAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,15 @@ namespace ClickPostaAPI.Controllers
         [HttpPost("AddRezervoVeturen")]
         public async Task<ActionResult<List<RezervoVeturen>>> AddRezervoVeturen(RezervoVeturen rezervoVeturen)
         {
+            ValidimiRezervimit validimiRezervimit = new ValidimiRezervimit(_context, rezervoVeturen.DataRezervimit, rezervoVeturen.DataKthimit, rezervoVeturen.UserId, rezervoVeturen.VeturaId);
+            if (await validimiRezervimit.isReserved())
+                return BadRequest("Vetura eshte e rezervuar!!");
+            else if (await validimiRezervimit.hasReserved())
+                return BadRequest("Useri ka rezervuar nje makine tjeter!!");
+
+            rezervoVeturen.Vetura = await _context.Vetura.FindAsync(rezervoVeturen.VeturaId);
+            rezervoVeturen.User = await _context.Useri.FindAsync(rezervoVeturen.UserId);
+
             _context.RezervoVeturen.Add(rezervoVeturen);
             await _context.SaveChangesAsync();
 

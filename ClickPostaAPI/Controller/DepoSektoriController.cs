@@ -1,7 +1,5 @@
 ﻿using ClickPostaAPI.Data;
-using ClickPostaAPI.Helpers;
 using ClickPostaAPI.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClickPostaAPI.Controllers
@@ -26,10 +24,9 @@ namespace ClickPostaAPI.Controllers
         [HttpPost("AddDepoSektori")]
         public async Task<ActionResult<List<DepoSektori>>> AddDepoSektori(DepoSektori depoSektori)
         {
-            ShtoDepoSektori dS = new ShtoDepoSektori(_context, depoSektori.DepoId, depoSektori.SektoriId);
-            /*depoSektori.Depo = await _context.Depo.FindAsync(depoSektori.DepoId);
-            depoSektori.Sektori = await _context.Sektori.FindAsync(depoSektori.SektoriId);*/
-            _context.DepoSektori.Add(dS.addDepoSektori());
+            depoSektori.Depo = await _context.Depo.FindAsync(depoSektori.DepoId);
+            depoSektori.Sektori = await _context.Sektori.FindAsync(depoSektori.SektoriId);
+            _context.DepoSektori.Add(depoSektori);
             await _context.SaveChangesAsync();
 
             return Ok(await _context.DepoSektori.ToListAsync());
