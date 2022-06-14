@@ -22,16 +22,16 @@ namespace ClickPostaAPI.Helpers
 
         public async Task<bool> isReserved()
         {
-            RezervoVeturen rV = await _context.RezervoVeturen.FirstOrDefaultAsync(a => a.VeturaId == veturaId);
+            RezervoVeturen rVeturen = await _context.RezervoVeturen.FirstOrDefaultAsync(a => a.VeturaId == veturaId && a.DataRezervimit == dataRezervimit);
 
-            if (rV == null)
+            if (rVeturen == null)
                 return false;
             return true;
         }
 
         public async Task<bool> hasReserved()
         {
-            RezervoVeturen useri = await _context.RezervoVeturen.FirstOrDefaultAsync(a => a.UserId == userId);
+            RezervoVeturen useri = await _context.RezervoVeturen.FirstOrDefaultAsync(a => a.UserId == userId && a.DataRezervimit == dataRezervimit);
 
             if (useri == null)
                 return false;

@@ -32,9 +32,6 @@ namespace ClickPostaAPI.Controllers
             else if (await validimiRezervimit.hasReserved())
                 return BadRequest("Useri ka rezervuar nje makine tjeter!!");
 
-            rezervoVeturen.Vetura = await _context.Vetura.FindAsync(rezervoVeturen.VeturaId);
-            rezervoVeturen.User = await _context.Useri.FindAsync(rezervoVeturen.UserId);
-
             _context.RezervoVeturen.Add(rezervoVeturen);
             await _context.SaveChangesAsync();
 
