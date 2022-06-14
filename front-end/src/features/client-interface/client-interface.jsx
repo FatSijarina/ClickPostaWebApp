@@ -11,27 +11,30 @@ import NotificationIcon from '../../img/client-dashboard-assets/icons/notificati
 import PackageIcon from '../../img/client-dashboard-assets/icons/packages.svg'
 import TrackIcon from '../../img/client-dashboard-assets/icons/track.svg'
 
+
 export default function ClientInterface() {
 
-    const klientiId = 2;
-    const [klienti, setKlienti] = useState();
-    const [porosite, setPorosite] = useState([]);
+    // const klientiId = 2;
+    // const [klienti, setKlienti] = useState();
+    // const [porosite, setPorosite] = useState([]);
 
-    useEffect(() => {
-        axios.get('http://localhost:5094/Porosia/GetUserPorosite?id=' + klientiId).
-            then(response => {
-                setPorosite(response.data);
-            })
-        axios.get('http://localhost:5094/api/User/GetKlientin?id=' + klientiId).
-        then(response => {
-            setKlienti(response.data);
-        })
-    }, [])
+
+    // useEffect(() => {
+    //     axios.get('http://localhost:5094/Porosia/GetUserPorosite?id=' + klientiId)
+    //         .then(response => {
+    //             localStorage.setItem('porosite', response);
+    //         })
+    //     axios.get('http://localhost:5094/api/User/GetKlientin?id=' + klientiId)
+    //     .then(response => {
+    //         localStorage.setItem('klienti', JSON.stringify(response.data));
+    //     })
+
+    // }, [])
 
     return (
         <div className="base-container">
-            {console.log(klienti)}
-            {console.log(porosite)}
+            {/* {console.log(klienti)}
+            {console.log(porosite)} */}
             <div className="dashboard-links">
                 <Link to="./">
                     <img src={HomeIcon} alt="home-icon" className='client-user-icon'/>
@@ -49,10 +52,7 @@ export default function ClientInterface() {
                     <img src={NotificationIcon} alt="notification-icon" className='client-user-icon'/>
                     <p>Njoftimet</p>
                 </Link>
-            </div>
-
-            <h1>Hello {klienti.emri}!</h1>
-        
+            </div>      
 
             <Routes>
                 <Route path='/' element={<CIHome />}/>

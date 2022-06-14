@@ -12,20 +12,23 @@ import HomePage from './features/homepage/home-page';
 import Dashboard from './features/dashboard/dashboard';
 import ClientInterface from './features/client-interface/client-interface';
 
+import { UserContextProvider } from './Context/UserContext';
+
 function App() {
     return (
         <div className="App">
-
-            <Navbar />
-            <Routes>
-                <Route path='/' element={<HomePage />} />
-                <Route path='/Register' element={<Register />} />
-                <Route path='/Login' element={<Login />} />
-                <Route path='/Dashboard/*' element={<Dashboard />} />
-                <Route path='/Home/*' element={<ClientInterface />} />
-            </Routes>
-            <ToastContainer position='bottom-right' />
-            <Footer />
+            <UserContextProvider>    
+                <Navbar />
+                <Routes>
+                    <Route path='/' element={<HomePage />} />
+                    <Route path='/Register' element={<Register />} />
+                    <Route path='/Login' element={<Login />} />
+                    <Route path='/Dashboard/*' element={<Dashboard />} />
+                    <Route path='/Home/*' element={<ClientInterface />} />
+                </Routes>
+                <ToastContainer position='bottom-right' />
+                <Footer />
+            </UserContextProvider>
         </div>
     );
 }

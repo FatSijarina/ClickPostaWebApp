@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import '../crud-styles.scss';
 import axios from 'axios';
 import ClientUpdatePopup from './user-update-popup';
 import { toast } from "react-toastify";
+import { UserContext } from '../../../Context/UserContext';
 
 export default function ClientRead() {
 
-  const [klientet, setKlientet] = useState([]);
+  const {klientet} = useContext(UserContext);
   const [qyteti, setQyteti] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [klientID, setKlientId] = useState();
@@ -26,19 +27,12 @@ export default function ClientRead() {
     setRefreshKey(refreshKey + 1 )
   }
 
-  useEffect(() => {
-    axios.get('http://localhost:5094/api/User/GetKlientet').then(response => {
-      setKlientet(response.data);
-    })
-    axios.get('http://localhost:5094/api/Qyteti/Get Qytetet').then(response => {
-      setQyteti(response.data);
-    })
-  }, [refreshKey])
+
 
   return (
     <>  
       <h1>Client Read</h1>
-
+    {console.log(klientet)}
       <div className="styled-table">          
         <table>
           <thead>
