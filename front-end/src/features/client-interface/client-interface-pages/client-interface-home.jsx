@@ -10,7 +10,7 @@ import Package from '../../../img/client-dashboard-assets/icons/order-packages.s
 
 export default function CIHome() {
 
-    const {klienti, porosite} = useContext(UserContext);
+    const {klienti, porosite, qytetet} = useContext(UserContext);
 
     return (
         <>
@@ -26,25 +26,36 @@ export default function CIHome() {
                 </div>
                 <div className="right-section">
                     <h2>Dergesat e mia</h2>
-                    <div className="client-order">
-                        <div className="client-order-info">
-                            <div className="client-order-info-row">
-                                <img src={Package} alt="package-icon" />
-                                <p>Liber</p>
+
+                    {porosite.sort((a, b) => b.id - a.id).slice(0, 5).map(porosia => (                        
+                        <div className="client-order" key={porosia.id}>
+                            <div className="client-order-info">
+                                <div className="client-order-info-row">
+                                    <img src={Package} alt="package-icon" />
+                                    <p>{porosia.emertimi}</p>
+                                </div>
+                                <div className="client-order-info-row">
+                                    <img src={LocationFrom} alt="package-icon" />
+                                    <p>
+                                        {qytetet.map((qyteti) => (
+                                            (porosia.senderZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
+                                        ))}
+                                    </p>
+                                </div>
+                                <div className="client-order-info-row">
+                                    <img src={LocationTo} alt="package-icon" />
+                                    <p>
+                                        {qytetet.map((qyteti) => (
+                                            (porosia.receiverZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
+                                        ))}
+                                    </p>
+                                </div>
                             </div>
-                            <div className="client-order-info-row">
-                                <img src={LocationFrom} alt="package-icon" />
-                                <p>Gjilan</p>
+                            <div className="client-order-status">
+                                <p></p>
                             </div>
-                            <div className="client-order-info-row">
-                                <img src={LocationTo} alt="package-icon" />
-                                <p>Kamenice</p>
-                            </div>
-                        </div>
-                        <div className="client-order-status">
-                            <p></p>
-                        </div>
-                    </div>                    
+                        </div>                
+                    ))}    
                 </div>
             </main>
         </>

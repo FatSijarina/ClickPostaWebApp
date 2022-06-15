@@ -53,7 +53,7 @@ namespace ClickPostaAPI.Helpers
 
                 //nese nuk gjejme rezervim nga ky transportues
                 //ose nese transportuesi nuk ka te rezervuar automjetin e duhur e fshijme ate nga lista
-                if (rezervimi.Equals(null))
+                if (rezervimi == null)
                     MarresitNgaQyteti.Remove(u);
                 else if (!(await _context.Vetura.FindAsync(rezervimi.VeturaId)).Tipi.Equals(KalkuloVeturenNgaVellimi()))
                     MarresitNgaQyteti.Remove(u);
