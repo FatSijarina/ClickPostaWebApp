@@ -22,7 +22,8 @@ namespace ClickPostaAPI.Helpers
 
         public async Task<bool> isReserved()
         {
-            RezervoVeturen rVeturen = await _context.RezervoVeturen.FirstOrDefaultAsync(a => a.VeturaId == veturaId && a.DataRezervimit == dataRezervimit);
+            RezervoVeturen rVeturen = await _context.RezervoVeturen.
+                FirstOrDefaultAsync(a => a.VeturaId == veturaId && a.DataRezervimit == dataRezervimit);
 
             if (rVeturen == null)
                 return false;
@@ -31,11 +32,34 @@ namespace ClickPostaAPI.Helpers
 
         public async Task<bool> hasReserved()
         {
-            RezervoVeturen useri = await _context.RezervoVeturen.FirstOrDefaultAsync(a => a.UserId == userId && a.DataRezervimit == dataRezervimit);
+            RezervoVeturen useri = await _context.RezervoVeturen.
+                FirstOrDefaultAsync(a => a.UserId == userId && a.DataRezervimit == dataRezervimit);
 
             if (useri == null)
                 return false;
             return true;
+        }
+
+        public bool isEqual()
+        {
+            DateTime dataTash = DateTime.Now;
+            DateTime dataRez = Convert.ToDateTime(dataRezervimit);
+            if(dataRez < dataTash.Date)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> ngaDepoNjejte()
+        {
+            int userZipCode = (int)await _context.Useri.Where(u => u.UserId == userId).Select(u => u.ZipCode).FirstOrDefaultAsync();
+            int qytetiZipCode = await _context.Qyteti.Where(q => q.QytetiZipCode == userZipCode).Select(q => q.QytetiZipCode).FirstOrDefaultAsync();
+            int veturaDepo = (int)await _context.Vetura.Where(v => v.VeturaId == veturaId).Select(v => v.DepoId).FirstOrDefaultAsync();
+            Depo depo = await _context.Depo.FirstOrDefaultAsync(a => a.ZipCode == qytetiZipCode && a.DepoId == veturaDepo);
+            if (depo == null)
+                return true;
+            return false;
         }
     }
 }

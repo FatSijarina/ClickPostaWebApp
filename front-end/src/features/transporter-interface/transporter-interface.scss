@@ -1,0 +1,117 @@
+.greetings-section {
+    .rezervo-btn {
+        width: 70%;
+        min-width: 18em;
+        margin-top: 6px;
+        min-width: 10em;
+        height: 50px;
+        padding: 0px 10px;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: 'Open Sans', "sans-serif";
+        background-color: #DA244B;
+        border: 0;
+        border-radius: 66px;
+        color: #f3f3f3;
+        cursor: pointer;
+    }
+}
+
+.transporter-main {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+
+    .left-section {
+        height: 300px;
+        width: 50vw;
+        border-radius: 66px;
+        margin: 2vw;
+    }
+
+    .middle-section {
+        height: 300px;
+        width: 50vw;
+        border-radius: 66px;
+        margin: 2vw;
+    }
+
+    .right-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 300px;
+        width: 50vw;
+        margin: 2vw;
+        border-radius: 40px;
+        color: white;
+
+        .client-order {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            border-radius: 25px;
+            box-shadow: 0px 0px 10px 1px #6e0c21;
+            background-color: #DA244B;
+            padding: 3% 0%;
+            margin-bottom: 1vw;
+
+            .client-order-info {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: left;
+                padding-left: 1.5vw;
+
+                p {
+                    margin: 3px 0px;
+                }
+
+                .client-order-info-row {
+                    display: flex;
+                    width: 100%;
+                    font-size: 1.2rem;
+                    font-weight: bolder;
+
+                    img {
+                        margin: 3px;
+                        height: 1.2vw;
+                    }
+                }
+            }
+        }
+    }
+
+    .rezervo-btn {
+        width: 70%;
+        min-width: 18em;
+        margin-top: 6px;
+        min-width: 10em;
+        height: 50px;
+        padding: 0px 10px;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: 'Open Sans', "sans-serif";
+        background-color: #DA244B;
+        border: 0;
+        border-radius: 66px;
+        color: #f3f3f3;
+        cursor: pointer;
+    }
+}
+
+.lista-btn {
+    width: 100%;
+    min-width: 18em;
+    height: 50px;
+    padding: 0px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Open Sans', "sans-serif";
+    background-color: #DA244B;
+    border: 0;
+    border-radius: 66px;
+    color: #f3f3f3;
+    cursor: pointer;
+}

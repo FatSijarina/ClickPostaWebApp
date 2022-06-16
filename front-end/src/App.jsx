@@ -11,6 +11,7 @@ import Login from "./features/login/login"
 import HomePage from './features/homepage/home-page';
 import Dashboard from './features/dashboard/dashboard';
 import ClientInterface from './features/client-interface/client-interface';
+import TransporterInterface from './features/transporter-interface/transporter-interface';
 
 import { UserContextProvider } from './Context/UserContext';
 
@@ -25,6 +26,7 @@ function App() {
                     <Route path='/Login' element={<Login />} />
                     <Route path='/Dashboard/*' element={<Dashboard />} />
                     <Route path='/Home/*' element={<ClientInterface />} />
+                    <Route path='/Transporter/*' element={<TransporterInterface />} />
                 </Routes>
                 <ToastContainer position='bottom-right' />
                 <Footer />
