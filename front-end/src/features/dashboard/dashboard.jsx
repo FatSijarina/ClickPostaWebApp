@@ -14,7 +14,7 @@ import SektoriCrud from '../cruds/sektori-crud/sektori-crud';
 import DepoSektoriCrud from '../cruds/deposektori-crud/depo-sektori-crud';
 import VeturaCrud from '../cruds/vetura-crud/vetura-crud';
 import RezervoVeturenCrud from '../cruds/rezervoVeturen-crud/rezervo-veturen-crud';
-import PushimiIcon from '../../img/dashboard-assets/rest.png';
+import PushimiIcon from '../../img/dashboard-assets/rest-icon.svg';
 import PushimiCrud from '../cruds/pushimi-crud/Pushimi-crud';
 import QytetiCrud from '../cruds/qyteti-crud/QytetiCrud';
 

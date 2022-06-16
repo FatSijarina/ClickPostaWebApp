@@ -8,11 +8,22 @@ import GreetingsCourier from '../../../img/client-dashboard-assets/courier-greet
 import LocationFrom from '../../../img/client-dashboard-assets/icons/location-from.svg'
 import LocationTo from '../../../img/client-dashboard-assets/icons/location-to.svg'
 import Package from '../../../img/client-dashboard-assets/icons/order-packages.svg'
+import SidebarClientOrder from "../../../components/user-interface-cards/sidebar-client-orders";
+import PerTuMarreImg from "../../../img/client-dashboard-assets/package-status/package-status-per-tu-marre.svg"
+import NeDepoImg from "../../../img/client-dashboard-assets/package-status/package-status-ne-depo.svg"
+import DukeUDerguar from "../../../img/client-dashboard-assets/package-status/package-status-e-marre.svg"
+import GjurmimiRealTime from "../../../img/client-dashboard-assets/Gjurmimi-RealTime.png"
 
 export default function CIHome() {
 
     const {klientiID, klienti, porosite, qytetet} = useContext(UserContext);
     const [porosiaFundit, setPorosiaFundit] = useState([]);
+
+    const statusiPorosise = [
+        {id: 1, statusi: PerTuMarreImg},
+        {id: 2, statusi: NeDepoImg},
+        {id: 3, statusi: DukeUDerguar}
+    ];
 
     useEffect(() => {
         axios.get('http://localhost:5094/Porosia/GetLatestUserPorosia?id=' + klientiID)
@@ -44,7 +55,7 @@ export default function CIHome() {
                                 <p>ID: <b>{porosiaFundit.id}</b></p>
                             </div>
                             <div className="latest-order-info-row">
-                                <p>Derguar te: <b>#{porosiaFundit.receiverEmri + " " + porosiaFundit.receiverMbiemri}</b></p>
+                                <p>Derguar te: <b>{porosiaFundit.receiverEmri + " " + porosiaFundit.receiverMbiemri}</b></p>
                             </div>
                             <div className="latest-order-info-row">
                                 <p>Nga: 
@@ -60,9 +71,12 @@ export default function CIHome() {
 
                         </div>
                         <div className="latest-order-status">
-
+                            <img src={porosiaFundit.statusiPorosiseId ?  statusiPorosise.find(s => s.id == porosiaFundit.statusiPorosiseId).statusi : "" }  alt="" />
                         </div>
                     </div>
+
+                    <img src={GjurmimiRealTime} alt="" />
+
                 </div>
                 <div className="right-section">
                     <h2>Dergesat e mia</h2>
@@ -70,29 +84,25 @@ export default function CIHome() {
                     {porosite.sort((a, b) => b.id - a.id).slice(0, 5).map(porosia => (                        
                         <div className="client-order" key={porosia.id}>
                             <div className="client-order-info">
-                                <div className="client-order-info-row">
-                                    <img src={Package} alt="package-icon" />
-                                    <p>{porosia.emertimi}</p>
-                                </div>
-                                <div className="client-order-info-row">
-                                    <img src={LocationFrom} alt="package-icon" />
-                                    <p>
-                                        {qytetet.map((qyteti) => (
-                                            (porosia.senderZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
-                                        ))}
-                                    </p>
-                                </div>
-                                <div className="client-order-info-row">
-                                    <img src={LocationTo} alt="package-icon" />
-                                    <p>
-                                        {qytetet.map((qyteti) => (
-                                            (porosia.receiverZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
-                                        ))}
-                                    </p>
-                                </div>
+                                <SidebarClientOrder 
+                                    icon={Package}
+                                    text={porosia.emertimi}
+                                />
+                                <SidebarClientOrder 
+                                    icon={LocationFrom}
+                                    text={qytetet.map((qyteti) => (
+                                        (porosia.senderZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
+                                    ))}
+                                />
+                                <SidebarClientOrder 
+                                    icon={LocationTo}
+                                    text={qytetet.map((qyteti) => (
+                                        (porosia.receiverZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
+                                    ))}
+                                />
                             </div>
                             <div className="client-order-status">
-                                <p></p>
+                                <img src={statusiPorosise.find(s => s.id === porosia.statusiPorosiseId).statusi}  alt="" />
                             </div>
                         </div>                
                     ))}    
