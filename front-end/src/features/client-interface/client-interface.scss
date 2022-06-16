@@ -21,13 +21,46 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        justify-content: space-between  ;
+        justify-content: space-between;
+        p{
+            color: white;
+        }
         .left-section{
-            height: 500px;
             width: 50vw;
-            border-radius: 66px;
+            border-radius: 40px;
             margin: 2vw;
-            background-color: #DA244B;
+                .latest-order{
+                    display: flex;
+                    width: 100%;
+                    border-radius: 20px;
+                    background-color: #DA244B;
+                    text-align: start;
+                    .latest-order-info{
+                        display: flex;
+                        flex-direction: column;
+                        width: 70%;
+                        margin: 3% 6%;
+                        .latest-order-info-row{
+                            display: flex;
+                            width: 100%;
+                            justify-content: flex-start;
+                            align-items: center;
+                            font-size:1.2rem;
+                            font-weight: 300;
+                            p{
+                                margin: 0%;
+                                margin-bottom: 2%;
+                            }
+                        }
+                        .latest-order-info-title{
+                            width: 50%;
+                            font-weight: bolder;
+                            font-size: 1.2rem;
+                        }
+
+
+                    }
+                }
         }
         .right-section{
             display: flex;

@@ -34,6 +34,16 @@ namespace ClickPostaAPI.Controllers
                 return NoContent();
             return Ok(Porosite);
         }
+        
+        [HttpGet("GetLatestUserPorosia")]
+        public async Task<ActionResult<Porosia>> GetLatestUserPorosia(int id)
+        {
+            Porosia PorosiaFundit = await _context.Porosia.Where(u => u.UserId == id).OrderByDescending(u => u.Id).FirstOrDefaultAsync();
+            if (PorosiaFundit == null)
+                return NoContent();
+            
+            return Ok(PorosiaFundit);
+        }
 
         [HttpGet("GetMarresiPorosite")]
         public async Task<ActionResult<List<Porosia>>> GetMarresiPorosite(int id)

@@ -1,4 +1,5 @@
-import React, {  } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../../../Context/UserContext";
 import "../client-interface.scss";
@@ -10,7 +11,15 @@ import Package from '../../../img/client-dashboard-assets/icons/order-packages.s
 
 export default function CIHome() {
 
-    const {klienti, porosite, qytetet} = useContext(UserContext);
+    const {klientiID, klienti, porosite, qytetet} = useContext(UserContext);
+    const [porosiaFundit, setPorosiaFundit] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:5094/Porosia/GetLatestUserPorosia?id=' + klientiID)
+            .then(response => {
+                setPorosiaFundit(response.data);
+            })
+    }, [])
 
     return (
         <>
@@ -22,7 +31,38 @@ export default function CIHome() {
 
             <main className="client-main">
                 <div className="left-section">
+                    <div className="latest-order">
+                        <div className="latest-order-info">
+                            <p className="latest-order-info-title">
+                                Gjendja e dergeses se fundit
+                            </p>
+                            
+                            <div className="latest-order-info-row">
+                                <p>Emertimi: <b>{porosiaFundit.emertimi}</b></p>
+                            </div>
+                            <div className="latest-order-info-row">
+                                <p>ID: <b>{porosiaFundit.id}</b></p>
+                            </div>
+                            <div className="latest-order-info-row">
+                                <p>Derguar te: <b>#{porosiaFundit.receiverEmri + " " + porosiaFundit.receiverMbiemri}</b></p>
+                            </div>
+                            <div className="latest-order-info-row">
+                                <p>Nga: 
+                                <b>{qytetet.map((qyteti) => (
+                                            (porosiaFundit.senderZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
+                                        ))}</b></p>
+                            </div>
+                            <div className="latest-order-info-row">
+                                <p>Per ne: <b>{qytetet.map((qyteti) => (
+                                            (porosiaFundit.receiverZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
+                                        ))}</b></p>
+                            </div>
 
+                        </div>
+                        <div className="latest-order-status">
+
+                        </div>
+                    </div>
                 </div>
                 <div className="right-section">
                     <h2>Dergesat e mia</h2>
