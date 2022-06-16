@@ -13,28 +13,8 @@ import TrackIcon from '../../img/client-dashboard-assets/icons/track.svg'
 
 
 export default function ClientInterface() {
-
-    // const klientiId = 2;
-    // const [klienti, setKlienti] = useState();
-    // const [porosite, setPorosite] = useState([]);
-
-
-    // useEffect(() => {
-    //     axios.get('http://localhost:5094/Porosia/GetUserPorosite?id=' + klientiId)
-    //         .then(response => {
-    //             localStorage.setItem('porosite', response);
-    //         })
-    //     axios.get('http://localhost:5094/api/User/GetKlientin?id=' + klientiId)
-    //     .then(response => {
-    //         localStorage.setItem('klienti', JSON.stringify(response.data));
-    //     })
-
-    // }, [])
-
     return (
         <div className="base-container">
-            {/* {console.log(klienti)}
-            {console.log(porosite)} */}
             <div className="dashboard-links">
                 <Link to="./">
                     <img src={HomeIcon} alt="home-icon" className='client-user-icon'/>

@@ -2,11 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import GreetingsCourier from '../../../../img/client-dashboard-assets/courier-greetings.svg';
 import "../../transporter-interface.scss";
-import Motorcycle from '../../../../img/transporter-assets/motorcycle.png';
+import Truck from '../../../../img/transporter-assets/cargo-truck.png';
 
-export default function TIReserveScooter() {
+export default function TIReserveTruck() {
     const [dataRezervimit, setDataRezervimit] = useState([]);
     const dataKthimit = dataRezervimit;
     const [userId, setUserId] = useState('0');
@@ -38,19 +37,21 @@ export default function TIReserveScooter() {
         axios.get('http://localhost:5094/api/User/GetTransportuesit').then(response => {
             setTransportuesit(response.data);
         })
+    }, [refreshKey])
+
+    const [makinat, setMakinat] = useState([]);
+    useEffect(() => {
         axios.get('http://localhost:5094/api/Veturat/ShowVeturat').then(response => {
             setMakinat(response.data);
         })
     }, [refreshKey])
 
-    const [makinat, setMakinat] = useState([]);
-
     return (
         <>
             <div className="greetings-section">
                 <h1>Hello Transporter</h1>
-                <img src={Motorcycle} alt="greetings-courier" />
-                <button className="add-order-btn">Rezervo Scooterin</button>
+                <img src={Truck} alt="greetings-courier" />
+                <button className="add-order-btn">Rezervo Kamion</button>
             </div>
             <div className="form">
                 <form onSubmit={handleSubmit}>
@@ -93,7 +94,7 @@ export default function TIReserveScooter() {
                                 <option value="Zgjedh Veturen" disabled={true}>Zgjedh Veturen</option>
                                 {makinat.map((makina) => (
                                     <option required key={makina.veturaId} value={makina.veturaId}>
-                                        {((makina.tipi == 'Scooter') ? makina.brendi : delete makinat[makinat.indexOf(makina)])}
+                                        {((makina.tipi == 'Truck') ? makina.brendi : delete makinat[makinat.indexOf(makina)])}
                                     </option>
                                 ))};
                             </select>

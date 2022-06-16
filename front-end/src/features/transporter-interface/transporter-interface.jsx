@@ -6,6 +6,9 @@ import TIHome from './transporter-interface-pages/transporter-interface-home'
 import TIReserve from './transporter-interface-pages/transporter-interface-reserve'
 import HomeIcon from '../../img/client-dashboard-assets/icons/home.svg'
 import PackageIcon from '../../img/client-dashboard-assets/icons/packages.svg'
+import TIReserveScooter from './transporter-interface-pages/rezervimet/transporter-reserve-scooter'
+import TIReservePickup from './transporter-interface-pages/rezervimet/transporter-reserve-pickup'
+import TIReserveTruck from './transporter-interface-pages/rezervimet/transporter-reserve-truck'
 
 
 export default function TransporterInterface() {
@@ -25,6 +28,9 @@ export default function TransporterInterface() {
             <Routes>
                 <Route path='/' element={<TIHome />} />
                 <Route path='/Rezervo/*' element={<TIReserve />} />
+                <Route path='/ReserveScooter' element={<TIReserveScooter />} />
+                <Route path='/ReservePickup' element={<TIReservePickup />} />
+                <Route path='/ReserveTruck' element={<TIReserveTruck />} />
             </Routes>
 
         </div>

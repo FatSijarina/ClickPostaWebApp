@@ -14,7 +14,7 @@ export default function TIHome() {
                 <h1>Veturat</h1>
             </div>
 
-            <main className="transporter-main">
+            <main className="transporter-main-home">
                 <div className="left-section">
                     <img img src={Motorcycle} alt="ClientUserIcon" className='client-user-icon' />
                     <button className="rezervo-btn">Rezervo nje scooter</button>
