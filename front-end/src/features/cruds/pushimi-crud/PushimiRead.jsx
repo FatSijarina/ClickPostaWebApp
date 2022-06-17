@@ -46,8 +46,8 @@ export default function PushimiRead(){
                 <table>
                     <thead>
                         <tr>
-                            <th>Pushimi ID</th>
-                            <th>User Id</th>
+                            <th>Pushimi Id</th>
+                            <th>Punetori Id</th>
                             <th>Data e fillimit</th>
                             <th>Data e mbarimit</th>
                             <th>Update</th>

@@ -31,10 +31,11 @@ export default function PushimiCreate(){
             <div>
                 <form className="form-orders" onSubmit={handleSubmit}>
                     <div className="form-group">
+
                         <input
                         type="number"
                         name="userId"
-                        placeholder="ID e userit"
+                        placeholder="ID e Punetorit"
                         required
                         defaultValue={userId}
                         onChange={(e) => setUserId(e.target.value)}
@@ -57,7 +58,7 @@ export default function PushimiCreate(){
                         />
                     </div>
                     { !isPending && <button type="submit" className="register-register-btn" value="Submit">
-                            Shto
+                            Rezervo
                         </button>}
                         { isPending && <button type="submit" className="register-register-btn" value="Submit">
                             Duke funksionuar

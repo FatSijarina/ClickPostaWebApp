@@ -18,6 +18,7 @@ import PushimiCrud from '../cruds/pushimi-crud/Pushimi-crud';
 import QytetiCrud from '../cruds/qyteti-crud/QytetiCrud';
 
 
+
 export default function Dashboard() {
     return(
         <div className="base-container">
@@ -57,6 +58,7 @@ export default function Dashboard() {
                     <img src={CityIcon} alt="ClientUserIcon" className='client-user-icon' />
                     <p>Qytetet</p>
                 </Link>
+               
             </div>    
                
             <Routes>
@@ -68,6 +70,7 @@ export default function Dashboard() {
                 <Route path='/VeturaCrud/*' element={<VeturaCrud />} />
                 <Route path='/PushimiCrud/*' element={<PushimiCrud/>}/>
                 <Route path='/QytetiCrud/*' element={<QytetiCrud/>}/>
+                
             </Routes>
 
 

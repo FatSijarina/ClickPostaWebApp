@@ -22,7 +22,7 @@ export default function Navbar() {
                             <Link to="/">
                                 <button type="button">FAQ</button>    
                             </Link> 
-                            <Link to="/">
+                            <Link to="./AboutUs">
                                 <button type="button">Rreth Nesh</button>    
                             </Link> 
                             <Link to="./Register">

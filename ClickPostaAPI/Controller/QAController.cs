@@ -22,7 +22,7 @@ namespace ClickPostaAPI.Controllers
         [HttpGet("Get QA")]
         public async Task<ActionResult<List<QA>>> Get()
         {
-            return Ok(await _context.Pushimi.ToListAsync());
+            return Ok(await _context.QA.ToListAsync());
         }
 
         [HttpGet("{id}")]

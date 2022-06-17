@@ -11,6 +11,8 @@ import Login from "./features/login/login"
 import HomePage from './features/homepage/home-page';
 import Dashboard from './features/dashboard/dashboard';
 import ClientInterface from './features/client-interface/client-interface';
+import AboutUs from './features/about-us/AboutUs';
+import FAQ from './features/faq/faq';
 
 function App() {
     return (
@@ -21,6 +23,8 @@ function App() {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/Register' element={<Register />} />
                 <Route path='/Login' element={<Login />} />
+                <Route path='/AboutUs' element={<AboutUs />} />
+                <Route path='/FAQ/*' element={<FAQ />} />
                 <Route path='/Dashboard/*' element={<Dashboard />} />
                 <Route path='/Home/*' element={<ClientInterface />} />
             </Routes>
