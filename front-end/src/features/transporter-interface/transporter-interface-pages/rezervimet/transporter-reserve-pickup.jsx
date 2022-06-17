@@ -51,7 +51,7 @@ export default function TIReservePickup() {
     return (
         <>
             <div className="greetings-section">
-                <h1>Hello Transporter</h1>
+                <h1>Hello {transportuesi.emri}</h1>
                 <img src={Pickup} alt="greetings-courier" />
                 <button className="add-order-btn">Rezervo Pickup</button>
             </div>

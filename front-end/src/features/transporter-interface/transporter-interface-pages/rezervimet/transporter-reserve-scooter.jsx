@@ -49,7 +49,7 @@ export default function TIReserveScooter() {
     return (
         <>
             <div className="greetings-section">
-                <h1>Hello Transporter</h1>
+                <h1>Hello {transportuesi.emri}</h1>
                 <img src={Motorcycle} alt="greetings-courier" />
                 <button className="add-order-btn">Rezervo Scooterin</button>
             </div>

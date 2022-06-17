@@ -6,8 +6,9 @@ import GreetingsCourier from '../../../img/client-dashboard-assets/courier-greet
 import LocationFrom from '../../../img/client-dashboard-assets/icons/location-from.svg';
 import LocationTo from '../../../img/client-dashboard-assets/icons/location-to.svg';
 import Package from '../../../img/client-dashboard-assets/icons/order-packages.svg';
-import Qr from '../../../img/transporter-assets/qr.png';
+import PorosiaDetails from "../transporter-interface-pages/porosia-transportuesit";
 import "../transporter-interface.scss";
+import { Route, Routes, Link } from 'react-router-dom'
 
 
 export default function TIHome() {
@@ -24,30 +25,38 @@ export default function TIHome() {
             <main className="transporter-main-home">
                 {orders.map(porosia => (
                     <div className="transporter-orders" key={porosia.id}>
-                        <div className="transporter-order-status">
-                            #{porosia.id}
-                        </div>
-                        <div className="transporter-orders-info">
-                            <SidebarClientOrder
-                                icon={Package}
-                                text={porosia.emertimi}
-                            />
-                            <SidebarClientOrder
-                                icon={LocationFrom}
-                                text={qytetet.map((qyteti) => (
-                                    (porosia.senderZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
-                                ))}
-                            />
-                            <SidebarClientOrder
-                                icon={LocationTo}
-                                text={qytetet.map((qyteti) => (
-                                    (porosia.receiverZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
-                                ))}
-                            />
-                        </div>
+                        <Link to="../detajetEPorosise">
+                            <div className="transporter-order-status">
+                                #{porosia.id}
+                            </div>
+                            <div className="transporter-orders-info">
+                                <SidebarClientOrder
+                                    icon={Package}
+                                    text={porosia.emertimi}
+                                    className="transporter-orders-info-cmp"
+                                />
+                                <SidebarClientOrder
+                                    icon={LocationFrom}
+                                    text={qytetet.map((qyteti) => (
+                                        (porosia.senderZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
+                                    ))}
+                                    className="transporter-orders-info-cmp"
+                                />
+                                <SidebarClientOrder
+                                    icon={LocationTo}
+                                    text={qytetet.map((qyteti) => (
+                                        (porosia.receiverZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
+                                    ))}
+                                    className="transporter-orders-info-cmp"
+                                />
+                            </div>
+                        </Link>
                     </div>
                 ))}
             </main>
+            <Routes>
+                <Route path='/detajetEPorosise' element={<PorosiaDetails />} />
+            </Routes>
         </>
     )
 }

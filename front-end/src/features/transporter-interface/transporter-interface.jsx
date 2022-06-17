@@ -9,7 +9,7 @@ import PackageIcon from '../../img/client-dashboard-assets/icons/packages.svg'
 import TIReserveScooter from './transporter-interface-pages/rezervimet/transporter-reserve-scooter'
 import TIReservePickup from './transporter-interface-pages/rezervimet/transporter-reserve-pickup'
 import TIReserveTruck from './transporter-interface-pages/rezervimet/transporter-reserve-truck'
-
+import PorosiaDetails from "../transporter-interface/transporter-interface-pages/porosia-transportuesit";
 
 export default function TransporterInterface() {
     return (
@@ -31,6 +31,7 @@ export default function TransporterInterface() {
                 <Route path='/ReserveScooter' element={<TIReserveScooter />} />
                 <Route path='/ReservePickup' element={<TIReservePickup />} />
                 <Route path='/ReserveTruck' element={<TIReserveTruck />} />
+                <Route path='/detajetEPorosise' element={<PorosiaDetails />} />
             </Routes>
 
         </div>
