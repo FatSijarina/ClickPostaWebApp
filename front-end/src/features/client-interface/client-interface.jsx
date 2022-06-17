@@ -1,7 +1,5 @@
 import React from "react";
 import { Route, Routes, Link } from 'react-router-dom'
-import axios from "axios";
-import { useState, useEffect } from "react";
 import CIHome from './client-interface-pages/client-interface-home'
 import CITrack from './client-interface-pages/client-interface-track'
 import CIOrders from './client-interface-pages/client-interface-orders'
@@ -10,6 +8,7 @@ import HomeIcon from '../../img/client-dashboard-assets/icons/home.svg'
 import NotificationIcon from '../../img/client-dashboard-assets/icons/notifications.svg'
 import PackageIcon from '../../img/client-dashboard-assets/icons/packages.svg'
 import TrackIcon from '../../img/client-dashboard-assets/icons/track.svg'
+import OrderDetajet from "./make-an-order/make-an-order-detajet";
 
 
 export default function ClientInterface() {
@@ -38,7 +37,8 @@ export default function ClientInterface() {
                 <Route path='/' element={<CIHome />}/>
                 <Route path='Njoftimet' element={<CINjoftimet />}/>
                 <Route path='Dergesat' element={<CIOrders />}/>
-                <Route path='Gjurmo' element={<CITrack />}/> 
+                <Route path='Gjurmo' element={<CITrack />}/>
+                <Route path='OrderDetajet' element={<OrderDetajet />}/> 
             </Routes>
 
         </div>

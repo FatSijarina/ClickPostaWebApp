@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../../../Context/UserContext";
+import {Link} from "react-router-dom"
 import "../client-interface.scss";
 import "../../login/style.scss"
 import GreetingsCourier from '../../../img/client-dashboard-assets/courier-greetings.svg'
@@ -37,7 +38,8 @@ export default function CIHome() {
             <div className="greetings-section">
                 <h1>Hello {klienti.emri}</h1>
                 <img src={GreetingsCourier} alt="greetings-courier" />
-                <button className="add-order-btn">Bej nje dergese</button>
+                {/* ja dergojm order details id e klientit me state */}
+                <Link to='OrderDetajet' state={{klientiID: klienti.userId}}><button className="add-order-btn">  Bej nje dergese</button> </Link>
             </div>    
 
             <main className="client-main">
