@@ -25,25 +25,25 @@ export default function TIHome() {
             <main className="transporter-main">
                 <div className="left-section">
                     <Link to="../ReserveScooter">
-                        <img img src={Motorcycle} alt="ClientUserIcon" className='client-user-icon' />
+                        <img src={Motorcycle} alt="ClientUserIcon" className='client-user-icon' />
                         <button className="rezervo-btn">Rezervo nje scooter</button>
                     </Link>
                 </div>
                 <div className="middle-section">
                     <Link to="../ReservePickup">
-                        <img img src={Pickup} alt="ClientUserIcon" className='client-user-icon' />
+                        <img src={Pickup} alt="ClientUserIcon" className='client-user-icon' />
                         <button className="rezervo-btn">Rezervo nje pickup</button>
                     </Link>
                 </div>
                 <div className="right-section">
                     <Link to="../ReserveTruck">
-                        <img img src={CargoTruck} alt="ClientUserIcon" className='client-user-icon' />
+                        <img src={CargoTruck} alt="ClientUserIcon" className='client-user-icon' />
                         <button className="rezervo-btn">Rezervo nje kamion</button>
                     </Link>
                 </div>
             </main>
             <div>
-                <button className="lista-btn" button onClick={() => { setButtonPopup(true)}}>Gjenero listen e rezervimeve</button>
+                <button className="lista-btn" onClick={() => { setButtonPopup(true)}}>Gjenero listen e rezervimeve</button>
             </div>
 
             <ShowRezervimetPopup trigger={buttonPopup} setTrigger={setButtonPopup} setRefreshKey={setRefreshKey} />

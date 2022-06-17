@@ -4,16 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../transporter-interface.scss";
 import Truck from '../../../../img/transporter-assets/cargo-truck.png';
+import { useContext } from "react";
+import { UserContext } from "../../../../Context/UserContext";
 
 export default function TIReserveTruck() {
+
+    const { transportuesi } = useContext(UserContext);
+
     const [dataRezervimit, setDataRezervimit] = useState([]);
     const dataKthimit = dataRezervimit;
-    const [userId, setUserId] = useState('0');
+    const [userId, setUserId] = useState(transportuesi.userId);
     const [veturaId, setVeturaId] = useState('0');
     const [refreshKey, setRefreshKey] = useState('0');
 
     const [isPending, setIsPending] = useState(false);
-    const [isConfirmed, setIsConfirmed] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -26,10 +30,7 @@ export default function TIReserveTruck() {
             .then(() => {
                 toast.success("Vetura u rezervua me sukses!!", { theme: "colored" });
                 setRefreshKey(refreshKey => refreshKey + 1)
-                setIsConfirmed(true);
             })
-
-            (!isConfirmed ? toast.error("Vetura nuk u rezervua me sukses!!", { theme: "colored" }) : "")
     }
 
     const [transportuesit, setTransportuesit] = useState([]);
@@ -49,7 +50,7 @@ export default function TIReserveTruck() {
     return (
         <>
             <div className="greetings-section">
-                <h1>Hello Transporter</h1>
+                <h1>Hello {transportuesi.emri}</h1>
                 <img src={Truck} alt="greetings-courier" />
                 <button className="add-order-btn">Rezervo Kamion</button>
             </div>
@@ -74,27 +75,13 @@ export default function TIReserveTruck() {
                         <div className="box">
                             <select
                                 required
-                                onChange={(e) => setUserId(e.target.value)}
-                                defaultValue='Zgjedh Transportuesin'
-                            >
-                                <option value="Zgjedh Transportuesin" disabled={true}>Zgjedh Trasnportuesin</option>
-                                {transportuesit.map((transportuesi) => (
-                                    <option required key={transportuesi.userId} value={transportuesi.userId}>
-                                        {transportuesi.emri}
-                                    </option>
-                                ))};
-                            </select>
-                        </div>
-                        <div className="box">
-                            <select
-                                required
                                 onChange={(e) => setVeturaId(e.target.value)}
                                 defaultValue='Zgjedh Veturen'
                             >
                                 <option value="Zgjedh Veturen" disabled={true}>Zgjedh Veturen</option>
                                 {makinat.map((makina) => (
                                     <option required key={makina.veturaId} value={makina.veturaId}>
-                                        {((makina.tipi == 'Truck') ? makina.brendi : delete makinat[makinat.indexOf(makina)])}
+                                        {((makina.tipi == 'Kamion') ? makina.brendi : delete makinat[makinat.indexOf(makina)])}
                                     </option>
                                 ))};
                             </select>

@@ -40,10 +40,9 @@ export default function ShowRezervimetPopup(props) {
                     <table className="styled-table-table">
                         <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>Transportuesi</th>
                                 <th>Data e Rezervimit</th>
                                 <th>Data e Kthimit</th>
-                                <th>Transportuesi</th>
                                 <th>Vetura</th>
                                 <th>Targa e Vetures</th>
                             </tr>
@@ -52,15 +51,14 @@ export default function ShowRezervimetPopup(props) {
                         <tbody>
                             {rezervimi.sort((a, b) => b.rezervimiId - a.rezervimiId).slice(0, 6).map(rV => (
                                 (rV.userId == transportuesi.userId) ?
-                                    <tr key={rV.rezervimiId }>
-                                        <th>{rV.rezervimiId}</th>
-                                        <th>{rV.dataRezervimit}</th>
-                                        <th>{rV.dataKthimit}</th>
+                                    <tr key={rV.rezervimiId}>
                                         <th>
                                             {transportuesit.map((transportuesi) => (
                                                 (transportuesi.userId == rV.userId) ? transportuesi.emri : ""
                                             ))}
                                         </th>
+                                        <th>{rV.dataRezervimit}</th>
+                                        <th>{rV.dataKthimit}</th>
                                         <th>
                                             {veturat.map((vetura) => (
                                                 (vetura.veturaId == rV.veturaId) ? vetura.brendi : ""

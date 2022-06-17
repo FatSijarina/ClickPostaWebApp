@@ -4,13 +4,14 @@ import React, { createContext, useState, useEffect} from "react";
 const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
-    const [transportuesiId, setTransportuesiId] = useState(3);
+    const [transportuesiId, setTransportuesiId] = useState(4);
     const [klientiID, setKlientiID] = useState(2);
     const [klienti, setKlienti] = useState("");
     const [transportuesi, setTransportuesi] = useState("");
     const [klientet, setKlientet] = useState([]);
     const [qytetet, setQytetet] = useState([]);
     const [porosite, setPorosite] = useState([]);
+    const [orders, setOrders] = useState([]);
     const [transportuesit, setTransportuesit] = useState([]);
     const [veturat, setVeturat] = useState([]);
     const [rezervimi, setRezervimi] = useState([]);
@@ -35,6 +36,10 @@ const UserContextProvider = ({ children }) => {
         await axios.get('http://localhost:5094/Porosia/GetUserPorosite?id=' + klientiID)
             .then(response => (
                 setPorosite(response.data)
+            ))
+        await axios.get('http://localhost:5094/Porosia/GetDerguesPorosite?id=' + transportuesiId)
+            .then(response => (
+                setOrders(response.data)
             ))
         await axios.get('http://localhost:5094/api/User/GetTransportuesit')
             .then(response => {
@@ -62,6 +67,7 @@ const UserContextProvider = ({ children }) => {
             klientet,
             qytetet,
             porosite,
+            orders,
             transportuesit,
             veturat,
             rezervimi

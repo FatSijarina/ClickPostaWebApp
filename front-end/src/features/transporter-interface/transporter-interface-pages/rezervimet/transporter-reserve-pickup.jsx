@@ -5,16 +5,20 @@ import { toast } from "react-toastify";
 import GreetingsCourier from '../../../../img/client-dashboard-assets/courier-greetings.svg';
 import "../../transporter-interface.scss";
 import Pickup from '../../../../img/transporter-assets/pickup-truck.png';
+import { useContext } from "react";
+import { UserContext } from "../../../../Context/UserContext";
 
 export default function TIReservePickup() {
+
+    const { transportuesi } = useContext(UserContext);
+
     const [dataRezervimit, setDataRezervimit] = useState([]);
     const dataKthimit = dataRezervimit;
-    const [userId, setUserId] = useState('0');
+    const userId = transportuesi.userId;
     const [veturaId, setVeturaId] = useState('0');
     const [refreshKey, setRefreshKey] = useState('0');
 
     const [isPending, setIsPending] = useState(false);
-    const [isConfirmed, setIsConfirmed] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -27,10 +31,7 @@ export default function TIReservePickup() {
             .then(() => {
                 toast.success("Vetura u rezervua me sukses!!", { theme: "colored" });
                 setRefreshKey(refreshKey => refreshKey + 1)
-                setIsConfirmed(true);
             })
-
-            (!isConfirmed ? toast.error("Vetura nuk u rezervua me sukses!!", { theme: "colored" }) : "")
     }
 
     const [transportuesit, setTransportuesit] = useState([]);
@@ -72,20 +73,6 @@ export default function TIReservePickup() {
                             placeholder="Data e Kthimit"
                             defaultValue={dataRezervimit}
                         />
-                        <div className="box">
-                            <select
-                                required
-                                onChange={(e) => setUserId(e.target.value)}
-                                defaultValue='Zgjedh Transportuesin'
-                            >
-                                <option value="Zgjedh Transportuesin" disabled={true}>Zgjedh Trasnportuesin</option>
-                                {transportuesit.map((transportuesi) => (
-                                    <option required key={transportuesi.userId} value={transportuesi.userId}>
-                                        {transportuesi.emri}
-                                    </option>
-                                ))};
-                            </select>
-                        </div>
                         <div className="box">
                             <select
                                 required

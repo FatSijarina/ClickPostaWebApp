@@ -1,37 +1,53 @@
-import React, { } from "react";
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import SidebarClientOrder from "../../../components/user-interface-cards/sidebar-client-orders";
+import { UserContext } from "../../../Context/UserContext";
+import GreetingsCourier from '../../../img/client-dashboard-assets/courier-greetings.svg';
+import LocationFrom from '../../../img/client-dashboard-assets/icons/location-from.svg';
+import LocationTo from '../../../img/client-dashboard-assets/icons/location-to.svg';
+import Package from '../../../img/client-dashboard-assets/icons/order-packages.svg';
+import Qr from '../../../img/transporter-assets/qr.png';
 import "../transporter-interface.scss";
-import GreetingsCourier from '../../../img/client-dashboard-assets/courier-greetings.svg'
-import CargoTruck from '../../../img/transporter-assets/cargo-truck.png';
-import Motorcycle from '../../../img/transporter-assets/motorcycle.png';
-import Pickup from '../../../img/transporter-assets/pickup-truck.png';
+
 
 export default function TIHome() {
+
+    const { qytetet, orders } = useContext(UserContext);
 
     return (
         <>
             <div className="greetings-section">
                 <img src={GreetingsCourier} alt="greetings-courier" />
-                <h1>Veturat</h1>
+                <h1>Tasqet e mia</h1>
             </div>
 
             <main className="transporter-main-home">
-                <div className="left-section">
-                    <img img src={Motorcycle} alt="ClientUserIcon" className='client-user-icon' />
-                    <button className="rezervo-btn">Rezervo nje scooter</button>
-                </div>
-                <div className="middle-section">
-                    <img img src={Pickup} alt="ClientUserIcon" className='client-user-icon' />
-                    <button className="rezervo-btn">Rezervo nje pickup</button>
-                </div>
-                <div className="right-section">
-                    <img img src={CargoTruck} alt="ClientUserIcon" className='client-user-icon' />
-                    <button className="rezervo-btn">Rezervo nje kamion</button>
-                </div>
+                {orders.map(porosia => (
+                    <div className="transporter-orders" key={porosia.id}>
+                        <div className="transporter-order-status">
+                            #{porosia.id}
+                        </div>
+                        <div className="transporter-orders-info">
+                            <SidebarClientOrder
+                                icon={Package}
+                                text={porosia.emertimi}
+                            />
+                            <SidebarClientOrder
+                                icon={LocationFrom}
+                                text={qytetet.map((qyteti) => (
+                                    (porosia.senderZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
+                                ))}
+                            />
+                            <SidebarClientOrder
+                                icon={LocationTo}
+                                text={qytetet.map((qyteti) => (
+                                    (porosia.receiverZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
+                                ))}
+                            />
+                        </div>
+                    </div>
+                ))}
             </main>
-
-            <div>
-                <button className="lista-btn">Gjenero listen e rezervimeve</button>
-            </div>
         </>
     )
 }
