@@ -2,16 +2,22 @@ import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
 import { UserContext } from "../../../Context/UserContext";
+import axios from "axios";
 
 import Details from "./details";
 import SenderDetails from "./sender-details";
 import ReceiverDetails from "./receiver-details";
+import Confirmation from "./confirmation";
+import Success from "./success";
+import { useEffect } from "react";
 
 export default function Order() {
 
     const [step, setStep] = useState(1);
+    const [order, setOrder] = useState(false);
 
-    const klientiID = useContext(UserContext);
+    const { klientiID } = useContext(UserContext);
+    const userId = klientiID;
     const [emertimi, setEmertimi] = useState('');
     const [detajet, setDetajet] = useState('');
     const [vellimi, setVellimi] = useState('');
@@ -19,43 +25,40 @@ export default function Order() {
     const [senderEmri, setSenderEmri] = useState('');
     const [senderMbiemri, setSenderMbiemri] = useState('');
     const [senderNrTelefonit, setSenderNrTelefonit] = useState('');
-    const [senderHomeNumber, setSenderHomeNumber] = useState('Nr i vendbanimit te derguesit');
+    const [senderHomeNumber, setSenderHomeNumber] = useState();
     const [senderStreetName, setSenderStreetName] = useState('');
-    const [senderZipCode, setSenderZipCode] = useState('');
-    const [receiverEmri, setReceiverEmri] = useState('smok');
+    const [senderZipCode, setSenderZipCode] = useState();
+    const [receiverEmri, setReceiverEmri] = useState('');
     const [receiverMbiemri, setReceiverMbiemri] = useState('');
     const [receiverNrTelefonit, setReceiverNrTelefonit] = useState('');
-    const [receiverHomeNumber, setReceiverHomeNumber] = useState('');
+    const [receiverHomeNumber, setReceiverHomeNumber] = useState();
     const [receiverStreetName, setReceiverStreetName] = useState('');
-    const [receiverZipCode, setReceiverZipCode] = useState('');
+    const [receiverZipCode, setReceiverZipCode] = useState();
 
-    const OrderDetails = Details
+    const handleSubmit = (e) => {
+        const porosia = { userId, senderEmri, senderMbiemri, emertimi, detajet, vellimi, materiali,
+                            senderNrTelefonit, senderStreetName, senderHomeNumber, senderZipCode,
+                            receiverEmri, receiverMbiemri, receiverNrTelefonit, receiverHomeNumber, receiverStreetName, receiverZipCode};
+        console.log((porosia));
+        axios.post('http://localhost:5094/Porosia/ShtoPorosi', porosia)   
+    }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     const porosia = { userId, senderEmri, senderMbiemri, emertimi, detajet, vellimi, materiali,
-    //                         senderNrTelefonit, senderStreetName, senderHomeNumber, senderZipCode,
-    //                         receiverEmri, receiverMbiemri, receiverNrTelefonit, receiverHomeNumber, receiverStreetName, receiverZipCode};
-    //     console.log((porosia));
-    //     axios.post('http://localhost:5094/Porosia/ShtoPorosi', porosia)   
-    // }
-
-    // prevStep = () => {
-    //     setStep(() => step - 1);
-    // }
-    // nextStep = () => {
-    //     setStep(() => step + 1);
-    // }
+    useEffect(() => {
+        if(order)
+            handleSubmit();
+    })
 
 
     const orderProcess = {
         1: <Details 
+            setStep={setStep}
             setEmertimi={setEmertimi}
             setDetajet={setDetajet}
             setVellimi={setVellimi}
             setMateriali={setMateriali}
             />,
         2: <SenderDetails 
+            setStep={setStep}
             setSenderEmri={setSenderEmri}
             setSenderMbiemri={setSenderMbiemri}
             setSenderNrTelefonit={setSenderNrTelefonit}
@@ -63,14 +66,19 @@ export default function Order() {
             setSenderStreetName={setSenderStreetName}
             setSenderZipCode={setSenderZipCode}
             />,
-        3: <ReceiverDetails 
+        3: <ReceiverDetails
+            setStep={setStep} 
             setReceiverEmri={setReceiverEmri}
             setReceiverMbiemri={setReceiverMbiemri}
             setReceiverNrTelefonit={setReceiverNrTelefonit}
             setReceiverHomeNumber={setReceiverHomeNumber}
             setReceiverStreetName={setReceiverStreetName}
             setReceiverZipCode={setReceiverZipCode}
-        />
+        />,
+        4: <Confirmation 
+            setOrder={setOrder}
+            />,
+        5: <Success />
     }
 
     return (
@@ -79,8 +87,10 @@ export default function Order() {
             {orderProcess[step]}
 
             {emertimi}
-            <button onClick={() => setStep(step + 1)}> Next</button>    
-            <button onClick={() => setStep(step - 1)}> Previous</button>          
+
+            
+            
+                
         </>
     )
 }

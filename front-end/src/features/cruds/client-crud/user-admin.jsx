@@ -68,7 +68,7 @@ export default function ClientRead() {
         </table>
       </div>
 
-      <ClientUpdatePopup trigger={buttonPopup} setTrigger={setButtonPopup} klientId={klientID} setRefreshKey={setRefreshKey} />
+      <ClientUpdatePopup trigger={buttonPopup} setTrigger={setButtonPopup} klientId={klientID} setRefreshKey={setRefreshKey} qyteti={qyteti}/>
     </>   
   )
 }

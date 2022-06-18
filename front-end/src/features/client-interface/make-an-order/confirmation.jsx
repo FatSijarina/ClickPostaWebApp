@@ -1,8 +1,11 @@
 import React from 'react'
 
-const Confirmation = () => {
+const Confirmation = (props) => {
   return (
-    <div>confirmation</div>
+    <>
+      <div>Do you confirm?</div>
+      <button onClick={() => props.setOrder(true)}> Yes</button> 
+    </>
   )
 }
 
