@@ -32,7 +32,6 @@ export default function ClientRead() {
   return (
     <>  
       <h1>Client Read</h1>
-    {console.log(klientet)}
       <div className="styled-table">          
         <table>
           <thead>

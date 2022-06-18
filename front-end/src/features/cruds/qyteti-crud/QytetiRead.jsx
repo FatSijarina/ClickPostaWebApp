@@ -53,7 +53,7 @@ export default function QytetiRead(){
                     </thead>
 
                     <tbody>
-                        {qytetet.splice(0,7).map(qyteti => (
+                        {qytetet.slice(0,7).map(qyteti => (
                             <tr key={qyteti.qytetiZipCode}>
                                 {console.log(qyteti.qytetiZipCode)}
                                 <th>{qyteti.qytetiZipCode}</th>
