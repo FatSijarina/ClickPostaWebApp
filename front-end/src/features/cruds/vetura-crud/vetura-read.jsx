@@ -13,19 +13,21 @@ export default function VeturaRead() {
 
     function handleClick(veturaId) {
         const confirmBox = window.confirm(
-            "Are you sure you want to delete vetura with id " + veturaId + '?'
+            "A jeni i sigurte se doni te fshini veturen me id " + veturaId + '?'
         )
         if (confirmBox === true) {
             axios.delete('http://localhost:5094/api/Veturat/DeleteVetura?id=' + veturaId)
                 .then(() => {
-                    toast.info("Vetura deleted successfully!!", { theme: "colored" });
+                    toast.info("Vetura u fshi me sukses!!", { theme: "colored" });
                 })
                 .then(() => {
                     setRefreshKey(refreshKey => refreshKey + 1)
-                })
+                }).catch(function (error) {
+                    toast.error(error.response.data);
+                });
         }
         else {
-            toast.error("Process of deleting vetura canceled !!")
+            toast.error("Procesi i fshirjes se nje vetures u anulua !!")
         }
     }
 

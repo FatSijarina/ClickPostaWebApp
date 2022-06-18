@@ -24,11 +24,13 @@ export default function VeturaCreate() {
 
         axios.post('http://localhost:5094/api/Veturat/AddVetura', vetura)
             .then(() => {
-                toast.success("Vetura added successfully!!", { theme: "colored" });
+                toast.success("Vetura u shtua me sukses!!", { theme: "colored" });
             })
             .then(() => {
                 setRefreshKey(refreshKey => refreshKey + 1)
-            })
+            }).catch(function (error) {
+                toast.error(error.response.data);
+            });
     }
 
     const [depot, setDepot] = useState([]);

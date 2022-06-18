@@ -29,9 +29,11 @@ export default function TIReserveScooter() {
 
         axios.post('http://localhost:5094/api/RezervoVeturen/AddRezervoVeturen', rezVeturen)
             .then(() => {
-                toast.success("Vetura u rezervua me sukses!!", { theme: "colored" });
+                toast.success("Scooter-i u rezervua me sukses!!", { theme: "colored" });
                 setRefreshKey(refreshKey => refreshKey + 1)
-            })
+            }).catch(function (error) {
+                console.log(error.response.data)
+            });
     }
 
     const [transportuesit, setTransportuesit] = useState([]);

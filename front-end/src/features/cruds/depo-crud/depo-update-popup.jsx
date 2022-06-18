@@ -20,10 +20,12 @@ export default function DepoUpdatePopup(props) {
         const depo = { depoId, name, addressNumber, streetName, zipCode};
         axios.put('http://localhost:5094/api/Depot/UpdateDepo', depo)
             .then(() => {
-                toast.success("Depo updated successfully!!", {theme: "colored"});
+                toast.success("Depo u perditesua e sukses!!", {theme: "colored"});
                 props.setTrigger(false);
                 props.setRefreshKey(refreshKey => refreshKey + 1);
-            })
+            }).catch(function (error) {
+                toast.error(error.response.data);
+            });
     }
 
 

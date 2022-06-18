@@ -24,11 +24,13 @@ export default function RezervoVeturenUpdatePopup(props) {
         setIsPending(true);
         axios.put('http://localhost:5094/api/RezervoVeturen/UpdateRezervoVeturen', rezervimiVetures)
             .then(() => {
-                toast.success("Rezervimi updated successfully!!", { theme: "colored" });
+                toast.success("Rezervimi u perditesua me sukses!!", { theme: "colored" });
                 setIsPending(false);
                 props.setRefreshKey(refreshKey => refreshKey + 1);
                 props.setTrigger(false);
-            })
+            }).catch(function (error) {
+                toast.error(error.response.data);
+            });
     }
 
     const [transportuesit, setTransportuesit] = useState([]);

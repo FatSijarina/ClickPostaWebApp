@@ -28,9 +28,11 @@ export default function TIReserveTruck() {
 
         axios.post('http://localhost:5094/api/RezervoVeturen/AddRezervoVeturen', rezVeturen)
             .then(() => {
-                toast.success("Vetura u rezervua me sukses!!", { theme: "colored" });
+                toast.success("Kamioni u rezervua me sukses!!", { theme: "colored" });
                 setRefreshKey(refreshKey => refreshKey + 1)
-            })
+            }).catch(function (error) {
+                toast.error(error.response.data);
+            });
     }
 
     const [transportuesit, setTransportuesit] = useState([]);

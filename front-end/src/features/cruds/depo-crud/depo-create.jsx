@@ -22,10 +22,12 @@ export default function DepoCreate() {
         
         axios.post('http://localhost:5094/api/Depot/AddDepo', depo)
             .then(() => {
-                toast.success("Depo added successfully!!", { theme: "colored" });
+                toast.success("Depo u shtua me sukses!!", { theme: "colored" });
             }).then(() => {
                 setRefreshKey(refreshKey => refreshKey + 1)
-            })
+            }).catch(function (error) {
+                toast.error(error.response.data);
+            });
     }
 
     const [qytetet, setQytetet] = useState([]);

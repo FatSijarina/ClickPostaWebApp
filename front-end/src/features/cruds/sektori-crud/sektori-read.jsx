@@ -13,19 +13,21 @@ export default function SektoriRead() {
 
     function handleClick(sektoriId) {
         const confirmBox = window.confirm(
-            "Are you sure you want to delete sektori with id " + sektoriId + '?'
+            "A jeni te sigurte se doni te fshini sektorin me id " + sektoriId + '?'
         )
         if (confirmBox === true) {
             axios.delete('http://localhost:5094/api/Sektoret/DeleteSektori?id=' + sektoriId)
                 .then(() => {
-                    toast.info("Sektori deleted successfully!!", { theme: "colored" });
+                    toast.info("Sektori u fshi me sukses!!", { theme: "colored" });
                 })
                 .then(() => {
                     setRefreshKey(refreshKey => refreshKey + 1)
-                })
+                }).catch(function (error) {
+                    toast.error(error.response.data);
+                });
         }
         else {
-            toast.error("Process of deleting a sektor canceled !!")
+            toast.error("Procesi i fshirjes se nje sektori u anulua !!")
         }
     }
 

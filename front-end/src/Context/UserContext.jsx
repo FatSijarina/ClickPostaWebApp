@@ -5,13 +5,15 @@ const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
     const [transportuesiId, setTransportuesiId] = useState(4);
-    const [klientiID, setKlientiID] = useState(2);
+    const [klientiID, setKlientiID] = useState(7);
+    const [porosiaId, setPorosiaId] = useState(6);
     const [klienti, setKlienti] = useState("");
     const [transportuesi, setTransportuesi] = useState("");
     const [klientet, setKlientet] = useState([]);
     const [qytetet, setQytetet] = useState([]);
     const [porosite, setPorosite] = useState([]);
     const [orders, setOrders] = useState([]);
+    const [porosia, setPorosia] = useState([]);
     const [transportuesit, setTransportuesit] = useState([]);
     const [veturat, setVeturat] = useState([]);
     const [rezervimi, setRezervimi] = useState([]);
@@ -36,6 +38,10 @@ const UserContextProvider = ({ children }) => {
         await axios.get('http://localhost:5094/Porosia/GetUserPorosite?id=' + klientiID)
             .then(response => (
                 setPorosite(response.data)
+            ))
+        await axios.get('http://localhost:5094/Porosia/GetPorosiaById?id=' + porosiaId)
+            .then(response => (
+                setPorosia(response.data)
             ))
         await axios.get('http://localhost:5094/Porosia/GetDerguesPorosite?id=' + transportuesiId)
             .then(response => (
@@ -67,6 +73,7 @@ const UserContextProvider = ({ children }) => {
             klientet,
             qytetet,
             porosite,
+            porosia,
             orders,
             transportuesit,
             veturat,

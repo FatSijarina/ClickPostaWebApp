@@ -12,23 +12,19 @@ export default function RezervoVeturenCreate() {
     const [refreshKey, setRefreshKey] = useState('0');
 
     const [isPending, setIsPending] = useState(false);
-    const [isConfirmed, setIsConfirmed] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const rezVeturen = { dataRezervimit, dataKthimit, userId, veturaId };
 
-        setIsPending(true);
-
         axios.post('http://localhost:5094/api/RezervoVeturen/AddRezervoVeturen', rezVeturen)
             .then(() => {
                 toast.success("Vetura u rezervua me sukses!!", { theme: "colored" });
                 setRefreshKey(refreshKey => refreshKey + 1)
-                setIsConfirmed(true);
-            })
-
-            (!isConfirmed ? toast.error("Vetura nuk u rezervua me sukses!!", { theme: "colored" }): "")
+            }).catch(function (error) {
+                toast.error(error.response.data);
+            });
     }
 
     const [transportuesit, setTransportuesit] = useState([]);

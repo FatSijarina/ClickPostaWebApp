@@ -25,11 +25,13 @@ export default function DepoUpdatePopup(props) {
         setIsPending(true);
         axios.put('http://localhost:5094/api/Veturat/UpdateVetura', vetura)
             .then(() => {
-                toast.success("Vetura updated successfully!!", { theme: "colored" });
+                toast.success("Vetura u perditesua me sukses!!", { theme: "colored" });
                 props.setTrigger(false);
                 props.setRefreshKey(refreshKey => refreshKey + 1);
                 setIsPending(false);
-            })
+            }).catch(function (error) {
+                toast.error(error.response.data);
+            });
     }
 
     const [depot, setDepot] = useState([]);

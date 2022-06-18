@@ -17,11 +17,13 @@ export default function SektoriUpdatePopup(props) {
 
     axios.put('http://localhost:5094/api/Sektoret/UpdateSektori', sektor)
     .then(() => {
-        toast.success("Sektori updated successfully!!", { theme: "colored" });
+        toast.success("Sektori u perditesua me sukses!!", { theme: "colored" });
         setIsPending(false);
         props.setRefreshKey(refreshKey => refreshKey + 1);
         props.setTrigger(false);
-    })       
+    }).catch(function (error) {
+        toast.error(error.response.data);
+    });
     }
 
     return (props.trigger) ? (

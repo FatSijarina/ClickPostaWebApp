@@ -13,19 +13,21 @@ export default function DepoSektoriRead() {
 
     function handleClick(depoSektoriId) {
         const confirmBox = window.confirm(
-            "Are you sure you want to delete depo with id " + depoSektoriId + '?'
+            "A jeni te sigurte se deshironi te fshini deposektorin me id" + depoSektoriId + '?'
         )
         if (confirmBox === true) {
             axios.delete('http://localhost:5094/api/Depot/DeleteDepo?id=' + depoSektoriId)
                 .then(() => {
-                    toast.info("DepoSektori deleted successfully!!", { theme: "colored" });
+                    toast.info("DepoSektori u fshi me sukses!!", { theme: "colored" });
                 })
                 .then(() => {
                     setRefreshKey(refreshKey => refreshKey + 1)
-                })
+                }).catch(function (error) {
+                    toast.error(error.response.data);
+                });
         }
         else {
-            toast.error("Process of deleting a DepoSektori canceled !!")
+            toast.error("Procesi i fshirjes se nje DepoSektori u anulua!!")
         }
     }
 

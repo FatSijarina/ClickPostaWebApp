@@ -13,19 +13,21 @@ export default function RezervoVeturenRead() {
 
     function handleClick(rezervimiId) {
         const confirmBox = window.confirm(
-            "Are you sure you want to delete reservation with id " + rezervimiId + '?'
+            "A jeni te sigurte se doni te fshini rezervimin me id " + rezervimiId + '?'
         )
         if (confirmBox === true) {
             axios.delete('http://localhost:5094/api/RezervoVeturen/FshijRezervoVeturen?id=' + rezervimiId)
                 .then(() => {
-                    toast.info("DepoSektori deleted successfully!!", { theme: "colored" });
+                    toast.info("Rezervimi u fshi me sukses!!", { theme: "colored" });
                 })
                 .then(() => {
                     setRefreshKey(refreshKey => refreshKey + 1)
-                })
+                }).catch(function (error) {
+                    toast.error(error.response.data);
+                });
         }
         else {
-            toast.error("Process of deleting a rezervimi vetures canceled !!")
+            toast.error("Procesi i fshirjes se nje rezervimi u anulua!!")
         }
     }
 

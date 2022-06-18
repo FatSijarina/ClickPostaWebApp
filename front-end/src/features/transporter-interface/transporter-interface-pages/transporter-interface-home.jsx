@@ -25,7 +25,7 @@ export default function TIHome() {
             <main className="transporter-main-home">
                 {orders.map(porosia => (
                     <div className="transporter-orders" key={porosia.id}>
-                        <Link to="../detajetEPorosise">
+                        <Link to="../detajetEPorosise" state={{ porosiaId: porosia.id }}>
                             <div className="transporter-order-status">
                                 #{porosia.id}
                             </div>
@@ -51,12 +51,13 @@ export default function TIHome() {
                                 />
                             </div>
                         </Link>
+                        <Routes>
+                            <Route path='/detajetEPorosise' element={<PorosiaDetails />} />
+                        </Routes>
                     </div>
                 ))}
             </main>
-            <Routes>
-                <Route path='/detajetEPorosise' element={<PorosiaDetails />} />
-            </Routes>
+            
         </>
     )
 }

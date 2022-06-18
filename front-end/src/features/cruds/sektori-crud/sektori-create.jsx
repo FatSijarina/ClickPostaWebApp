@@ -19,11 +19,13 @@ export default function SektoriCreate() {
         
         axios.post('http://localhost:5094/api/Sektoret/AddSektori', sektori)
             .then(() => {
-                toast.success("Sektori added successfully!!", { theme: "colored" });
+                toast.success("Sektori u shtua me sukses!!", { theme: "colored" });
             })
             .then(() => {
                 setRefreshKey(refreshKey => refreshKey + 1)
-            })
+            }).catch(function (error) {
+                toast.error(error.response.data);
+            });
     }
 
     return (

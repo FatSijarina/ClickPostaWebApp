@@ -3,6 +3,7 @@ import '../popup.scss';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 export default function ClientUpdatePopup(props) {
 
@@ -48,7 +49,10 @@ export default function ClientUpdatePopup(props) {
             setIsPending(false);
             props.setRefreshKey(refreshKey => refreshKey + 1);
             props.setTrigger(false);
-        })
+            toast.success("Useri u perditesua me sukses!", {theme:"colored"})
+        }).catch(function (error) {
+            toast.error(error.response.data);
+        });
     }
 
   return (props.trigger) ? (

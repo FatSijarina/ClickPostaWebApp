@@ -21,11 +21,13 @@ export default function DepoSektoriUpdatePopup(props) {
         setIsPending(true);
         axios.put('http://localhost:5094/api/DepoSektori/UpdateDepoSektori', depoSektori)
             .then(() => {
-                toast.success("DepoSektori updated successfully!!", { theme: "colored" });
+                toast.success("DepoSektori u perditesua me sukses!!", { theme: "colored" });
                 setIsPending(false);
                 props.setRefreshKey(refreshKey => refreshKey + 1);
                 props.setTrigger(false);
-            })
+            }).catch(function (error) {
+                toast.error(error.response.data);
+            });
     }
 
     const [depot, setDepot] = useState([]);

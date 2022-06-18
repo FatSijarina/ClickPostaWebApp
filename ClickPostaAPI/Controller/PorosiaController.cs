@@ -34,14 +34,24 @@ namespace ClickPostaAPI.Controllers
                 return NoContent();
             return Ok(Porosite);
         }
-        
+
         [HttpGet("GetLatestUserPorosia")]
         public async Task<ActionResult<Porosia>> GetLatestUserPorosia(int id)
         {
             Porosia PorosiaFundit = await _context.Porosia.Where(u => u.UserId == id).OrderByDescending(u => u.Id).FirstOrDefaultAsync();
             if (PorosiaFundit == null)
                 return NoContent();
-            
+
+            return Ok(PorosiaFundit);
+        }
+
+        [HttpGet("GetPorosiaById")]
+        public async Task<ActionResult<Porosia>> GetPorosiaById(int id)
+        {
+            Porosia PorosiaFundit = await _context.Porosia.FindAsync(id);
+            if (PorosiaFundit == null)
+                return NoContent();
+
             return Ok(PorosiaFundit);
         }
 
@@ -81,7 +91,7 @@ namespace ClickPostaAPI.Controllers
             _context.Porosia.Add(porosia);
             porosia.StatusiPorosiseId = 1;
             porosia.DepoSektoriId = await caktimiPorosise.FiltroDepoSektori();
-            
+
             int? MarresiCaktuar = await caktimiPorosise.FiltroTransportuesit(porosia.SenderZipCode);
             int? DerguesiCaktuar = await caktimiPorosise.FiltroTransportuesit(porosia.ReceiverZipCode);
 
@@ -150,9 +160,9 @@ namespace ClickPostaAPI.Controllers
             //detajet e transportuesve dhe depos
             if (request.MarresiId != 0)
                 dbPorosia.MarresiId = request.MarresiId;
-            if(request.DepoSektoriId != 0)
+            if (request.DepoSektoriId != 0)
                 dbPorosia.DepoSektoriId = request.DepoSektoriId;
-            if(request.DerguesiId != 0)
+            if (request.DerguesiId != 0)
                 dbPorosia.DerguesiId = request.DerguesiId;
 
             if (request.StatusiPorosiseId != 0)
