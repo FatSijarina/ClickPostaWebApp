@@ -1,0 +1,81 @@
+.navbar {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+    
+
+    .left-red { 
+        background-color: #DA244B;
+        width: 30%;
+        display: flex;
+        height: 4rem;
+        justify-content:flex-end;
+        align-items: center;
+        border-radius: 0px 66px 66px 0px;
+        
+        #navbar-logo{
+            margin-right: 8% !important;
+
+            img {
+                width: 70%;
+            }
+        }
+    }
+    .right-red {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        position: absolute;
+        background-color: #DA244B;
+        color: #f3f3f3;
+        width: 50%;
+        height: 4rem;
+        right: 0;
+        border-radius: 66px 0px 0px 66px;
+
+        .navbar-links {
+            display: flex;
+            width: 50%;
+            margin-left: 8px;
+            max-width: 600px;
+            justify-content: space-evenly;
+            align-items: center;
+            font-weight: 600;
+
+            a{
+                width: fit-content;
+                text-decoration: none;
+                color: white;
+            }
+            button {
+                display: inline-block;
+                border: none;
+                padding: 1.2rem 0.7rem;
+                margin: 0;
+                text-decoration: none;
+                background-color: #DA244B;
+                border-radius: 20px;
+                color: white;
+                cursor: pointer;
+                text-align: center;
+                transition: background 250ms ease-in-out, 
+                            transform 150ms ease;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+            }
+            button:hover {
+                background-color: #e9325a;
+            }
+        }
+    }
+
+    .logo-name {
+        margin-left: 20px;
+        height: 4rem;
+        width: 13rem;
+    }
+}
+
