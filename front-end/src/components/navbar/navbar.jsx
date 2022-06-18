@@ -19,7 +19,7 @@ export default function Navbar() {
                     
                     <div className="right-red">    
                         <div className="navbar-links">
-                            <Link to="/">
+                            <Link to="./FAQ">
                                 <button type="button">FAQ</button>    
                             </Link> 
                             <Link to="./AboutUs">

@@ -16,7 +16,8 @@ import VeturaCrud from '../cruds/vetura-crud/vetura-crud';
 import PushimiIcon from '../../img/dashboard-assets/rest.png';
 import PushimiCrud from '../cruds/pushimi-crud/Pushimi-crud';
 import QytetiCrud from '../cruds/qyteti-crud/QytetiCrud';
-
+import QuestionCrud from '../cruds/QA/QA-cruds';
+import QuestionIcon from '../../img/dashboard-assets/question.png';
 
 
 export default function Dashboard() {
@@ -58,7 +59,10 @@ export default function Dashboard() {
                     <img src={CityIcon} alt="ClientUserIcon" className='client-user-icon' />
                     <p>Qytetet</p>
                 </Link>
-               
+                <Link to="./QuestionCrud" > 
+                    <img src={QuestionIcon} alt="ClientUserIcon" className='client-user-icon' />
+                    <p>Questions</p>
+                </Link>
             </div>    
                
             <Routes>
@@ -70,7 +74,7 @@ export default function Dashboard() {
                 <Route path='/VeturaCrud/*' element={<VeturaCrud />} />
                 <Route path='/PushimiCrud/*' element={<PushimiCrud/>}/>
                 <Route path='/QytetiCrud/*' element={<QytetiCrud/>}/>
-                
+                <Route path='/QuestionCrud/*' element={<QuestionCrud/>}/>
             </Routes>
 
 

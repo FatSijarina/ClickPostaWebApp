@@ -17,11 +17,10 @@ namespace ClickPostaAPI.Controllers
         {
             _context = context;
         }
+        
+        [HttpGet("GetQA")]
+        public async Task<ActionResult<List<QA>>> Get(){
 
-
-        [HttpGet("Get QA")]
-        public async Task<ActionResult<List<QA>>> Get()
-        {
             return Ok(await _context.QA.ToListAsync());
         }
 
