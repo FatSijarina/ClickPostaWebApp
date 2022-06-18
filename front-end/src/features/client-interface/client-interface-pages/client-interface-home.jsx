@@ -39,7 +39,7 @@ export default function CIHome() {
                 <h1>Hello {klienti.emri}</h1>
                 <img src={GreetingsCourier} alt="greetings-courier" />
                 {/* ja dergojm order details id e klientit me state */}
-                <Link to='OrderDetajet' state={{klientiID: klienti.userId}}><button className="add-order-btn">  Bej nje dergese</button> </Link>
+                <Link to='Order' state={{klientiID: klienti.userId}}><button className="add-order-btn">  Bej nje dergese</button> </Link>
             </div>    
 
             <main className="client-main">

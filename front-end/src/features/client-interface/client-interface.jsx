@@ -8,7 +8,7 @@ import HomeIcon from '../../img/client-dashboard-assets/icons/home.svg'
 import NotificationIcon from '../../img/client-dashboard-assets/icons/notifications.svg'
 import PackageIcon from '../../img/client-dashboard-assets/icons/packages.svg'
 import TrackIcon from '../../img/client-dashboard-assets/icons/track.svg'
-import OrderDetajet from "./make-an-order/make-an-order-detajet";
+import Order from "./make-an-order/make-an-order";
 
 
 export default function ClientInterface() {
@@ -38,7 +38,7 @@ export default function ClientInterface() {
                 <Route path='Njoftimet' element={<CINjoftimet />}/>
                 <Route path='Dergesat' element={<CIOrders />}/>
                 <Route path='Gjurmo' element={<CITrack />}/>
-                <Route path='OrderDetajet' element={<OrderDetajet />}/> 
+                <Route path='Order' element={<Order />}/> 
             </Routes>
 
         </div>
