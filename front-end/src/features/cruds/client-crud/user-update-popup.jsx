@@ -23,7 +23,7 @@ export default function ClientUpdatePopup(props) {
     const [password, setPassword] = useState('');
 
     const [isPending, setIsPending] = useState(false);
-    const [qyteti, setQyteti] = props.qyteti;
+    const qyteti = props.qyteti;
     const rolet = [
         {id: 1, roli: 'Klient'},
         {id: 2, roli: 'Admin'},

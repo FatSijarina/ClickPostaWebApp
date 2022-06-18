@@ -13,7 +13,8 @@ import CityIcon from '../../img/dashboard-assets/city-icon.svg';
 import SektoriCrud from '../cruds/sektori-crud/sektori-crud';
 import DepoSektoriCrud from '../cruds/deposektori-crud/depo-sektori-crud';
 import VeturaCrud from '../cruds/vetura-crud/vetura-crud';
-import PushimiIcon from '../../img/dashboard-assets/rest.png';
+import RezervoVeturenCrud from '../cruds/rezervoVeturen-crud/rezervo-veturen-crud';
+import PushimiIcon from '../../img/dashboard-assets/rest-icon.svg';
 import PushimiCrud from '../cruds/pushimi-crud/Pushimi-crud';
 import QytetiCrud from '../cruds/qyteti-crud/QytetiCrud';
 import QuestionCrud from '../cruds/QA/QA-cruds';
@@ -51,6 +52,10 @@ export default function Dashboard() {
                     <img src={VehicleIcon} alt="ClientUserIcon" className='client-user-icon' />
                     <p>Veturat</p>
                 </Link>
+                <Link to="./RezervoVeturenCrud" >
+                    <img src={VehicleIcon} alt="ClientUserIcon" className='client-user-icon' />
+                    <p>Rezervo veturat</p>
+                </Link>
                 <Link to="./PushimiCrud" > 
                     <img src={PushimiIcon} alt="ClientUserIcon" className='client-user-icon' />
                     <p>Pushimet</p>
@@ -72,6 +77,7 @@ export default function Dashboard() {
                 <Route path='/DepoCrud/*' element={<DepoCrud />} />
                 <Route path='/DepoSektoriCrud/*' element={<DepoSektoriCrud />} />
                 <Route path='/VeturaCrud/*' element={<VeturaCrud />} />
+                <Route path='/RezervoVeturenCrud/*' element={<RezervoVeturenCrud />} />
                 <Route path='/PushimiCrud/*' element={<PushimiCrud/>}/>
                 <Route path='/QytetiCrud/*' element={<QytetiCrud/>}/>
                 <Route path='/QuestionCrud/*' element={<QuestionCrud/>}/>

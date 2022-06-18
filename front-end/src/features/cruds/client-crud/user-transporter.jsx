@@ -14,7 +14,7 @@ export default function ClientRead() {
   function handleClick(klientiId) {
     console.log(klientiId);
     axios.delete('http://localhost:5094/api/User/DeleteUser?id=' + klientiId)
-        .then(setRefreshKey(refreshKey => refreshKey + 1))
+        .then(setRefreshKey(refreshKey + 1))
 }
 
   useEffect(() => {
