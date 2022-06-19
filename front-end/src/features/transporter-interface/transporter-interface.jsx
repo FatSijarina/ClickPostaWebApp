@@ -6,10 +6,12 @@ import TIHome from './transporter-interface-pages/transporter-interface-home'
 import TIReserve from './transporter-interface-pages/transporter-interface-reserve'
 import HomeIcon from '../../img/client-dashboard-assets/icons/home.svg'
 import PackageIcon from '../../img/client-dashboard-assets/icons/packages.svg'
+import HolidayIcon from '../../img/transporter-assets/calendar.png';
 import TIReserveScooter from './transporter-interface-pages/rezervimet/transporter-reserve-scooter'
 import TIReservePickup from './transporter-interface-pages/rezervimet/transporter-reserve-pickup'
 import TIReserveTruck from './transporter-interface-pages/rezervimet/transporter-reserve-truck'
 import PorosiaDetails from "../transporter-interface/transporter-interface-pages/porosia-transportuesit";
+import RezervoPushim from "./transporter-interface-pages/rezervimi-pushimit/rezervo-pushim";
 
 export default function TransporterInterface() {
     return (
@@ -23,6 +25,11 @@ export default function TransporterInterface() {
                     <img src={PackageIcon} alt="track-icon" className='client-user-icon' />
                     <p>Rezervo</p>
                 </Link>
+
+                <Link to="./RezervoPushim">
+                    <img src={HolidayIcon} alt="track-icon" className='client-user-icon' />
+                    <p>Rezervo pushimin</p>
+                </Link>
             </div>
 
             <Routes>
@@ -32,6 +39,7 @@ export default function TransporterInterface() {
                 <Route path='/ReservePickup' element={<TIReservePickup />} />
                 <Route path='/ReserveTruck' element={<TIReserveTruck />} />
                 <Route path='/detajetEPorosise' element={<PorosiaDetails />} />
+                <Route path='/RezervoPushim' element={<RezervoPushim/>}></Route>
             </Routes>
 
         </div>
