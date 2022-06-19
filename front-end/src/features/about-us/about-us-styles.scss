@@ -6,16 +6,26 @@
         flex-direction: row;
         justify-content: center;
         justify-content: space-evenly;
+    
+        .card-outline{ 
+            background-color: #DA244B;
+            border: 15px solid #DA244B;
+            width: 15%;
+            max-height: 300px;
+            margin-left: -50%;
+            margin-top: 30%;
+        }
+        .card-inline{
+            border: 1px solid white;
+            background-color: white;   
+        }
     }
-    .card-outline{ 
-        background-color: #DA244B;
-        border: 15px solid #DA244B;
-        width: 15%;
+    .aboutUsImage{
+        height: 500px;
+        margin-left: 15%;
+        aspect-ratio: 1/1;
     }
-    .card-inline{
-        border: 1px solid white;
-        background-color: white;   
-    }
+   
     .img{
         width: 130px;
         height:130px;

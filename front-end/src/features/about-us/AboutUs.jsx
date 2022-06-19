@@ -8,43 +8,41 @@ import Mbledhja from "../../img/aboutUs-assets/logistics.png";
 import Klasifikimi from "../../img/aboutUs-assets/delivery.png";
 import Shperndarja from "../../img/aboutUs-assets/destination.png";
 import img1 from "../../img/aboutUs-assets/img1.jpg";
+import AboutUsImage from './about-us-video.jpg';
 
 
 
 export default function AboutUs(){
     return(
-
+        
         <div className="main-div">
-            
-            <div className="cards">
-            <div className="card-outline">
-                    <div className="card-inline">
-                        <h6>Staf i zgjedhur me pervoj!</h6>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br/>
-                             Velit architecto nobis officia quod cupiditate tempora,<br/> quaerat eligendi unde, quae assumenda quibusdam <br/>
-                            exercitationem veniam tenetur nemo optio sint a? Nisi, nam.</p>
+           
+
+                <div className="cards">
+                    <img src={AboutUsImage} className="aboutUsImage"/>
+                    <div className="card-outline">
+                            <div className="card-inline">
+                                <h6>Staf i zgjedhur me pervoje!</h6>
+                                <p></p>
+                            </div>
                     </div>
+
+                        <div className="card-outline">
+                            <div className="card-inline">
+                                <h6>Besueshmeri!</h6>
+                                <p></p>
+                            </div>
+                        </div>
+
+                        <div className="card-outline">
+                            <div className="card-inline">
+                                <h6>Dergesa brenda 24h</h6>
+                                <p></p>
+                            </div>
+                        </div>
                 </div>
 
-                <div className="card-outline">
-                    <div className="card-inline">
-                        <h6>Staf i zgjedhur me pervoj!</h6>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br/>
-                             Velit architecto nobis officia quod cupiditate tempora,<br/> quaerat eligendi unde, quae assumenda quibusdam <br/>
-                            exercitationem veniam tenetur nemo optio sint a? Nisi, nam.</p>
-                    </div>
-                </div>
-
-                <div className="card-outline">
-                    <div className="card-inline">
-                        <h6>Staf i zgjedhur me pervoj!</h6>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br/>
-                             Velit architecto nobis officia quod cupiditate tempora,<br/> quaerat eligendi unde, quae assumenda quibusdam <br/>
-                            exercitationem veniam tenetur nemo optio sint a? Nisi, nam.</p>
-                    </div>
-                </div>
-            </div>
-
+        
 
             <div className="section2">
                 <h4 className="h4">Pse ClickPosta?</h4>

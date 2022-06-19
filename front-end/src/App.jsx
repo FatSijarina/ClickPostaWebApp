@@ -14,6 +14,7 @@ import ClientInterface from './features/client-interface/client-interface';
 import TransporterInterface from './features/transporter-interface/transporter-interface';
 import FAQ from './features/faq/faq';
 import AboutUs from './features/about-us/AboutUs';
+import Ballina from './features/homepage/home-page';
 
 import { UserContextProvider } from './Context/UserContext';
 
@@ -31,6 +32,7 @@ function App() {
                     <Route path='/FAQ/*' element={<FAQ />} />
                     <Route path='/Transporter/*' element={<TransporterInterface />} />
                     <Route path='/AboutUs/*' element={<AboutUs />} />
+                    <Route path='/Ballina/*' element={<Ballina/>}/>
                 </Routes>
                 <ToastContainer position='bottom-right' />
                 <Footer />
