@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import ClientIcon from '../../img/client-crud-assets/user-crud-read.svg'
 import DepoIcon from '../../img/dashboard-assets/depo-icon.svg';
 import PorositeIcon from '../../img/dashboard-assets/orders-icon.svg';
+import supplier from '../../img/transporter-assets/supplier.png';
 import VehicleIcon from '../../img/dashboard-assets/vehicle-icon.svg';
 import CityIcon from '../../img/dashboard-assets/city-icon.svg';
 import SektoriCrud from '../cruds/sektori-crud/sektori-crud';
@@ -37,7 +38,7 @@ export default function Dashboard() {
                     <p>Porosite</p>
                 </Link>
                 <Link to="./SektoriCrud" > 
-                    <img src={PorositeIcon} alt="ClientUserIcon" className='client-user-icon' />
+                    <img src={supplier} alt="ClientUserIcon" className='client-user-icon' />
                     <p>SektoriCrud</p>
                 </Link>
                 <Link to="./DepoCrud" > 

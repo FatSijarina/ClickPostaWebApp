@@ -50,41 +50,6 @@
         margin: 2vw;
         border-radius: 40px;
         color: white;
-
-        .client-order {
-            display: flex;
-            justify-content: space-between;
-            width: 90%;
-            border-radius: 25px;
-            box-shadow: 0px 0px 10px 1px #6e0c21;
-            background-color: #DA244B;
-            padding: 3% 0%;
-            margin-bottom: 1vw;
-
-            .client-order-info {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: left;
-                padding-left: 1.5vw;
-
-                p {
-                    margin: 3px 0px;
-                }
-
-                .client-order-info-row {
-                    display: flex;
-                    width: 100%;
-                    font-size: 1.2rem;
-                    font-weight: bolder;
-
-                    img {
-                        margin: 3px;
-                        height: 1.2vw;
-                    }
-                }
-            }
-        }
     }
 
     .rezervo-btn {
@@ -132,14 +97,19 @@
         justify-content: space-evenly;
         margin-left: 40px;
         margin-top: 30px;
-        border-radius: 40px;
+        border-radius: 20px;
         width: 30%;
         background: #DA244B;
+        box-shadow: 0px 0px 5px 0px #DA244B;
+        transition: ease-in-out 0.4s;
 
         .transporter-order-status {
             font-size: 1.2rem;
             font-weight: bolder;
             color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .transporter-orders-info {
@@ -162,5 +132,6 @@
 
 .transporter-orders:hover {
     background: #e9325a;
-    transform: translate(0px, -10px);
+    transform: translate(0px, -15px);
+    background-image: linear-gradient(to bottom left, #8b0724, #fc577b);
 }

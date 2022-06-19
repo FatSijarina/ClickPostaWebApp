@@ -60,6 +60,36 @@ const PorosiaDetails = () => {
                     <p>Zip Kodi: <b>{porosia.receiverZipCode}</b></p>
                 </div>
             </div>
+            <div className="porosia-main-details-statusi">
+                {(porosia.statusiPorosiseId >= 1) ?
+                    <p>E marre
+                        <input
+                        type="checkbox"
+                        checked
+                       /></p> :
+                    <p>E marre<input type="checkbox" checked={false}/></p>
+                }
+            </div>
+            <div className="porosia-main-details-statusi">
+                {(porosia.statusiPorosiseId >= 2) ?
+                    <p>Ne depo
+                        <input
+                            type="checkbox"
+                            checked
+                        /></p> :
+                    <p>Ne depo<input type="checkbox" checked={false} /></p>
+                }
+            </div>
+            <div className="porosia-main-details-statusi">
+                {(porosia.statusiPorosiseId == 3) ?
+                    <p>E derguar
+                        <input
+                            type="checkbox"
+                            checked
+                        /></p> :
+                    <p>E derguar<input type="checkbox" checked={false} /></p>
+                }
+            </div>
         </main>
     );
 }

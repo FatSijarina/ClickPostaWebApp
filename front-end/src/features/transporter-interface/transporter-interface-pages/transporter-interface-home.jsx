@@ -15,6 +15,12 @@ export default function TIHome() {
 
     const { qytetet, orders } = useContext(UserContext);
 
+    const statusiPorosise = [
+        { id: 1, statusi: "E marre" },
+        { id: 2, statusi: "Ne depo" },
+        { id: 3, statusi: "E derguar" }
+    ];
+
     return (
         <>
             <div className="greetings-section">
@@ -27,7 +33,12 @@ export default function TIHome() {
                     <div className="transporter-orders" key={porosia.id}>
                         <Link to="../detajetEPorosise" state={{ porosiaId: porosia.id }}>
                             <div className="transporter-order-status">
-                                #{porosia.id}
+                                <p>
+                                    #{porosia.id}
+                                </p>
+                                <p>
+                                    #{statusiPorosise.find(s => s.id == porosia.statusiPorosiseId).statusi}
+                                </p>
                             </div>
                             <div className="transporter-orders-info">
                                 <SidebarClientOrder
