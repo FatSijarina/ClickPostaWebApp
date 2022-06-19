@@ -3,7 +3,7 @@ import AskImage from '../../img/faq-assets/ask.png';
 import './faq-styles.scss';
 import DownArrow from '../../img/faq-assets/down-arrow.png';
 import UpArrow from '../../img/faq-assets/arrow-up.png';
-import FaqImg from '../../img/faq-assets/faq.png';
+import FaqImg from '../../img/faq-assets/faq-illustration.svg';
 import { useState } from "react";
 import { Link, Route, Routes } from 'react-router-dom';
 import QuestionRead from '../cruds/QA/QA-read';

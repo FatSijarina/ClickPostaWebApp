@@ -21,9 +21,6 @@ const RezervoPushim = () => {
 //   const { combine, allowedMaxDays, beforeToday } = DateRangePicker;
 
 
-
-
-  
   const [open, setOpen] = useState(false)
 
   // get the target element to toggle 

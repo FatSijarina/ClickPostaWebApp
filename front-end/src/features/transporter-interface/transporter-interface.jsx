@@ -6,7 +6,7 @@ import TIHome from './transporter-interface-pages/transporter-interface-home'
 import TIReserve from './transporter-interface-pages/transporter-interface-reserve'
 import HomeIcon from '../../img/client-dashboard-assets/icons/home.svg'
 import PackageIcon from '../../img/client-dashboard-assets/icons/packages.svg'
-import HolidayIcon from '../../img/transporter-assets/calendar.png';
+import HolidayIcon from '../../img/transporter-assets/calendar-icon.svg';
 import TIReserveScooter from './transporter-interface-pages/rezervimet/transporter-reserve-scooter'
 import TIReservePickup from './transporter-interface-pages/rezervimet/transporter-reserve-pickup'
 import TIReserveTruck from './transporter-interface-pages/rezervimet/transporter-reserve-truck'
