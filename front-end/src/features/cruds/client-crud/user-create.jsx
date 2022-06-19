@@ -29,8 +29,6 @@ export default function ClientCreate() {
         {id: 3, roli: 'Transportues'}
     ];
 
-    const navigate = useNavigate();
-
     const handleSubmit = (e) => {
         e.preventDefault();
         const klienti = { emri, mbiemri, email, password, nrTelefonit,

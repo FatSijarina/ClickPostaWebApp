@@ -1,6 +1,18 @@
+import axios from 'axios';
 import React from 'react'
+import { useEffect, useState } from 'react';
 
 const Details = (props) => {
+
+  const [materiali, setMateriali] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5094/api/Sektoret/ShowSektori')
+      .then(response => (
+        setMateriali(response.data)
+      ))
+  })
+
   return (
 
     <>
@@ -24,17 +36,38 @@ const Details = (props) => {
           <input 
               type="number" 
               name="clientId" 
-              placeholder="Vellimi" 
+              placeholder="Gjatesia" 
               required
-              onChange={(e) => props.setVellimi(e.target.value)}
+              onChange={(e) => props.setGjatesia(e.target.value)}
           />
           <input 
-              type="text" 
+              type="number" 
               name="clientId" 
-              placeholder="Materiali" 
+              placeholder="Gjeresia" 
               required
-              onChange={(e) => props.setMateriali(e.target.value)}
+              onChange={(e) => props.setGjeresia(e.target.value)}
           />
+          <input 
+              type="number" 
+              name="clientId" 
+              placeholder="Lartesia" 
+              required
+              onChange={(e) => props.setLartesia(e.target.value)}
+          />
+        
+          <div className="box">
+            <select 
+                onChange={(e) => setMateriali(e.target.value)} 
+                defaultValue='Zgjedh Materialin'
+            >      
+              <option value="Zgjedh Materialin" disabled={true}>Zgjedh Materialin</option>  
+              {materiali.map(materiali => (
+                  <option key={materiali.sektoriId} value={materiali.emertimi}>
+                      {materiali.emertimi}
+                  </option>
+              ))};                               
+            </select>
+          </div>
         </div>
       </form>
       <button onClick={() => props.setStep(2)}> Next</button> 

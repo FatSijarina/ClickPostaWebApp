@@ -3,8 +3,7 @@ import '../crud-styles.scss';
 import { Link, Route, Routes } from 'react-router-dom';
 import PushimiCreate from './PushimiCreate';
 import PushimiRead from './PushimiRead';
-import ReadIcon from '../../../img/dashboard-assets/rest.png';
-import PushimiIcon from '../../../img/dashboard-assets/rest.png';
+import PushimiIcon from '../../../img/dashboard-assets/rest-icon.svg';
 
 
 
@@ -21,7 +20,7 @@ export default function PushimiCrud() {
                 </Link>
                 <Link to="./">
                     <div className="crud-icons-combine">
-                        <img src={ReadIcon} alt="create an order icon" />
+                        <img src={PushimiIcon} alt="create an order icon" />
                         <p>Read</p>
                     </div>
                 </Link>

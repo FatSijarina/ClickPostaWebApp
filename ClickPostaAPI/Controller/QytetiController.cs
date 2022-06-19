@@ -25,7 +25,7 @@ namespace ClickPostaAPI.Controllers
             return Ok(await _context.Qyteti.ToListAsync());
         }
 
-        [HttpGet("{ZipCode}")]
+        [HttpGet("ZipCode")]
         public async Task<ActionResult<Qyteti>> Get(int qytetiZipCode)
         {
             var qyteti = await _context.Qyteti.FindAsync(qytetiZipCode);

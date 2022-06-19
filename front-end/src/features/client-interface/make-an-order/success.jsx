@@ -4,6 +4,8 @@ import {Link} from "react-router-dom"
 import OrderSuccessImg from '../../../img/order-process-assets/success/my-address-art.png'
 
 const Success = (props) => {
+
+
   return (
     <>
     
@@ -11,6 +13,7 @@ const Success = (props) => {
       <h1>Porosia u krye sukses.</h1>
 
       <Link to='../'><button className="add-order-btn">  Kthehu Home</button> </Link>
+      <button onClick={() => props.setStep(1)}> Bej nje tjeter dergese!</button> 
     
     </>
   )

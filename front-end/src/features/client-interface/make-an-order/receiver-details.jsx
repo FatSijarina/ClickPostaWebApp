@@ -1,6 +1,9 @@
 import React from 'react'
 
 const ReceiverDetails = (props) => {
+
+  const { qytetet } = props;
+
   return (
     <>
       <div>Adresa ku duhet te dergohet porosia</div>
@@ -42,8 +45,22 @@ const ReceiverDetails = (props) => {
               required
               onChange={(e) => props.setReceiverZipCode(e.target.value)}
           />
+          <div className="box">
+          <select 
+              onChange={(e) => props. setReceiverZipCode(e.target.value)} 
+              defaultValue='Zgjedh Qytetin'
+          >      
+          <option value="Zgjedh Qytetin" disabled={true}>Zgjedh Qytetin</option>  
+          {qytetet.map(qyteti => (
+              <option key={qyteti.qytetiZipCode} value={qyteti.qytetiZipCode}>
+                  {qyteti.emriQytetit}
+              </option>
+          ))};                               
+          </select>
+      </div>
         </div>
       </form>
+
       <button onClick={() => props.setStep(4)}> Next</button> 
       <button onClick={() => props.setStep(2)}> Previous</button>    
     </>

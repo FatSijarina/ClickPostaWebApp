@@ -13,14 +13,23 @@ import { useEffect } from "react";
 
 export default function Order() {
 
+    const { klienti, qytetet } = useContext(UserContext);
+
+    const [checkBox, setCheckBox] = useState(false);
+
+
     const [step, setStep] = useState(1);
     const [order, setOrder] = useState(false);
+
+    const [ gjatesia, setGjatesia ] = useState();
+    const [ gjeresia, setGjeresia ] = useState();
+    const [ lartesia, setLartesia ] = useState();
 
     const { klientiID } = useContext(UserContext);
     const userId = klientiID;
     const [emertimi, setEmertimi] = useState('');
     const [detajet, setDetajet] = useState('');
-    const [vellimi, setVellimi] = useState('');
+    const vellimi = gjatesia * gjeresia * lartesia ;
     const [materiali, setMateriali] = useState('');
     const [senderEmri, setSenderEmri] = useState('');
     const [senderMbiemri, setSenderMbiemri] = useState('');
@@ -50,7 +59,8 @@ export default function Order() {
     useEffect(() => {
         if(order)
             handleSubmit();
-    })
+
+    }, [checkBox])
 
 
     const orderProcess = {
@@ -58,11 +68,17 @@ export default function Order() {
                 setStep={setStep}
                 setEmertimi={setEmertimi}
                 setDetajet={setDetajet}
-                setVellimi={setVellimi}
+                setGjatesia={setGjatesia}
+                setGjeresia={setGjeresia}
+                setLartesia={setLartesia}
                 setMateriali={setMateriali}
             />,
-        2: <SenderDetails 
+        2: <SenderDetails
+                klienti = {klienti}
+                checkBox={checkBox}
+                setCheckBox={setCheckBox}
                 setStep={setStep}
+                qytetet={qytetet}
                 setSenderEmri={setSenderEmri}
                 setSenderMbiemri={setSenderMbiemri}
                 setSenderNrTelefonit={setSenderNrTelefonit}
@@ -71,7 +87,8 @@ export default function Order() {
                 setSenderZipCode={setSenderZipCode}
             />,
         3: <ReceiverDetails
-                setStep={setStep} 
+                setStep={setStep}
+                qytetet={qytetet}
                 setReceiverEmri={setReceiverEmri}
                 setReceiverMbiemri={setReceiverMbiemri}
                 setReceiverNrTelefonit={setReceiverNrTelefonit}
@@ -85,7 +102,8 @@ export default function Order() {
                 porosia={porosia}
             />,
         5: <Success 
-
+                porosia={porosia}
+                setStep={setStep} 
             />
     }
 
@@ -93,8 +111,8 @@ export default function Order() {
         <>
 
             {orderProcess[step]}
-           
-            
+            {checkBox.toString()}
+            {senderZipCode}
                 
         </>
     )

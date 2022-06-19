@@ -1,6 +1,6 @@
 import React from 'react';
 import '../crud-styles.scss';
-import QuestionIcon from '../../../img/faq-assets/question.png';
+import QuestionIcon from '../../../img/faq-assets/question-icon.svg';
 import QuestionRead from './QA-read';
 import { Link, Route, Routes } from 'react-router-dom';
 import QuestionCreate from './QA-create';
