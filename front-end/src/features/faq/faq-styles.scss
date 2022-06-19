@@ -43,13 +43,13 @@
     align-items: center;
     cursor: pointer;
 }
-.content{
+.content-faq{
     color: white;
     max-height: 0;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0,1,0,1);
 }
-.content.show{
+.content-faq.show{
     height: auto;
     max-height: 9999px;
     transition: all 0.7s cubic-bezier(1,0,1,0);

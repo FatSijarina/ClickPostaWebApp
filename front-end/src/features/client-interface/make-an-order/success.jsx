@@ -1,8 +1,18 @@
 import React from 'react'
+import {Link} from "react-router-dom"
 
-const Success = () => {
+import OrderSuccessImg from '../../../img/order-process-assets/success/my-address-art.png'
+
+const Success = (props) => {
   return (
-    <div>Order Success</div>
+    <>
+    
+      <img src={OrderSuccessImg} alt="" />
+      <h1>Porosia u krye sukses.</h1>
+
+      <Link to='../'><button className="add-order-btn">  Kthehu Home</button> </Link>
+    
+    </>
   )
 }
 

@@ -35,12 +35,16 @@ export default function Order() {
     const [receiverStreetName, setReceiverStreetName] = useState('');
     const [receiverZipCode, setReceiverZipCode] = useState();
 
+    const porosia = { userId, senderEmri, senderMbiemri, emertimi, detajet, vellimi, materiali,
+        senderNrTelefonit, senderStreetName, senderHomeNumber, senderZipCode,
+        receiverEmri, receiverMbiemri, receiverNrTelefonit, receiverHomeNumber, receiverStreetName, receiverZipCode};
+
     const handleSubmit = (e) => {
-        const porosia = { userId, senderEmri, senderMbiemri, emertimi, detajet, vellimi, materiali,
-                            senderNrTelefonit, senderStreetName, senderHomeNumber, senderZipCode,
-                            receiverEmri, receiverMbiemri, receiverNrTelefonit, receiverHomeNumber, receiverStreetName, receiverZipCode};
         console.log((porosia));
-        axios.post('http://localhost:5094/Porosia/ShtoPorosi', porosia)   
+        axios.post('http://localhost:5094/Porosia/ShtoPorosi', porosia)
+        .catch(function (error) {
+            console.log(error.response.data);
+        });
     }
 
     useEffect(() => {
@@ -51,44 +55,45 @@ export default function Order() {
 
     const orderProcess = {
         1: <Details 
-            setStep={setStep}
-            setEmertimi={setEmertimi}
-            setDetajet={setDetajet}
-            setVellimi={setVellimi}
-            setMateriali={setMateriali}
+                setStep={setStep}
+                setEmertimi={setEmertimi}
+                setDetajet={setDetajet}
+                setVellimi={setVellimi}
+                setMateriali={setMateriali}
             />,
         2: <SenderDetails 
-            setStep={setStep}
-            setSenderEmri={setSenderEmri}
-            setSenderMbiemri={setSenderMbiemri}
-            setSenderNrTelefonit={setSenderNrTelefonit}
-            setSenderHomeNumber={setSenderHomeNumber}
-            setSenderStreetName={setSenderStreetName}
-            setSenderZipCode={setSenderZipCode}
+                setStep={setStep}
+                setSenderEmri={setSenderEmri}
+                setSenderMbiemri={setSenderMbiemri}
+                setSenderNrTelefonit={setSenderNrTelefonit}
+                setSenderHomeNumber={setSenderHomeNumber}
+                setSenderStreetName={setSenderStreetName}
+                setSenderZipCode={setSenderZipCode}
             />,
         3: <ReceiverDetails
-            setStep={setStep} 
-            setReceiverEmri={setReceiverEmri}
-            setReceiverMbiemri={setReceiverMbiemri}
-            setReceiverNrTelefonit={setReceiverNrTelefonit}
-            setReceiverHomeNumber={setReceiverHomeNumber}
-            setReceiverStreetName={setReceiverStreetName}
-            setReceiverZipCode={setReceiverZipCode}
-        />,
-        4: <Confirmation 
-            setOrder={setOrder}
+                setStep={setStep} 
+                setReceiverEmri={setReceiverEmri}
+                setReceiverMbiemri={setReceiverMbiemri}
+                setReceiverNrTelefonit={setReceiverNrTelefonit}
+                setReceiverHomeNumber={setReceiverHomeNumber}
+                setReceiverStreetName={setReceiverStreetName}
+                setReceiverZipCode={setReceiverZipCode}
             />,
-        5: <Success />
+        4: <Confirmation 
+                setOrder={setOrder}
+                setStep={setStep} 
+                porosia={porosia}
+            />,
+        5: <Success 
+
+            />
     }
 
     return (
         <>
 
             {orderProcess[step]}
-
-            {emertimi}
-
-            
+           
             
                 
         </>

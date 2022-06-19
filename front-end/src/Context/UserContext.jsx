@@ -5,7 +5,7 @@ const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
     const [transportuesiId, setTransportuesiId] = useState(4);
-    const [klientiID, setKlientiID] = useState(7);
+    const [klientiID, setKlientiID] = useState(2);
     const [porosiaId, setPorosiaId] = useState(6);
     const [klienti, setKlienti] = useState("");
     const [transportuesi, setTransportuesi] = useState("");

@@ -74,7 +74,7 @@ export default function FAQ(){
                                 <h4>{item.question}</h4>
                                 <span>{selected == i ? <img src={UpArrow} className="img-arrow" />: <img src={DownArrow} className="img-arrow"/> }</span>
                             </div>
-                            <div className={selected == i? 'content show' : 'content'}>{item.answer}</div>
+                            <div className={selected == i? 'content-faq show' : 'content-faq'}>{item.answer}</div>
                         </div>
                     ))}
                 </div>

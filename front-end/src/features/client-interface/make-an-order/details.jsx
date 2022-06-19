@@ -37,7 +37,7 @@ const Details = (props) => {
           />
         </div>
       </form>
-       <button onClick={() => props.setStep(2)}> Next</button> 
+      <button onClick={() => props.setStep(2)}> Next</button> 
     </>
   )
  
