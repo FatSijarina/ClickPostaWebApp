@@ -14,6 +14,7 @@ export default function FAQ(){
 
     const [selected, setSelected]= useState(null);
     const [question, setQuestion] = useState('');
+    const [answer, setAnswer] = useState('');
     const [isPending, setIsPending] = useState(false);
     const [refreshKey, setRefreshKey] = useState('0');
 
@@ -26,7 +27,7 @@ export default function FAQ(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const q = { question };
+        const q = { question, answer };
 
         setIsPending(true);
         
@@ -63,7 +64,7 @@ export default function FAQ(){
 
     return(
         <div className="container-div">           
-            <div className="wrapper">
+            <div className="base-container">
                 <div className="accordion">
                 <h3 className="h3-section2">Pyetjet me te shpeshta</h3>
                 <img src={FaqImg} className="img-faq"/>

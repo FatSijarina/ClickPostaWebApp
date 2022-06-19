@@ -14,7 +14,7 @@ export default function QuestionUpdatePopup(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const q = {questionId, question, answer};
+        const q = {question, answer};
         
         axios.put('http://localhost:5094/api/QAControlller/Update QA', q)
             .then(() => {

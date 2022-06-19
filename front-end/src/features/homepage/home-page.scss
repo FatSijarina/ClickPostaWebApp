@@ -1,0 +1,53 @@
+.main-div-ballina{
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.3)),url(./woman-box.jpg);
+    width: 100vw;
+    height: 81vh;
+    margin-top: 0;
+    padding: 0;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat; 
+}
+.ballina-title{
+    margin-top: 17%;
+    margin-right: 52%;
+    font-size: 27px;
+}
+.button-register-ballina{
+    margin-top: 2%;
+    margin-right: 50%;
+    width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: #DA244B;
+    color: white;
+    font-size: 16px;
+    border: 1px solid #DA244B;
+}
+.workers-ballina{
+    width: 1200px;
+    height: 650px;
+    margin-top: 155px;
+}
+.content-ballina{
+    font-size: 16px;
+    text-align: start;
+}
+.section2-ballina{
+    margin-top: 170px;
+    display: flex;
+    flex-direction: column;
+}
+.link-aboutUs{
+    color: #DA244B;
+    margin-right: 83%;
+    font-size: larger;
+    font-weight: bold;
+    text-align: start;
+}
+.kosovo-map-ballina{
+    width: 1200px; 
+    height: 650px;
+    margin-top: 130px;
+}

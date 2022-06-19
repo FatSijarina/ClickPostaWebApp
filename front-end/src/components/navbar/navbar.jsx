@@ -19,6 +19,9 @@ export default function Navbar() {
                     
                     <div className="right-red">    
                         <div className="navbar-links">
+                        <Link to="./Ballina">
+                                <button type="button">Ballina</button>    
+                            </Link> 
                             <Link to="./FAQ">
                                 <button type="button">FAQ</button>    
                             </Link> 
