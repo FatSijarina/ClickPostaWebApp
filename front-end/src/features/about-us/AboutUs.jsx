@@ -99,9 +99,13 @@ export default function AboutUs(){
                     <img src={img1}  />
                     <p>Në ClickPoste besojmë fort se proceset e shërbimeve tona ofrojnë  <br />zgjidhje për individët dhe krijojnë mundësi rritjeje për bizneset. <br /> Prandaj kemi bërë bashkë individë të motivuar dhe profesionistë <br /> të fushës për t`ju ofruar zgjidhje afatgjata dhe besueshmëri. <br /><br />
                         Ne premtojmë të kujdesemi për të gjithë menaxhimin e zinxhirit <br /> të furnizimit, për të bërë dërgesën tuaj të sigurt, të shpejtë dhe në kohë.</p>
-                    <a href="Contact.jsx">Contact</a>
+                    
                 </div>
                 
+            </div>
+
+            <div className="contact-aboutus">
+                <button className="button-aboutus">Contact us</button>
             </div>
 
         </div>

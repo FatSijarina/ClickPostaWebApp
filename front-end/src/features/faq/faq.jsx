@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 export default function FAQ(){
 
     const [selected, setSelected]= useState(null);
-    const [questions, setQuestions] = useState([]);
+    const [question, setQuestion] = useState('');
     const [isPending, setIsPending] = useState(false);
     const [refreshKey, setRefreshKey] = useState('0');
 
@@ -26,11 +26,11 @@ export default function FAQ(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const question = { questions };
+        const q = { question };
 
         setIsPending(true);
         
-        axios.post('http://localhost:5094/api/QAControlller/Add Question & Answer', question)
+        axios.post('http://localhost:5094/api/QAControlller/Add Question & Answer', q)
             .then(() => {
                 toast.success("Question added successfully!!", { theme: "colored" });
             }).then(() => {
@@ -63,46 +63,46 @@ export default function FAQ(){
 
     return(
         <div className="container-div">           
-        <div className="wrapper">
-            <div className="accordion">
-            <h3 className="h3-section2">Pyetjet me te shpeshta</h3>
-            <img src={FaqImg} className="img-faq"/>
-            
-                {data.map((item, i) => ( 
-                    <div className="item" onClick={() => toggle(i)}>
-                        <div className="title">
-                            <h4>{item.question}</h4>
-                            <span>{selected == i ? <img src={UpArrow} className="img-arrow" />: <img src={DownArrow} className="img-arrow"/> }</span>
+            <div className="wrapper">
+                <div className="accordion">
+                <h3 className="h3-section2">Pyetjet me te shpeshta</h3>
+                <img src={FaqImg} className="img-faq"/>
+                
+                    {data.map((item, i) => ( 
+                        <div className="item-faq" onClick={() => toggle(i)}>
+                            <div className="title-h4-faq">
+                                <h4>{item.question}</h4>
+                                <span>{selected == i ? <img src={UpArrow} className="img-arrow" />: <img src={DownArrow} className="img-arrow"/> }</span>
+                            </div>
+                            <div className={selected == i? 'content show' : 'content'}>{item.answer}</div>
                         </div>
-                        <div className={selected == i? 'content show' : 'content'}>{item.answer}</div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
-        </div>
 
-        <div className="add-question">
-            <h3 className="title-faq">Keni ndonje pyetje?</h3>
-            <div className="form"> 
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <input 
-                            type="text" 
-                            name="question" 
-                            placeholder="Question" 
-                            required 
-                            autoComplete="off"
-                            defaultValue={questions}
-                            onChange={(e) => setQuestions(e.target.value)}
-                        />
-                       
-                        { !isPending && <button type="submit" className="register-register-btn" value="Submit">
-                            Shto
-                        </button>}
-                       
-                    </div>
-                </form>   
-            </div>       
-        </div>  
-</div>
+            <div className="add-question">
+                <h3 className="title-faq">Keni ndonje pyetje?</h3>
+                <div className="form"> 
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group-faq">
+                            <input 
+                                type="text" 
+                                name="question" 
+                                placeholder="Question" 
+                                required 
+                                autoComplete="off"
+                                defaultValue={question}
+                                onChange={(e) => setQuestion(e.target.value)}
+                            />
+                        
+                            { !isPending && <button type="submit" className="register-register-btn" value="Submit">
+                                Dergo
+                            </button>}
+                        
+                        </div>
+                    </form>   
+                </div>       
+            </div>  
+        </div>
  )
 }

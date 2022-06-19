@@ -1,0 +1,40 @@
+.calendarWrap{
+    position: relative;
+    display: inline-block;
+    margin-top: 50px;
+}
+
+.calendarElement{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+    border: 1px solid #ccc;
+    z-index: 999;
+    color: grey;
+}
+.inputBox{
+    font-size: 22px;
+    padding: 5px 8px 4px 8px;
+    border-radius: 66px;
+    border: 1px solid #DA244B;
+    margin-top: 70px;
+    margin-left: 30px;
+    
+}
+.enddate-label, .startdate-label{
+    font-size: larger;
+    font-weight: bold;
+}
+.enddate-label{
+    margin-left: 40px;
+}
+.button-rezervimi{
+    width: 110px;
+    height: 35px;
+    border-radius: 13px;
+    margin-top: 55px;
+    background-color: #DA244B;
+    color: white;
+    border: #DA244B;
+}
