@@ -1,11 +1,13 @@
 ﻿using ClickPostaAPI.Data;
 using ClickPostaAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace ClickPostaAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
 

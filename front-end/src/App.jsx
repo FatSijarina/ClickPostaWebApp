@@ -17,8 +17,14 @@ import AboutUs from './features/about-us/AboutUs';
 import Ballina from './features/homepage/home-page';
 
 import { UserContextProvider } from './Context/UserContext';
+import { useEffect } from 'react';
 
 function App() {
+
+    // useEffect(() = > {
+
+    // })
+
     return (
         <div className="App">
             <UserContextProvider>    

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using ClickPostaAPI.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ClickPostaAPI.Data
 {
-    public partial class ClickPostaDBContext : DbContext
+    public partial class ClickPostaDBContext : IdentityDbContext<Useri, IdentityRole<int>, int>
     {
         public ClickPostaDBContext()
         {
@@ -41,6 +43,7 @@ namespace ClickPostaAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Depo>(entity =>
             {
                 entity.Property(e => e.DepoId).HasColumnName("DepoID");
@@ -342,9 +345,9 @@ namespace ClickPostaAPI.Data
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Password)
+                /*entity.Property(e => e.Password)
                     .HasMaxLength(100)
-                    .IsUnicode(false);
+                    .IsUnicode(false);*/
 
                 entity.Property(e => e.RoleId).HasColumnName("RoleID");
 

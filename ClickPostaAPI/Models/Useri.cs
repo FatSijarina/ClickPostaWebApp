@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace ClickPostaAPI.Models
 {
-    public partial class Useri
+    public partial class Useri : IdentityUser<int>
     {
         public Useri()
         {
@@ -17,8 +18,6 @@ namespace ClickPostaAPI.Models
         public int UserId { get; set; }
         public string Emri { get; set; } = null!;
         public string Mbiemri { get; set; } = null!;
-        public string Email { get; set; } = null!;
-        public string Password { get; set; } = null!;
         public string NrTelefonit { get; set; } = null!;
         public int? HomeNumber { get; set; }
         public string? StreetName { get; set; }
@@ -28,7 +27,6 @@ namespace ClickPostaAPI.Models
         public string? Orari { get; set; }
         public int? DitetEpushimit { get; set; }
         public int? NrPorosive { get; set; }
-
         public virtual Role? Role { get; set; }
         public virtual Qyteti? ZipCodeNavigation { get; set; }
         public virtual ICollection<Porosia> PorosiaDerguesi { get; set; }

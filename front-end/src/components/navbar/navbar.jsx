@@ -2,10 +2,23 @@ import React from "react";
 import "./style.scss"
 import logoIconWhite from "../../img/logo-assets/Icon - White.svg"
 import logoName from "../../img/logo-assets/Typemark.svg"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useContext } from "react";
+import { UserContext } from "../../Context/UserContext";
 
 
 export default function Navbar() {
+
+        const { setToken } = useContext(UserContext);
+        const navigate = useNavigate();
+
+        const handleSubmit = (e) => {
+            localStorage.removeItem('jwt');
+            navigate('/Ballina')
+            window.location.reload();
+            
+        }
+
         return (
             
                 <div className="navbar">
@@ -34,6 +47,9 @@ export default function Navbar() {
                             <Link to="./Login">
                                 <button type="button">Kyqu</button>    
                             </Link> 
+
+                                <button type="button" onClick={handleSubmit}>Dil</button>    
+
                         </div>
                     </div> 
                                    

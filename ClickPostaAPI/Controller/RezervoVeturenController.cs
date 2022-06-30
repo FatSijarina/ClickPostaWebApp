@@ -1,11 +1,13 @@
 ﻿using ClickPostaAPI.Data;
 using ClickPostaAPI.Helpers;
 using ClickPostaAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClickPostaAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class RezervoVeturenController : ControllerBase
