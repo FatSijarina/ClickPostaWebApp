@@ -11,8 +11,10 @@ namespace ClickPostaAPI.Helpers
         private decimal VellimiPorosise { get; }
         private string MaterialiPorosise { get; }
 
-
-        public CaktimiPorosise(ClickPostaDBContext context, int? depoZipCode, decimal vellimiPorosise, string materialiPorosise)
+        public CaktimiPorosise(ClickPostaDBContext context,
+            int? depoZipCode, 
+            decimal vellimiPorosise, 
+            string materialiPorosise)
         {
             _context = context;
             DepoZipCode = depoZipCode;
@@ -24,11 +26,11 @@ namespace ClickPostaAPI.Helpers
         public string KalkuloVeturenNgaVellimi()
         {
             if (VellimiPorosise < 0.45m)
-                return "Skuter";
+                return "Scooter";
             if (VellimiPorosise < 2.10m)
-                return "Pikap";
+                return "Pickup";
 
-            return "Kamion";
+            return "Truck";
         }
 
         public async Task<int> FiltroTransportuesit(int? PorosiaZipCode)

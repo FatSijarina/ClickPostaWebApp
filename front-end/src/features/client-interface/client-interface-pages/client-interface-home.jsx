@@ -17,8 +17,7 @@ import GjurmimiRealTime from "../../../img/client-dashboard-assets/Gjurmimi-Real
 
 export default function CIHome() {
 
-    const {klientiID, klienti, porosite, qytetet} = useContext(UserContext);
-    const [porosiaFundit, setPorosiaFundit] = useState([]);
+    const {porosiaFundit, token , data, klienti, porosite, qytetet} = useContext(UserContext);
 
     const statusiPorosise = [
         {id: 1, statusi: PerTuMarreImg},
@@ -26,12 +25,7 @@ export default function CIHome() {
         {id: 3, statusi: DukeUDerguar}
     ];
 
-    useEffect(() => {
-        axios.get('http://localhost:5094/Porosia/GetLatestUserPorosia?id=' + klientiID)
-            .then(response => {
-                setPorosiaFundit(response.data);
-            })
-    }, [])
+
 
     return (
         <>
@@ -62,7 +56,7 @@ export default function CIHome() {
                             <div className="latest-order-info-row">
                                 <p>Nga: 
                                 <b>{qytetet.map((qyteti) => (
-                                            (porosiaFundit.senderZipCode == qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
+                                            (porosiaFundit.senderZipCode === qyteti.qytetiZipCode) ? qyteti.emriQytetit : ""
                                         ))}</b></p>
                             </div>
                             <div className="latest-order-info-row">

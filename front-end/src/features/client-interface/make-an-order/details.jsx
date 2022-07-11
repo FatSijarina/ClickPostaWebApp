@@ -11,7 +11,7 @@ const Details = (props) => {
       .then(response => (
         setMateriali(response.data)
       ))
-  })
+  }, [])
 
   return (
 
@@ -57,7 +57,7 @@ const Details = (props) => {
         
           <div className="box">
             <select 
-                onChange={(e) => setMateriali(e.target.value)} 
+                onChange={(e) => props.setMateriali(e.target.value)} 
                 defaultValue='Zgjedh Materialin'
             >      
               <option value="Zgjedh Materialin" disabled={true}>Zgjedh Materialin</option>  

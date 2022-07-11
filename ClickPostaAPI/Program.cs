@@ -1,12 +1,23 @@
 global using Microsoft.EntityFrameworkCore;
 using ClickPostaAPI.Data;
+using ClickPostaAPI.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+ConfigurationManager _config = builder.Configuration; // allows both to access and to set up the config
+IWebHostEnvironment environment = builder.Environment;
+
+builder.Services.AddControllers(opt =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    opt.Filters.Add(new AuthorizeFilter(policy));
+});
+
 builder.Services.AddDbContext<ClickPostaDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ClickPostaDB"));
@@ -17,6 +28,8 @@ builder.Services.AddCors(opt => {
         policy.AllowAnyMethod().AllowCredentials().AllowAnyHeader().WithOrigins("http://localhost:3000");
     });
 });
+
+builder.Services.AddIdentityServices(_config);
 
 
 builder.Services.AddControllers().AddJsonOptions(x =>
@@ -35,9 +48,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

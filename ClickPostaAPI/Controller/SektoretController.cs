@@ -1,9 +1,11 @@
 ﻿using ClickPostaAPI.Data;
 using ClickPostaAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClickPostaAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class SektoretController : ControllerBase

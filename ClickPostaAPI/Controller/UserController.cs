@@ -1,5 +1,6 @@
 ﻿using ClickPostaAPI.Data;
 using ClickPostaAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,7 +49,7 @@ namespace ClickPostaAPI.Controllers
             if (useri == null)
                 return BadRequest("Useri nuk mund te jete i zbrazet!");
 
-            useri.Password = BCrypt.Net.BCrypt.HashPassword(useri.Password);
+            //useri.Password = BCrypt.Net.BCrypt.HashPassword(useri.Password);
             _context.Useri.Add(useri);
 
             await _context.SaveChangesAsync();
@@ -69,8 +70,8 @@ namespace ClickPostaAPI.Controllers
                 dbUser.Mbiemri = useri.Mbiemri;
             if (!useri.Email.Trim().Equals(""))
                 dbUser.Email = useri.Email;
-            if (!useri.Password.Trim().Equals(""))
-                dbUser.Password = BCrypt.Net.BCrypt.HashPassword(useri.Password);
+            /*if (!useri.Password.Trim().Equals(""))
+                dbUser.Password = BCrypt.Net.BCrypt.HashPassword(useri.Password);*/
             if (!useri.NrTelefonit.Trim().Equals(""))
                 dbUser.NrTelefonit = useri.NrTelefonit;
             if (!(useri.HomeNumber <= 0))

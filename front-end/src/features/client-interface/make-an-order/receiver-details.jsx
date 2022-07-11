@@ -39,12 +39,6 @@ const ReceiverDetails = (props) => {
               required
               onChange={(e) => props.setReceiverStreetName(e.target.value)}
           />
-          <input 
-              type="number" 
-              placeholder="ZipCode" 
-              required
-              onChange={(e) => props.setReceiverZipCode(e.target.value)}
-          />
           <div className="box">
           <select 
               onChange={(e) => props. setReceiverZipCode(e.target.value)} 

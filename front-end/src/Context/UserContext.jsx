@@ -1,12 +1,21 @@
 import axios from "axios";
 import React, { createContext, useState, useEffect} from "react";
+import jwt_decode from "jwt-decode";
 
 const UserContext = createContext();
+const token = localStorage.getItem("jwt");
+
 
 const UserContextProvider = ({ children }) => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const data = token ? jwt_decode(localStorage.getItem("jwt")) : "";
+
+
     const [transportuesiId, setTransportuesiId] = useState(4);
-    const [klientiID, setKlientiID] = useState(2);
+    const [klientiID, setKlientiID] = useState();
     const [porosiaId, setPorosiaId] = useState(6);
+    const [porosiaFundit, setPorosiaFundit] = useState([]);
     const [klienti, setKlienti] = useState("");
     const [transportuesi, setTransportuesi] = useState("");
     const [klientet, setKlientet] = useState([]);
@@ -19,14 +28,18 @@ const UserContextProvider = ({ children }) => {
     const [rezervimi, setRezervimi] = useState([]);
 
     const fetchUser = async () => {
-        await axios.get('http://localhost:5094/api/User/GetKlientin?id=' + klientiID)
+        await axios.get('http://localhost:5094/api/User/GetKlientin?id=' + data.nameid)
         .then(response => (
             setKlienti(response.data)
         ))
-        await axios.get('http://localhost:5094/api/User/GetKlientin?id=' + transportuesiId)
+        await axios.get('http://localhost:5094/api/User/GetKlientin?id=' + data.nameid)
             .then(response => (
                 setTransportuesi(response.data)
             ))
+        axios.get('http://localhost:5094/Porosia/GetLatestUserPorosia?id=' + data.nameid)
+        .then(response => {
+            setPorosiaFundit(response.data);
+        })
         await axios.get('http://localhost:5094/api/User/GetKlientet')
             .then(response => (
                 setKlientet(response.data)
@@ -35,15 +48,15 @@ const UserContextProvider = ({ children }) => {
             .then(response => (
                 setQytetet(response.data)
             ))
-        await axios.get('http://localhost:5094/Porosia/GetUserPorosite?id=' + klientiID)
+        await axios.get('http://localhost:5094/Porosia/GetUserPorosite?id=' + data.nameid)
             .then(response => (
                 setPorosite(response.data)
             ))
-        await axios.get('http://localhost:5094/Porosia/GetPorosiaById?id=' + porosiaId)
+        await axios.get('http://localhost:5094/Porosia/GetPorosiaById?id=' + data.nameid)
             .then(response => (
                 setPorosia(response.data)
             ))
-        await axios.get('http://localhost:5094/Porosia/GetDerguesPorosite?id=' + transportuesiId)
+        await axios.get('http://localhost:5094/Porosia/GetDerguesPorosite?id=' + data.nameid)
             .then(response => (
                 setOrders(response.data)
             ))
@@ -62,8 +75,20 @@ const UserContextProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        fetchUser();
-    }, []);
+
+        //setToken(localStorage.getItem("jwt"));
+        if(token){
+            //setToken(localStorage.getItem("jwt"));
+            
+            console.log(data);
+            axios.interceptors.request.use(config => {
+                if(token) config.headers.Authorization = `Bearer ${token}`
+                return config;
+            })
+            console.log(data);
+            fetchUser();
+        }
+    }, [token]);
 
     return (
         <UserContext.Provider value={{
@@ -77,7 +102,12 @@ const UserContextProvider = ({ children }) => {
             orders,
             transportuesit,
             veturat,
-            rezervimi
+            rezervimi,
+            setIsLoggedIn,
+            setKlientiID,
+            //setToken,
+            data,
+            porosiaFundit
         }}>
             {children}
         </UserContext.Provider>

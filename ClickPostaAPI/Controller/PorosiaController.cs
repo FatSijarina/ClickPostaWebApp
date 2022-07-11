@@ -2,9 +2,11 @@
 using ClickPostaAPI.Models;
 using ClickPostaAPI.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ClickPostaAPI.Controllers
 {
+
     [Route("Porosia")]
     [ApiController]
     public class PorosiaController : ControllerBase
