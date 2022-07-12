@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 import { useState, useContext } from "react";
 import { UserContext } from "../../Context/UserContext";
 import "./style.scss"
@@ -10,7 +11,7 @@ import { useEffect } from "react";
 
 export default function Login() {
 
-    const { setKlientiID, setToken, token, klientiID } = useContext(UserContext);
+    const { isLoggedIn, setIsLoggedIn, klientiID } = useContext(UserContext);
     const navigate = useNavigate();
 
     const [user, setUser] = useState([]);
@@ -21,11 +22,14 @@ export default function Login() {
         e.preventDefault();
         const klienti = { email, password };
 
-        await axios.post('http://localhost:5094/api/Account/login', klienti, {validateStatus: () => true})
+        await axios.post('http://localhost:5094/api/Account/login', klienti)
             .then(response => {
                 window.localStorage.setItem('jwt', response.data.token)
                 navigate('/Home')
                 window.location.reload();
+            })
+            .catch(function (error) {
+                toast.error(error.response.data);
             })
     }
     useEffect(() => {
@@ -43,17 +47,19 @@ export default function Login() {
                     <h1>Kyqu ne llogari</h1>
                     <form onSubmit={handleSubmit} className="login-form-group" >
                         <input 
-                        type="text" 
-                        name="username" 
-                        defaultValue={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Username"/>
+                            required
+                            type="email" 
+                            name="email" 
+                            defaultValue={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Username"/>
                         <input
-                         type="password" 
-                         name="password" 
-                         defaultValue={password}
-                         onChange={(e) => setPassword(e.target.value)}
-                         placeholder="Password"/>
+                            required
+                            type="password" 
+                            name="password" 
+                            defaultValue={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"/>
                         <button type="submit" value="Submit" className="login-login-btn">
                             Kyqu
                         </button>

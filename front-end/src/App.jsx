@@ -15,9 +15,11 @@ import TransporterInterface from './features/transporter-interface/transporter-i
 import FAQ from './features/faq/faq';
 import AboutUs from './features/about-us/AboutUs';
 import Ballina from './features/homepage/home-page';
+import NotFound from './features/NotFound/NotFound'
 
-import { UserContextProvider } from './Context/UserContext';
+import { UserContext, UserContextProvider } from './Context/UserContext';
 import { useEffect } from 'react';
+import { useContext } from 'react';
 
 function App() {
 
@@ -25,24 +27,41 @@ function App() {
 
     // })
 
+    const{data, isLoggedIn} = useContext(UserContext)
+
+    const RoleRoute = () => {
+        switch(data.role){
+            case '1':
+                return <ClientInterface />
+            case '2':
+                return <Dashboard />
+            case '3':
+                return <TransporterInterface />
+            default:
+                return null;
+        }
+    }
+
     return (
-        <div className="App">
-            <UserContextProvider>    
+        <div className="App">   
                 <Navbar />
                 <Routes>
                     <Route path='/' element={<HomePage />} />
                     <Route path='/Register' element={<Register />} />
                     <Route path='/Login' element={<Login />} />
-                    <Route path='/Dashboard/*' element={<Dashboard />} />
-                    <Route path='/Home/*' element={<ClientInterface />} />
                     <Route path='/FAQ/*' element={<FAQ />} />
-                    <Route path='/Transporter/*' element={<TransporterInterface />} />
-                    <Route path='/AboutUs/*' element={<AboutUs />} />
                     <Route path='/Ballina/*' element={<Ballina/>}/>
+                    <Route path='/AboutUs/*' element={<AboutUs />} />
+                    {   isLoggedIn &&
+                        (<Route path='/Home/*' element={<RoleRoute />} />)
+                    }
+
+                    <Route path='*' element={<NotFound />} />
+
                 </Routes>
                 <ToastContainer position='bottom-right' />
                 <Footer />
-            </UserContextProvider>
+            
         </div>
     );
 }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ClickPostaAPI.Controllers
 {
-
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
 

@@ -25,8 +25,6 @@ export default function CIHome() {
         {id: 3, statusi: DukeUDerguar}
     ];
 
-
-
     return (
         <>
             <div className="greetings-section">

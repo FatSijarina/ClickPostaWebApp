@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./style.scss"
 import registerBox from "../../img/register-assets/register-page-box.svg";
 import { Link } from 'react-router-dom';
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext";
 
 
 
@@ -13,22 +14,25 @@ export default function Register() {
     const [emri, setEmri] = useState('');
     const [mbiemri, setMbiemri] = useState('');
     const [nrTelefonit, setNrTelefonit] = useState('');
+    const [homeNumber, setHomeNumber] = useState('');
     const [streetName, setStreetName] = useState('');
-    const [zipCode, setZipCode] = useState('');
-    const [city, setCity] = useState('Qyteti');
+    const [zipCode, setZipCode] = useState();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [qyteti, setQyteti] = useState([]);
 
     const [isPending, setIsPending] = useState(false);
     const navigate = useNavigate();
 
+    const{qytetet} = useContext(UserContext);
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        const klienti = { emri, mbiemri, email, password, nrTelefonit, streetName, zipCode, city };
+        const klienti = { emri, mbiemri, email, password, nrTelefonit, homeNumber, streetName, zipCode };
 
         setIsPending(true);
         
-        axios.post('http://localhost:5000/KlientetController/ShtoKlient', klienti)
+        axios.post('http://localhost:5094/api/Account/Register', klienti)
         .then((response) => {
             console.log((klienti));
             setIsPending(false);
@@ -74,6 +78,14 @@ export default function Register() {
                                 onChange={(e) => setNrTelefonit(e.target.value)}
                             />
                             <input 
+                                type="number" 
+                                name="number" 
+                                placeholder="Nr i vendbanimit"
+                                required
+                                defaultValue={homeNumber}
+                                onChange={(e) => setHomeNumber(e.target.value)}
+                            />
+                            <input 
                                 type="text" 
                                 name="address" 
                                 placeholder="01, FilanRruga"
@@ -81,28 +93,18 @@ export default function Register() {
                                 defaultValue={streetName}
                                 onChange={(e) => setStreetName(e.target.value)}
                             />
-                            <input 
-                                type="text" 
-                                name="zipCode" 
-                                placeholder="10000"
-                                required
-                                defaultValue={zipCode}
-                                onChange={(e) => setZipCode(e.target.value)}
-                            />
                             <div className="box">
                                 <select 
                                     required
-                                    defaultValue={city}
-                                    onChange={(e) => setCity(e.target.value)}
-                                >                                    
-                                    <option value="Qyteti" disabled>Qyteti</option>
-                                    <option>Gjilan</option>
-                                    <option>Prishtine</option>
-                                    <option>Prizren</option>
-                                    <option>Mitrovice</option>
-                                    <option>Gjakove</option>
-                                    <option>Peje</option>
-                                    <option>Ferizaj</option>                                   
+                                    onChange={(e) => setZipCode(e.target.value)} 
+                                    defaultValue='Zgjedh Qytetin'
+                                >      
+                                <option value="Zgjedh Qytetin" disabled={true}>Zgjedh Qytetin</option>  
+                                {qytetet.map(qyteti => (
+                                    <option required key={qyteti.qytetiZipCode} value={qyteti.qytetiZipCode}>
+                                        {qyteti.emriQytetit}
+                                    </option>
+                                ))};                               
                                 </select>
                             </div>
                             <input 

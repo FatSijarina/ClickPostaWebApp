@@ -27,7 +27,28 @@ const UserContextProvider = ({ children }) => {
     const [veturat, setVeturat] = useState([]);
     const [rezervimi, setRezervimi] = useState([]);
 
+    
+
     const fetchUser = async () => {
+        await axios.get('http://localhost:5094/api/User/GetKlientin?id=' + data.nameid)
+        .then(response => (
+            setKlienti(response.data)
+        ))
+        axios.get('http://localhost:5094/Porosia/GetLatestUserPorosia?id=' + data.nameid)
+        .then(response => {
+            setPorosiaFundit(response.data);
+        })
+        await axios.get('http://localhost:5094/Porosia/GetUserPorosite?id=' + data.nameid)
+            .then(response => (
+                setPorosite(response.data)
+            ))
+        await axios.get('http://localhost:5094/Porosia/GetPorosiaById?id=' + data.nameid)
+            .then(response => (
+                setPorosia(response.data)
+            ))
+    };
+
+    const fetchTransporter = async () => {
         await axios.get('http://localhost:5094/api/User/GetKlientin?id=' + data.nameid)
         .then(response => (
             setKlienti(response.data)
@@ -35,18 +56,6 @@ const UserContextProvider = ({ children }) => {
         await axios.get('http://localhost:5094/api/User/GetKlientin?id=' + data.nameid)
             .then(response => (
                 setTransportuesi(response.data)
-            ))
-        axios.get('http://localhost:5094/Porosia/GetLatestUserPorosia?id=' + data.nameid)
-        .then(response => {
-            setPorosiaFundit(response.data);
-        })
-        await axios.get('http://localhost:5094/api/User/GetKlientet')
-            .then(response => (
-                setKlientet(response.data)
-            ))
-        await axios.get('http://localhost:5094/api/Qyteti/Get Qytetet')
-            .then(response => (
-                setQytetet(response.data)
             ))
         await axios.get('http://localhost:5094/Porosia/GetUserPorosite?id=' + data.nameid)
             .then(response => (
@@ -59,6 +68,25 @@ const UserContextProvider = ({ children }) => {
         await axios.get('http://localhost:5094/Porosia/GetDerguesPorosite?id=' + data.nameid)
             .then(response => (
                 setOrders(response.data)
+            ))
+        await axios.get('http://localhost:5094/api/Veturat/ShowVeturat')
+            .then(response => {
+                setVeturat(response.data);
+            })
+        await axios.get('http://localhost:5094/api/RezervoVeturen/ShowRezervimet')
+            .then(response => {
+                setRezervimi(response.data);
+            })
+    };
+
+    const fetchAdmin = async () => {
+        await axios.get('http://localhost:5094/api/User/GetKlientet')
+            .then(response => (
+                setKlientet(response.data)
+            ))
+        await axios.get('http://localhost:5094/Porosia/GetUserPorosite?id=' + data.nameid)
+            .then(response => (
+                setPorosite(response.data)
             ))
         await axios.get('http://localhost:5094/api/User/GetTransportuesit')
             .then(response => {
@@ -76,17 +104,27 @@ const UserContextProvider = ({ children }) => {
 
     useEffect(() => {
 
-        //setToken(localStorage.getItem("jwt"));
+        axios.get('http://localhost:5094/api/Qyteti/Get Qytetet').then(response => {
+          setQytetet(response.data);
+        })
+
         if(token){
-            //setToken(localStorage.getItem("jwt"));
-            
             console.log(data);
             axios.interceptors.request.use(config => {
                 if(token) config.headers.Authorization = `Bearer ${token}`
                 return config;
             })
             console.log(data);
-            fetchUser();
+            switch(data.role){
+                case '1': 
+                    fetchUser();
+                    break;
+                case '2':
+                    fetchAdmin();
+                case '3':
+                    fetchTransporter();
+            }
+            setIsLoggedIn(true)
         }
     }, [token]);
 
@@ -103,6 +141,7 @@ const UserContextProvider = ({ children }) => {
             transportuesit,
             veturat,
             rezervimi,
+            isLoggedIn,
             setIsLoggedIn,
             setKlientiID,
             //setToken,

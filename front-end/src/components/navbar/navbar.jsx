@@ -9,51 +9,59 @@ import { UserContext } from "../../Context/UserContext";
 
 export default function Navbar() {
 
-        const { setToken } = useContext(UserContext);
-        const navigate = useNavigate();
+    const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
+    const navigate = useNavigate();
 
-        const handleSubmit = (e) => {
-            localStorage.removeItem('jwt');
-            navigate('/Ballina')
-            window.location.reload();
-            
-        }
+    const handleSubmit = (e) => {
+        localStorage.removeItem('jwt');
+        navigate('/Ballina');
+        window.location.reload();
+        setIsLoggedIn(false);
+    }
 
-        return (
+    return (    
+        <div className="navbar">
+            <div className="left-red">
+                <Link to="/Dashboard" id="navbar-logo">
+                    <img src={logoIconWhite} alt="Our Logo Icon" />
+                </Link>
+            </div>
+            <img src={logoName} alt="logoName" className="logo-name"/>
             
-                <div className="navbar">
+            <div className="right-red">    
+                <div className="navbar-links">
                     
-                    <div className="left-red">
-                        <Link to="/Dashboard" id="navbar-logo">
-                            <img src={logoIconWhite} alt="Our Logo Icon" />
-                        </Link>
-                    </div>
-                    <img src={logoName} alt="logoName" className="logo-name"/>
-                    
-                    <div className="right-red">    
-                        <div className="navbar-links">
+                    {isLoggedIn ? 
+                        <Link to="./Home">
+                            <button type="button">Home</button>    
+                        </Link> 
+                        :
                         <Link to="./Ballina">
-                                <button type="button">Ballina</button>    
-                            </Link> 
-                            <Link to="./FAQ">
-                                <button type="button">FAQ</button>    
-                            </Link> 
-                            <Link to="./AboutUs">
-                                <button type="button">Rreth Nesh</button>    
-                            </Link> 
+                            <button type="button">Ballina</button>    
+                        </Link> 
+                    }
+
+                    <Link to="./FAQ">
+                        <button type="button">FAQ</button>    
+                    </Link> 
+                    <Link to="./AboutUs">
+                        <button type="button">Rreth Nesh</button>    
+                    </Link> 
+
+                    {isLoggedIn ? 
+                        <button type="button" onClick={handleSubmit}>Dil</button>   
+                        :
+                        <>
                             <Link to="./Register">
                                 <button type="button">Regjistrohu</button>    
                             </Link> 
                             <Link to="./Login">
                                 <button type="button">Kyqu</button>    
-                            </Link> 
-
-                                <button type="button" onClick={handleSubmit}>Dil</button>    
-
-                        </div>
-                    </div> 
-                                   
+                            </Link>
+                        </> 
+                    }
                 </div>
-
-        )
-    }
+            </div>               
+        </div>
+    )
+}

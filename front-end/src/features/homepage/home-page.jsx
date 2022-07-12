@@ -35,10 +35,6 @@ export default function Ballina() {
             
           </div>
 
-
-
-         
-
         </div>    
     )
 }

@@ -44,7 +44,7 @@ namespace ClickPostaAPI.Controller
                 return Ok(CreateUserObject(user));
             }
 
-            return Unauthorized();
+            return BadRequest("Password not correct.");
         }
 
         [HttpPost("Register")]
@@ -62,6 +62,7 @@ namespace ClickPostaAPI.Controller
                 Email = registerDTO.Email,
                 NrTelefonit = registerDTO.NrTelefonit,
                 HomeNumber = registerDTO.HomeNumber,
+                StreetName = registerDTO.StreetName,
                 ZipCode = registerDTO.ZipCode,  
                 RoleId  = 1,
 
