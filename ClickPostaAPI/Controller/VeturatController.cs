@@ -23,6 +23,15 @@ namespace ClickPostaAPI.Controllers
             return Ok(await _context.Vetura.ToListAsync());
         }
 
+        [HttpGet("ShowVeturatOfDepo")]
+        public async Task<ActionResult<List<Vetura>>> GetVeturatDepo(int depoId)
+        {
+            List<Vetura> veturat = await _context.Vetura.Where(v => v.DepoId == depoId).ToListAsync();
+            if(veturat == null)
+                return BadRequest("Depo me id " + depoId + " nuk ka asnje veture!!");
+            return Ok(veturat);
+        }
+
         [HttpPost("AddVetura")]
         public async Task<ActionResult<List<Vetura>>> AddVetura(Vetura vetura)
         {

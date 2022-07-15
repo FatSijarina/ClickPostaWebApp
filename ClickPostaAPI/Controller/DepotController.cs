@@ -23,6 +23,17 @@ namespace ClickPostaAPI.Controllers
             return Ok(await _context.Depo.ToListAsync());
         }
 
+        [HttpGet("ShowDepotQyteti")]
+        public async Task<ActionResult<List<Depo>>> Get(int zipCode)
+        {
+            List<Depo> depotQyteti = await _context.Depo.Where(d => d.ZipCode == zipCode).ToListAsync();
+            if(depotQyteti == null)
+            {
+                return BadRequest("Ne qytetin me ZipCode " + zipCode + " nuk ka asnje depo!!");
+            }
+            return Ok(depotQyteti);
+        }
+
         [HttpPost("AddDepo")]
         public async Task<ActionResult<List<Depo>>> AddDepo(Depo depo)
         {

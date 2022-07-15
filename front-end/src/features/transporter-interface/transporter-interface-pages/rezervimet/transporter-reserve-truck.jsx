@@ -49,6 +49,7 @@ export default function TIReserveTruck() {
         })
     }, [refreshKey])
 
+    var kamioni = 'truck'
     return (
         <>
             <div className="greetings-section">
@@ -83,7 +84,7 @@ export default function TIReserveTruck() {
                                 <option value="Zgjedh Veturen" disabled={true}>Zgjedh Veturen</option>
                                 {makinat.map((makina) => (
                                     <option required key={makina.veturaId} value={makina.veturaId}>
-                                        {((makina.tipi == 'Kamion') ? makina.brendi : delete makinat[makinat.indexOf(makina)])}
+                                        {(((makina.tipi).toUpperCase() == kamioni.toUpperCase()) ? makina.brendi : delete makinat[makinat.indexOf(makina)])}
                                     </option>
                                 ))};
                             </select>
